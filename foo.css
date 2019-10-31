@@ -7,6 +7,5 @@ body {
   border: 1px solid black;
 }
 
-
 /* 'foo' isn't a valid color */
 a { color: black; }
