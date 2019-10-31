@@ -1,6 +1,6 @@
 let foo = 'xuxuxuxux';
 
-if (typeof (foo) === "string) {
+if (typeof (foo) === "string") {
   console.log(foo);
 }
 
