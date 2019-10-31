@@ -12,3 +12,19 @@ body {
   background:
   palevioletred
 }
+
+.mybox {
+  border: 1px solid black;
+  padding: 5px;
+  width: 100px;
+}
+
+/* clr isn't a known property */
+a {
+  clr: red;
+}
+
+/* 'foo' isn't a valid color */
+a {
+  color: foo;
+}
