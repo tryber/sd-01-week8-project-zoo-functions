@@ -1,11 +1,11 @@
 let foo = 'xuxuxuxux';
 
-if (typeof (foo) == String) {
+if (typeof (foo) === "string) {
   console.log(foo);
 }
 
 foo = 'okay';
 
-const x = 1
+const x = 1;
 
-console.log(x)
+console.log(x);
