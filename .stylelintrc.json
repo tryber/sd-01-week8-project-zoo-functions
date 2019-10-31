@@ -55,7 +55,6 @@
     "font-family-no-missing-generic-family-keyword": true,
     "font-weight-notation": "numeric",
     "function-blacklist": [],
-    "function-calc-no-invalid": true,
     "function-calc-no-unspaced-operator": true,
     "function-comma-newline-after": "always",
     "function-comma-newline-before": "always",
