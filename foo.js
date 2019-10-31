@@ -1,13 +1,11 @@
-var foo = 'xuxuxuxux'
+let foo = 'xuxuxuxux';
 
-if (true) {
-  console.log(foo)
+if (typeof (foo) == String) {
+  console.log(foo);
 }
 
-var foo = "okay";
+foo = 'okay';
 
-const x=1
+const x = 1
 
-x=2
-
-
+console.log(x)
