@@ -6,6 +6,8 @@ if (true) {
 
 var foo = "okay";
 
-const x = 1
+const x=1
 
-console.log(x = x - 1;)
+x=2
+
+
