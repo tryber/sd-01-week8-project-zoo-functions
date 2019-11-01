@@ -13,7 +13,14 @@ function schedule (dayName) {
   const schedule = data.hours
     Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
     schedule.Monday = "CLOSED"
-    return schedule
+
+    if (dayName == undefined) {
+      return schedule
+    } else {
+      let day = {}
+      day[dayName] = schedule[dayName]
+      return day
+    }
 };
 
 function animalCount (species) {
