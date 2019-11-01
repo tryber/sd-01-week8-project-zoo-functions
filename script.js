@@ -37,7 +37,7 @@ let goodInput = [8, 9, 10, 11];
 let badInput = [1, 2, 3, 4];
 
 assert.equal(anyGreaterThan10(goodInput), true);
-assert.equal(anyGreaterThan10(badInput), false);
+assert.equal(anyGreaterThan10(badInput), true);
 
 //---------------
 
