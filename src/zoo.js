@@ -1,17 +1,16 @@
 const data = require('./data')
 
-const entrants1 = {
-  entrantsSenior: 3,
-  entrantsChildren: 5,
-  entrantsAdults: 4
+const entrant = {
+  Senior: 3,
+  Children: 5,
+  Adults: 4
 }
-entryCalculator = (entrants) => {
-  const test = entrants1.find(numberEntrants => 
-  numberEntrants.entrantsAdults * data.prices.find(priceAdults))
-  console.log(test)
-};
-entryCalculator()
 
+entryCalculator = (entrants) => {
+  const senior = entrant.find((entrant) => { entrant.toLowerCase() == 'senior'})
+  return senior
+};
+console.log(entryCalculator())
 
 
 function schedule (dayName) {
