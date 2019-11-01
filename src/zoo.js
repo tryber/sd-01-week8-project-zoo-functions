@@ -7,7 +7,7 @@ const entrant = {
 }
 
 entryCalculator = (entrants) => {
-  const senior = entrant.find((entrant) => { entrant.toLowerCase() == 'senior'})
+  const senior = entrant.find((element) => { element.toLowerCase() == 'senior'})
   return senior
 };
 console.log(entryCalculator())
