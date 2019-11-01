@@ -10,9 +10,10 @@ function entryCalculator (entrants) {
 };
 
 function schedule (dayName) {
-  data.hours.Monday = 'CLOSED'
-  console.log(data.hours)
-  // console.log(data.hours.Monday)
+  const schedule = data.hours
+    Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+    schedule.Monday = "CLOSED"
+    return schedule
 };
 
 function animalCount (species) {
