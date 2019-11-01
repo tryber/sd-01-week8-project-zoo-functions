@@ -61,20 +61,59 @@ function schedule (dayName) {
 function animalCount (species) {
  // seu código aqui
   if (species == undefined) {
-    const animals = data.animals
-    let animalsObject = {}
-    for (let animal of animals) {
-      animalsObject[animal.name] = animal.residents.length  
+      const animals = data.animals
+      let animalsObject = {}
+      for (let animal of animals) {
+        animalsObject[animal.name] = animal.residents.length  
+      }
+      return animalsObject
     }
-    return animalsObject
-  }
 
     return data.animals.find( animal => animal.name == species).residents.length
 };
 
 function animalMap (options) {
   // seu código aqui
-};
+  
+  if (options == undefined) {
+    let animalGroupings = {}
+    function filterAnimals (region) {
+      const animalsRegion = data.animals.filter (animal => animal.location == region)
+      let regionalAnimals = []
+      for (let animal of animalsRegion) {
+        regionalAnimals.push(animal.name)
+      }
+      animalGroupings[region] = regionalAnimals
+      return animalGroupings
+    }
+    filterAnimals("NE")
+    filterAnimals("NW")
+    filterAnimals("SE")
+    filterAnimals("SW")
+    console.log(animalGroupings)
+    return animalGroupings
+  }
+  
+    
+    function filterAnimals (region) {
+      const animalsRegion = data.animals.filter (animal => animal.location == region)
+      let regionalAnimals = []
+      for (let animal of animalsRegion) {
+        regionalAnimals.push(animal.name)
+      }
+      animalGroupings[animal.location] = animalNames
+      return animalGroupings
+    }
+    // filterAnimals("NE", "NW", "SE", "SW")
+
+  // const animalsNE = data.animals.filter (animal => animal.location == 'NE')
+
+  // console.log (animalsNE)  
+    // for (let animal of data.animals) {
+    //   animalGroupings[animal.location]= Array.push(animal.name)
+    // }
+    // console.log (animalGroupings)
+}
 
 function animalPopularity (rating) {
   // seu código aqui
