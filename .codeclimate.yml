@@ -33,3 +33,18 @@ checks:
 exclude_patterns:
 - "zoo.test.js"
 - "data.js"
+plugins:
+  csslint:
+    enabled: true
+  editorconfig:
+    enabled: true
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  nodesecurity:
+    enabled: true
+  shellcheck:
+    enabled: true
+  stylelint:
+    enabled: true
