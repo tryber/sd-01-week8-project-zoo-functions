@@ -1,5 +1,5 @@
 const assert = require('assert'),
-      zoo    = require('./zoo');
+      zoo    = require('./zoo'),
       data   = require('./data');
 
 let actual, expected, options
