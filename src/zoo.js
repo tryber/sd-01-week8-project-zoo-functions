@@ -1,16 +1,18 @@
 const data = require('./data')
 
 function entryCalculator (entrants) {
-  if (entrants == undefined || Object.keys(entrants).length == 0) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0
   }
   return Object.keys(entrants).reduce((acc, key) => {
-    return acc + data.prices[key] * entrants[key];
+    return acc + 
+    (data.prices[key] * entrants[key]);
   }, 0)
 }; 
 
 function schedule (dayName) {
   // seu código aqui
+
 };
 
 function animalCount (species) {
