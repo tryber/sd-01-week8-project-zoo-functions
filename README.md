@@ -23,14 +23,8 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   * Agora, crie uma branch onde você vai guardar os `commits` do seu projeto
     * Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
     * Exemplo: `git checkout -b joaozinho-project-zoo-functions`
-
-3. Crie uma pasta na raiz do projeto com o seu nome e um arquivo **README.md** dentro dessa pasta:
-  * Verifique que você está na raiz do projeto
-    * Exemplo: `pwd` -> o retorno vai ser algo tipo _/Users/joaozinho/code/**sd-01-week8-project-zoo-functions**_
-  * Crie a pasta e o arquivo **README.md**
-    * Exemplo:
-      * `mkdir joaozinho`
-      * `echo "Instruções a seguir:" > joaozinho/README.md`
+      
+3. Desenvolva a solução para os problemas no arquivo `src/zoo.js`. Você pode usar o arquivo `src/zoo.test.js` para verificar se a sua implementação está de acordo com o esperado;
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   * Verifique que as mudanças ainda não estão no _stage_
@@ -54,7 +48,9 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-01-week8-project-zoo-functions/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-01-week8-project-zoo-functions/pulls) e confira que o seu _Pull Request_ está criado.
+  
+7. Você irá perceber que ao realizar novos `commits` no seu _Pull Request_ eles serão automaticaticamente analisados pelo _CodeClimate_ e pelo TravisCI_. Se atente para os comentários do _CodeClimate_ que irão conter dicas valiosas de como deixar seu código melhor! Você pode também explorar o _TravisCI_ para obter informações sobre quais _assertions_ ainda precisa adereçar em seu projeto. 
 
 ---
 
