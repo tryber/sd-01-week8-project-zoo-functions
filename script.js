@@ -17,7 +17,7 @@ const onlyVowels = input => input.map(removeNonVowels);
 
 const wordUniqueCharacters = word => word.split('').filter((item, index, input) => input.indexOf(item) === index);
 
-const allSameVowels = (input) => input.filter(word => {
+const allSameVowels = input => input.filter((word) => {
   const vowels = removeNonVowels(word);
   const uniqueVowels = wordUniqueCharacters(vowels);
   return uniqueVowels.length === 1;
