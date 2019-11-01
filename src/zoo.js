@@ -72,6 +72,10 @@ function createAnimals() {
   // seu código aqui
 }
 
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+}
+
 module.exports = {
   entryCalculator: entryCalculator,
   schedule: schedule,
@@ -90,5 +94,6 @@ module.exports = {
   oldestFromFirstSpecies: oldestFromFirstSpecies,
   increasePrices: increasePrices,
   createAnimals: createAnimals,
-  Animal: Animal
+  Animal: Animal,
+  createEmployee: createEmployee
 }
