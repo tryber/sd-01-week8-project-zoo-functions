@@ -10,7 +10,17 @@ function entryCalculator (entrants = 0){
 };
 
 function schedule (dayName) {
-  // seu código aqui
+    const schedule = data.hours
+    Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+    schedule.Monday = "CLOSED"
+
+  if (dayName == undefined) {
+    return schedule
+  } else {
+    let day = {}
+    day[dayName] = schedule[dayName]
+    return day
+  }
 };
 
 function animalCount (species) {
