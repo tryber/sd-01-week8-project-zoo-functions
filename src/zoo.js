@@ -10,20 +10,19 @@ function entryCalculator(entrants) {
 }
 
 function schedule(dayName) {
-    const horarioFunc = data.hours
+    const horarioFunc = Object.assign({}, data.hours)
+    Object.keys(horarioFunc).forEach((key) => horarioFunc[key] = `Open from ${parseInt(data.hours[key].open)}am until ${parseInt(data.hours[key].close) - 12}pm`)
+    horarioFunc.Monday = "CLOSED"
     if (dayName === undefined || Object.keys(dayName).length === 0) {
-        Object.keys(horarioFunc).forEach((key) => horarioFunc[key] = `Open from ${parseInt(data.hours[key].open)}am until ${parseInt(data.hours[key].close) - 12}pm`)
-        horarioFunc.Monday = "CLOSED"
         return horarioFunc
-    } else
+    } else {
         return {
             [dayName]: horarioFunc[dayName]
         }
-        // console.log("======================*************===============")
-        // console.log(day)
-        // console.log("======================*************===============")
-        // return dia
+    }
 }
+
+
 // function schedule(dayName = 0) {
 //     const cronograma = data.hours;
 //     if (dayName == 0) {
