@@ -1,7 +1,7 @@
 const data = require('./data')
 
 function entryCalculator (entrants) {
-  // seu código aqui
+  
 };
 
 function schedule (dayName) {
