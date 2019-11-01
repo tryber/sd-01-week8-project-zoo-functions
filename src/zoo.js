@@ -59,7 +59,17 @@ function schedule (dayName) {
 };
 
 function animalCount (species) {
-  // seu código aqui
+ // seu código aqui
+  if (species == undefined) {
+    const animals = data.animals
+    let animalsObject = {}
+    for (let animal of animals) {
+      animalsObject[animal.name] = animal.residents.length  
+    }
+    return animalsObject
+  }
+
+    return data.animals.find( animal => animal.name == species).residents.length
 };
 
 function animalMap (options) {
