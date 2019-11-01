@@ -1,11 +1,61 @@
 const data = require('./data')
 
-function entryCalculator (entrants) {
-  // seu código aqui
+//default params:
+function entryCalculator (entrants = 0){
+  if ( Object.keys(entrants).length === 0) {
+    return 0
+  }
+
+  return Object.keys(entrants).reduce( ( total, entrant )  => {
+    return total + (data.prices[entrant] * entrants[entrant])
+  }, 0)
+  
+ 
 };
 
 function schedule (dayName) {
-  // seu código aqui
+  const hours = data.hours
+  const hourKeys = Object.keys(data.hours)
+  let dayIndex = hourKeys.indexOf(dayName)
+  
+  function dailySchedule () {
+      for (let key of hourKeys) {
+      if (hours[key].open == 0 && hours[key].close == 0) {
+        hours[key] = 'CLOSED'
+      }
+      else {
+        hours[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`
+      }
+    }
+  }
+
+  if (dayName == undefined) {
+    dailySchedule();
+    return data.hours
+  }
+  
+//   function scheduleOfTheDay() {
+//     if (hours[dayIndex].open == 0 && hours[dayIndex].close == 0) {
+//       hours[dayIndex] = 'CLOSED'
+//     }
+//     else {
+//       hours[dayIndex] = `Open from ${hours[dayIndex].open}am until ${hours[dayIndex].close - 12}pm`
+//     }
+
+//   return hours[dayIndex]
+// }
+  
+//   scheduleOfTheDay()
+
+  // console.log (hours[dayIndex]
+
+  // const todaysHours = {
+  //   [dayName] : data.hours[dayName]
+  // }
+
+  return {[dayName] : data.hours[dayName]}
+
+
 };
 
 function animalCount (species) {
