@@ -1,7 +1,15 @@
 const data = require('./data')
 
-function entryCalculator (entrants) {
-  // seu código aqui
+function entryCalculator (entrants = 0){
+  if (Object.keys(entrants).length === 0) {
+    entrants = 0
+    return entrants
+  }
+  const adultsPrice = entrants.Adult * data.prices.Adult
+  const childsPrice = entrants.Child * data.prices.Child
+  const seniorsPrice = entrants.Senior * data.prices.Senior
+
+  return adultsPrice + childsPrice + seniorsPrice;
 };
 
 function schedule (dayName) {
