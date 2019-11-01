@@ -461,8 +461,7 @@ assert.deepEqual(prices, expected)
 /*****************/
 
 // retorna um array de objetos da classe Animal. Esta classe contém os atributos
-// name, sex, age and species. O método info retorna uma string formatada com
-// informações sobre o animal
+// name, sex, age and species.
 const animals = zoo.createAnimals()
 
 assert.equal(animals.length, 31)
@@ -476,6 +475,17 @@ animals.forEach(animal => {
   assert.equal(typeof animal.species, 'string')
 })
 
-assert.equal(animals[0].info(), 'Zena is a 12 year old female lion')
-assert.equal(animals[30].info(), 'Bernard is a 6 year old male lion giraffe')
+/***************/
+/* Animal.info */
+/***************/
 
+// retorna uma string formatada descrevendo o animal
+assert.equal(animals[0].info(), 'Zena is a 12 year old female lion')
+assert.equal(animals[30].info(), 'Bernard is a 6 year old male giraffe')
+
+/************************/
+/* Animal.total_animals */
+/************************/
+
+// retorna o número total de animais existentes
+assert.equal(zoo.Animal.total_animals, 31)

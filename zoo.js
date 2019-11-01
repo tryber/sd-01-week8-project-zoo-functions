@@ -64,6 +64,10 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
+class Animal {
+  // seu código aqui
+}
+
 function createAnimals() {
   // seu código aqui
 }
@@ -85,5 +89,6 @@ module.exports = {
   animalsOlderThan: animalsOlderThan,
   oldestFromFirstSpecies: oldestFromFirstSpecies,
   increasePrices: increasePrices,
-  createAnimals: createAnimals
+  createAnimals: createAnimals,
+  Animal: Animal
 }
