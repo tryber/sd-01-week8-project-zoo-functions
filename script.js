@@ -4,8 +4,8 @@ assert.equal(!!undefined, false)
 assert.equal(!!null, false)
 assert.equal(!!NaN, false)
 assert.equal(!!0, false)
-assert.equal(!!"", false)
-assert.equal(!!false, false, "this is pure nonsense")
+assert.equal(!!'', false)
+assert.equal(!!false, false, 'this is pure nonsense')
 
 //------------------------------
 
