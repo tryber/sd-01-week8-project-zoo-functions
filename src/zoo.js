@@ -1,8 +1,18 @@
 const data = require('./data')
 
-function entryCalculator (entrants) {
-  // seu código 
+
+entryCalculator = (entrants) => {
+  const test = entrants1.find(numberEntrants => 
+  numberEntrants.entrantsAdults * data.prices.find(priceAdults))
+  console.log(test)
 };
+
+const entrants1 = {
+  entrantsSenior: 3,
+  entrantsChildren: 5,
+  entrantsAdults: 4
+}
+
 
 function schedule (dayName) {
   // seu código aqui

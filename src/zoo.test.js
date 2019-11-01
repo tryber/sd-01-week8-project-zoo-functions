@@ -10,7 +10,7 @@ let actual, expected, options
 /* entryCalculator */
 /*******************/
 
-// returna 0 se nenhum argumento for passado
+// retorna 0 se nenhum argumento for passado
 actual = zoo.entryCalculator();
 assert.equal(actual, 0);
 
