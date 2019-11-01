@@ -34,24 +34,6 @@ function schedule (dayName) {
     return data.hours
   }
   
-//   function scheduleOfTheDay() {
-//     if (hours[dayIndex].open == 0 && hours[dayIndex].close == 0) {
-//       hours[dayIndex] = 'CLOSED'
-//     }
-//     else {
-//       hours[dayIndex] = `Open from ${hours[dayIndex].open}am until ${hours[dayIndex].close - 12}pm`
-//     }
-
-//   return hours[dayIndex]
-// }
-  
-//   scheduleOfTheDay()
-
-  // console.log (hours[dayIndex]
-
-  // const todaysHours = {
-  //   [dayName] : data.hours[dayName]
-  // }
 
   return {[dayName] : data.hours[dayName]}
 
@@ -77,6 +59,7 @@ function animalMap (options) {
   
   if (options == undefined) {
     let animalGroupings = {}
+
     function filterAnimals (region) {
       const animalsRegion = data.animals.filter (animal => animal.location == region)
       let regionalAnimals = []
@@ -86,33 +69,15 @@ function animalMap (options) {
       animalGroupings[region] = regionalAnimals
       return animalGroupings
     }
+
     filterAnimals("NE")
     filterAnimals("NW")
     filterAnimals("SE")
     filterAnimals("SW")
-    console.log(animalGroupings)
+
     return animalGroupings
   }
-  
     
-    function filterAnimals (region) {
-      const animalsRegion = data.animals.filter (animal => animal.location == region)
-      let regionalAnimals = []
-      for (let animal of animalsRegion) {
-        regionalAnimals.push(animal.name)
-      }
-      animalGroupings[animal.location] = animalNames
-      return animalGroupings
-    }
-    // filterAnimals("NE", "NW", "SE", "SW")
-
-  // const animalsNE = data.animals.filter (animal => animal.location == 'NE')
-
-  // console.log (animalsNE)  
-    // for (let animal of data.animals) {
-    //   animalGroupings[animal.location]= Array.push(animal.name)
-    // }
-    // console.log (animalGroupings)
 }
 
 function animalPopularity (rating) {
