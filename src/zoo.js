@@ -1,6 +1,6 @@
 const data = require('./data')
 
-function entryCalculator (entrants = 0){
+function entryCalculator (entrants = 0) {
   if (Object.keys(entrants).length === 0) return 0
   let finalPrice = entrants.Adult * data.prices.Adult;
   finalPrice += entrants.Child * data.prices.Child;
@@ -9,17 +9,16 @@ function entryCalculator (entrants = 0){
   return finalPrice;
 };
 
-function schedule (dayName) {
-    const schedule = data.hours
-    Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
-    schedule.Monday = "CLOSED"
-
+function schedule(dayName) {
+  const schedule = {}
+  schedule.Monday = "teste"
+  Object.keys(data.hours).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+  schedule.Monday = "CLOSED"
+  
   if (dayName == undefined) {
     return schedule
   } else {
-    let day = {}
-    day[dayName] = schedule[dayName]
-    return day
+    return { [dayName]: schedule[dayName] } 
   }
 };
 
