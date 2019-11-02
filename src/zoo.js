@@ -81,13 +81,16 @@ function animalMap (options) {
 
 
   if (options.hasOwnProperty('includeNames') === true) {
-    function filterAnimalsResidents (region) {
+    function filterAnimalsResidents (region, sex) {
       const animalsRegion = data.animals.filter (animal => animal.location == region)
       let residentAnimals = []
       let animalsObjArray = []
       for (let animal of animalsRegion) {
         for (let residents of animal.residents) {
           residentAnimals.push(residents.name)
+        }
+        if (options.hasOwnProperty('sorted') === true) {
+          residentAnimals.sort()
         }
         let regionalAnimalsNames = {[animal.name] : residentAnimals}
         animalsObjArray.push(regionalAnimalsNames)
@@ -105,7 +108,6 @@ function animalMap (options) {
   const animalsSW = filterAnimalsResidents("SW")
 
   const animalGroupings = Object.assign({}, animalsNE, animalsNW, animalsSE, animalsSW)
-  // console.log (animalGroupings)
   return animalGroupings
   
   }
