@@ -43,8 +43,19 @@ function schedule(dayName) {
 
 
 function animalCount(species) {
-    // seu código aqui
-};
+    const bichos = data.animals
+    const chaves = bichos.map(bicharada => bicharada.name)
+    const valores = bichos.map(bicharada => bicharada.residents.length)
+    const bicharada = {}
+    for (let index = 0; index < chaves.length; index++) {
+        bicharada[chaves[index]] = valores[index]
+    }
+    if (species === undefined || Object.keys(species).length === 0) {
+        return bicharada
+    } else {
+        return bicharada[species]
+    }
+}
 
 function animalMap(options) {
     // seu código aqui
