@@ -14,7 +14,7 @@ let actual, expected, options
 actual = zoo.entryCalculator();
 assert.equal(actual, 0);
 
-// // retorna 0 se um objeto vazio for passado
+// retorna 0 se um objeto vazio for passado
 actual = zoo.entryCalculator({});
 assert.equal(actual, 0);
 
