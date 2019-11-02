@@ -12,7 +12,7 @@ function entryCalculator (entrants = 0) {
 function schedule(dayName) {
   const schedule = {}
   schedule.Monday = "teste"
-  Object.keys(data.hours).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+  Object.keys(data.hours).forEach(key => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
   schedule.Monday = "CLOSED"
   
   if (dayName == undefined) {
@@ -22,12 +22,30 @@ function schedule(dayName) {
   }
 };
 
-function animalCount (species) {
-  // seu código aqui
+function animalCount(species) {
+  const animalSpecies = data.animals.map(species => species.name)
+  const animalQuantity = data.animals.map(quantity => quantity.residents.length)
+  const count = {}
+
+  for (let index = 0; index < animalSpecies.length; index++) {
+    count[animalSpecies[index]] = animalQuantity[index]
+  }
+
+  if (species == undefined) {
+    return count
+  } else {
+    return count[species]
+  }
 };
 
-function animalMap (options) {
-  // seu código aqui
+function animalMap(options) {
+  const obj = {}
+  const locations = [...new Set(data.animals.map(species => species.location))]
+  locations.forEach(location => obj[location] = data.animals.filter(animal => animal.location == location).map(species => species.name))
+
+  if (options == undefined) {
+    return obj
+  }
 };
 
 function animalPopularity (rating) {
