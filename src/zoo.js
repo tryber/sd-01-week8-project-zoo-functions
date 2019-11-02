@@ -56,29 +56,61 @@ function animalCount (species) {
 
 function animalMap (options) {
   // seu código aqui
-  
-  if (options == undefined) {
-    let animalGroupings = {}
+  let animalObj = {}
 
-    function filterAnimals (region) {
-      const animalsRegion = data.animals.filter (animal => animal.location == region)
-      let regionalAnimals = []
-      for (let animal of animalsRegion) {
-        regionalAnimals.push(animal.name)
+  switch (options) {
+    case undefined:
+
+        function filterAnimals (region) {
+          const animalsRegion = data.animals.filter (animal => animal.location == region)
+          let regionalAnimals = []
+          for (let animal of animalsRegion) {
+            regionalAnimals.push(animal.name)
+          }
+          animalObj[region] = regionalAnimals
+          return animalObj
+        }
+    
+        filterAnimals("NE")
+        filterAnimals("NW")
+        filterAnimals("SE")
+        filterAnimals("SW")
+    
+        return animalObj
       }
-      animalGroupings[region] = regionalAnimals
-      return animalGroupings
-    }
 
-    filterAnimals("NE")
-    filterAnimals("NW")
-    filterAnimals("SE")
-    filterAnimals("SW")
 
+  if (options.hasOwnProperty('includeNames') === true) {
+    function filterAnimalsResidents (region) {
+      const animalsRegion = data.animals.filter (animal => animal.location == region)
+      let residentAnimals = []
+      let animalsObjArray = []
+      for (let animal of animalsRegion) {
+        for (let residents of animal.residents) {
+          residentAnimals.push(residents.name)
+        }
+        let regionalAnimalsNames = {[animal.name] : residentAnimals}
+        animalsObjArray.push(regionalAnimalsNames)
+        regionalAnimalsNames = []
+        residentAnimals = []
+      }
+      
+    let animalGroupings = {[region] : animalsObjArray}
     return animalGroupings
   }
-    
+  
+  const animalsNE = filterAnimalsResidents("NE")
+  const animalsNW = filterAnimalsResidents("NW")
+  const animalsSE = filterAnimalsResidents("SE")
+  const animalsSW = filterAnimalsResidents("SW")
+
+  const animalGroupings = Object.assign({}, animalsNE, animalsNW, animalsSE, animalsSW)
+  // console.log (animalGroupings)
+  return animalGroupings
+  
+  }
 }
+    
 
 function animalPopularity (rating) {
   // seu código aqui
