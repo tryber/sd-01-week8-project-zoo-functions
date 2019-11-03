@@ -86,6 +86,10 @@ function animalMap (options) {
       let residentAnimals = []
       let animalsObjArray = []
       for (let animal of animalsRegion) {
+        if (options.hasOwnProperty('sex') === true) {
+           animal.residents = animal.residents.filter (animal => animal.sex == options.sex)
+            // console.log (options.sex)
+        }
         for (let residents of animal.residents) {
           residentAnimals.push(residents.name)
         }
