@@ -5,17 +5,30 @@ const animals = data.animals; // [{id }]
 
 
 // data: {4*{ key : x }} // x data depth variation
-console.log()
+console.log(logic.getKeyName(data))
 
 // data.animals: [4*{key:value}{key:[3*{key:value}]}]
 
 // key.forEach((element) => createObject(objectZoo, element, value))
 
 const zooDates = new Object;
-const key_section_1 = logic.getKeyName(data);
-key_section_1.forEach((element) => logic.createObject(zooDates, element, "test"))
+
+
+
+logic.getKeyName(data).forEach((element) => logic.createObject(zooDates, element, "taylor"))
+
 console.log(zooDates)
-    // logic.getKeyName(data.animals[0]).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals)))
+logic.bigSearch(data.hours)
+
+
+
+
+
+// console.log(typeof data)
+// const key_section_1 = logic.getKeyName(data);
+// key_section_1.forEach((element) => logic.createObject(zooDates, element, bigSearch(element)))
+
+// logic.getKeyName(data.animals[0]).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals)))
 
 // logic.getKeyName(data.animals[0].residents[0])).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals))))
 
