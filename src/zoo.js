@@ -248,7 +248,14 @@ if (options.hasOwnProperty('includeNames') === true) {
   }
 
   function animalsOlderThan(animal, age) {
-    // seu código aqui
+    const selectedAnimal = data.animals.find( animals => animals.name == animal )
+    if (selectedAnimal.residents.every( resident => resident.age >= age)) {
+      return true
+    }
+    else {
+      return false
+    }
+
   }
 
   function oldestFromFirstSpecies(id) {

@@ -399,7 +399,7 @@ assert.deepEqual(actual, expected)
 
 // passados o nome de uma espécie e uma idade, testa se todos os animais desta
 // espécie possuem a idade mínima especificada
-actual = zoo.animalsOlderThan('otter', 7)
+actual = zoo.animalsOlderThan('otters', 7)
 expected = true
 
 assert.deepEqual(actual, expected)
@@ -421,12 +421,12 @@ assert.deepEqual(actual, expected)
 actual = zoo.oldestFromFirstSpecies('01422318-ca2d-46b8-b66c-3e9e188244ed')
 expected = ['Vicky', 'female', 12]
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
 actual = zoo.oldestFromFirstSpecies('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae')
 expected = ['Margherita', 'female', 10]
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
 /******************************************************************************/
 
