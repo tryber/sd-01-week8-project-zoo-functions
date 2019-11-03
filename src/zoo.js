@@ -259,8 +259,16 @@ if (options.hasOwnProperty('includeNames') === true) {
   }
 
   function oldestFromFirstSpecies(id) {
-    // seu código aqui
-  }
+    const employeeObj = data.employees.find (employee => employee.id == id)
+
+    const firstSpecieId = employeeObj.responsibleFor[0]
+    const animalObj = data.animals.find ( animal => animal.id == firstSpecieId)
+    const ageArray = animalObj.residents.map (element => element.age)
+    const oldestAnimal = animalObj.residents[ ageArray.indexOf(Math.max(...ageArray)) ]
+    const oldestAnimalArray = [ oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age ]
+    
+    return oldestAnimalArray
+    }
 
   function increasePrices(percentage) {
     // seu código aqui
