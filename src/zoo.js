@@ -158,16 +158,8 @@ if (options.hasOwnProperty('includeNames') === true) {
       for (let id of ids) {
         animalArr.push (data.animals.find( item => item.id == id) )
       }
-      // let animalObj1 = data.animals.find ( itemId => itemId.id == ids )
-      // animalArr.push( animalObj1 )
-      // if ( ids[1] !== undefined ) {
-      //   let animalObj2 = data.animals.find ( itemId => itemId.id == ids )
-      //   animalArr.push( animalObj2 )
-        // console.log (ids)
 
-        console.log (animalArr)
         return animalArr
-      // return [data.animals.find ( itemId => itemId.id == ids )]
     }
   };
 
@@ -179,8 +171,14 @@ if (options.hasOwnProperty('includeNames') === true) {
     // seu código aqui
   };
 
-  function employeeByName (employeeName) {
-    // seu código aqui
+  function employeeByName (employeeName = 0) {
+    if (employeeName == 0) {
+      return {}
+    }
+    else {
+      const employees = data.employees
+      return employees.find( property => property.firstName == employeeName || property.lastName == employeeName )
+    }
   };
 
   function managersForEmployee (idOrName) {
