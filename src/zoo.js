@@ -188,18 +188,6 @@ if (options.hasOwnProperty('includeNames') === true) {
   function employeeCoverage (idOrName = "") {
 
     const employees = data.employees
-    const employeeObj = () => employees.find( property => property.firstName == idOrName || property.lastName == idOrName || property.id == idOrName  )
-    let fullName = `${employeeObj.firstName} ${employeeObj.lastName}`
-    let animalArr = []
-    const animalIds = employeeObj.responsibleFor
-    console.log(animalIds, fullName, employeeObj)
-    // for (let id of animalIds) {
-    //   animalArr.push (data.animals.find( item => item.id == id) )
-    // }
-
-    const coverageList = {
-      [fullName] : [animalArr]
-    }
 
     if (idOrName == "") {
       let fullName
@@ -212,14 +200,31 @@ if (options.hasOwnProperty('includeNames') === true) {
         for (let id of animalIds) {
           animalArr.push (data.animals.find( item => item.id == id).name )
         }
-        // console.log(animalArr)
         coverageList[fullName] = animalArr 
         animalArr = []
       }
-      console.log(coverageList)
       return coverageList
     }
+    else {
+      const employeeObj = employees.find (employee => employee.id == idOrName || employee.firstName == idOrName || employee.lastName == idOrName )
+      console.log (idOrName)
+      let fullName = `${employeeObj.firstName} ${employeeObj.lastName}`
+      let animalArr = []
+      let idedAnimal
+      const animalIds = employeeObj.responsibleFor
+      for (let id of animalIds) {
+        idedAnimal = data.animals.find( item => item.id == id)
+        animalArr.push(idedAnimal.name)
+      }
+      
+      const employeeCoverage = {
+        [fullName] : animalArr
+      }
+      
 
+      console.log(employeeCoverage)
+      return employeeCoverage
+    }
   };
 
   function addEmployee(id, firstName, lastName, managers, responsibleFor) {
