@@ -303,7 +303,7 @@ expected = {
   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
   'Wilburn Wishart': ['snakes', 'elephants'],
-  'Stephanie Strauss': ['giraffes'],
+  'Stephanie Strauss': ['giraffes', 'otters'],
   'Sharonda Spry': ['otters', 'frogs'],
   'Ardith Azevado': ['tigers', 'bears'],
   'Emery Elser': ['elephants', 'bears', 'lions']

@@ -185,8 +185,41 @@ if (options.hasOwnProperty('includeNames') === true) {
     // seu código aqui
   };
 
-  function employeeCoverage (idOrName) {
-    // seu código aqui
+  function employeeCoverage (idOrName = "") {
+
+    const employees = data.employees
+    const employeeObj = () => employees.find( property => property.firstName == idOrName || property.lastName == idOrName || property.id == idOrName  )
+    let fullName = `${employeeObj.firstName} ${employeeObj.lastName}`
+    let animalArr = []
+    const animalIds = employeeObj.responsibleFor
+    console.log(animalIds, fullName, employeeObj)
+    // for (let id of animalIds) {
+    //   animalArr.push (data.animals.find( item => item.id == id) )
+    // }
+
+    const coverageList = {
+      [fullName] : [animalArr]
+    }
+
+    if (idOrName == "") {
+      let fullName
+      let animalArr = []
+      const coverageList = {}
+      let animalIds
+      for (let employee of employees) {
+        fullName = `${employee.firstName} ${employee.lastName}`
+        animalIds = employee.responsibleFor
+        for (let id of animalIds) {
+          animalArr.push (data.animals.find( item => item.id == id).name )
+        }
+        // console.log(animalArr)
+        coverageList[fullName] = animalArr 
+        animalArr = []
+      }
+      console.log(coverageList)
+      return coverageList
+    }
+
   };
 
   function addEmployee(id, firstName, lastName, managers, responsibleFor) {
