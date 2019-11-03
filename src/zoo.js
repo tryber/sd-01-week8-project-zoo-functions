@@ -271,7 +271,27 @@ if (options.hasOwnProperty('includeNames') === true) {
     }
 
   function increasePrices(percentage) {
-    // seu código aqui
+    let prices = data.prices
+
+    function roundTo(n, digits) {
+      if (digits === undefined) {
+        digits = 0;
+      }
+ 
+      var multiplicator = Math.pow(10, digits);
+      n = parseFloat((n * multiplicator).toFixed(11));
+      var test =(Math.round(n) / multiplicator);
+      return +(test.toFixed(digits));
+    }
+
+    for (const key in prices) {
+      prices[key] = ( prices[key] * (100+percentage) / 100 )
+      console.log (prices[key])
+
+      prices[key] = roundTo(prices[key], 2)
+
+    }
+    return data.prices
   }
 
   class Animal {

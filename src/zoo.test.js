@@ -2,7 +2,7 @@ const assert = require('assert'),
       zoo    = require('./zoo'),
       data   = require('./data');
 
-let actual, expected, options
+let actual, expected, options, prices
 
 /******************************************************************************/
 
@@ -436,7 +436,7 @@ assert.deepEqual(actual, expected)
 
 // data uma porcentagem, incrementa todos os preços, arrendondados em duas casas
 // decimais
-zoo.increasePrices(50)
+prices = zoo.increasePrices(50)
 expected = {
   'Adult': 74.99,
   'Senior': 37.49,
@@ -445,11 +445,11 @@ expected = {
 
 assert.deepEqual(prices, expected)
 
-zoo.increasePrices(30)
+prices = zoo.increasePrices(30)
 expected = {
   'Adult': 97.49,
   'Senior': 48.74,
-  'Child': 40.93
+  'Child': 40.94
 }
 
 assert.deepEqual(prices, expected)
