@@ -1,3 +1,10 @@
+high thoughts
+
+
+
+
+
+
 function setOpenHour(...input) {
     const openHour = new Array;
     for (let i of input) {

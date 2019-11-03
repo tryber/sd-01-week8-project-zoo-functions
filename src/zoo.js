@@ -1,6 +1,35 @@
-const data = require('./data')
+const data = require('./data');
+const logic = require('./logic')
 
-// data.properties
+const animals = data.animals; // [{id }]
+
+
+// data: {4*{ key : x }} // x data depth variation
+console.log()
+
+// data.animals: [4*{key:value}{key:[3*{key:value}]}]
+
+// key.forEach((element) => createObject(objectZoo, element, value))
+
+const zooDates = new Object;
+const key_section_1 = logic.getKeyName(data);
+key_section_1.forEach((element) => logic.createObject(zooDates, element, "test"))
+console.log(zooDates)
+    // logic.getKeyName(data.animals[0]).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals)))
+
+// logic.getKeyName(data.animals[0].residents[0])).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals))))
+
+// making a object
+
+
+
+// Function made for build the code (EFI)
+function displayArray(properties_argument) {
+
+}
+
+
+
 
 function entryCalculator(entrants) {
     // seu código aqui
@@ -9,7 +38,6 @@ function entryCalculator(entrants) {
 function schedule(dayName) {
     // seu código aqui
 }
-
 
 function animalCount(species) {
     // seu código aqui
