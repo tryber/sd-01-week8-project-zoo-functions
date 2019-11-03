@@ -207,7 +207,6 @@ if (options.hasOwnProperty('includeNames') === true) {
     }
     else {
       const employeeObj = employees.find (employee => employee.id == idOrName || employee.firstName == idOrName || employee.lastName == idOrName )
-      console.log (idOrName)
       let fullName = `${employeeObj.firstName} ${employeeObj.lastName}`
       let animalArr = []
       let idedAnimal
@@ -222,7 +221,6 @@ if (options.hasOwnProperty('includeNames') === true) {
       }
       
 
-      console.log(employeeCoverage)
       return employeeCoverage
     }
   };
@@ -237,7 +235,16 @@ if (options.hasOwnProperty('includeNames') === true) {
   }
 
   function isManager(id) {
-    // seu código aqui
+    const managerArray = data.employees.map( property => property.managers)
+    for (const arrays of managerArray) {
+      if (arrays.indexOf(id) === -1) {
+        return false
+      }
+      else {
+        return true
+      }
+    }
+   
   }
 
   function animalsOlderThan(animal, age) {

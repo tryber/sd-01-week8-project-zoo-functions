@@ -383,11 +383,11 @@ assert.equal(data.employees.length, 10)
 /*************/
 
 // testa se o id passado é de um gerente
-acutal = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
+actual = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
 expected = false
 assert.deepEqual(actual, expected)
 
-acutal = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
+actual = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
 expected = true
 assert.deepEqual(actual, expected)
 
@@ -402,12 +402,12 @@ assert.deepEqual(actual, expected)
 actual = zoo.animalsOlderThan('otter', 7)
 expected = true
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
 actual = zoo.animalsOlderThan('penguins', 10)
 expected = false
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
 /******************************************************************************/
 
