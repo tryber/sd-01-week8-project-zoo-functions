@@ -227,8 +227,13 @@ if (options.hasOwnProperty('includeNames') === true) {
     }
   };
 
-  function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-    // seu código aqui
+  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+    let newEmployee = { id : id,
+      firstName: firstName,
+      lastName: lastName,
+      managers: managers,
+      responsibleFor: responsibleFor }
+    data.employees.push(newEmployee)
   }
 
   function isManager(id) {

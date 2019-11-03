@@ -342,7 +342,7 @@ assert.deepEqual(actual, expected);
 zoo.addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe')
 
 assert.equal(data.employees.length, 9)
-let lastEmployee = data.employess[8]
+let lastEmployee = data.employees[8]
 assert.equal(lastEmployee.id, '39800c14-4b76-454a-858d-2f8d168146a7')
 assert.equal(lastEmployee.firstName, 'John')
 assert.equal(lastEmployee.lastName, 'Doe')
