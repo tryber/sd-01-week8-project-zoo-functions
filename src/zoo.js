@@ -38,15 +38,33 @@ function animalCount(species = 0) {
 }
 
 function animalMap(options) {
-  const animals = data.animals, obj = {}
-  const isLocation = (animal, location) => animal.location === location
-  const filterAnimals = (animals, location) => animals.filter((animal) => isLocation(animal, location))
-  const getAllLocation = data.animals.map((animal)=>animal.location)
-  const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
-  locationReduce.forEach(location => {
-    obj[location] = filterAnimals(animals,location).map(item => item.name)
+  // const animals = data.animals, obj = {}
+  // const isLocation = (animal, location) => animal.location === location
+  // const filterAnimals = (animals, location) => animals.filter((animal) => isLocation(animal, location))
+  // const getAllLocation = data.animals.map((animal)=>animal.location)
+  // const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
+  // locationReduce.forEach(location => {
+  //   obj[location] = filterAnimals(animals,location).map(item => item.name)
+  // })
+  // return obj
+  const { includeNames } = options
+  const obj = {}
+  const locations = [...new set(data.animals.map(species => species.location))]
+  locations.forEach(location => {
+    if(includeNames){
+      obj[location] = data.animals
+      .filter(animal => animal.location == location)
+      .map(species => {
+        const name = species.name
+        const residents = species.resident
+        return { [name]: residents}
+      })
+    }else{
+      obj[location] = data.animals
+      .filter(animal => animal.location == location )
+      .map(species => species.name)
+    }
   })
-  return obj
 }
 function animalPopularity(rating) {
   // seu código aqui
@@ -97,11 +115,22 @@ function increasePrices(percentage) {
 }
 
 class Animal {
-  // seu código aqui
+ constructor(name, age, sex, species){
+  this.name = name
+  this.age = age
+  this.sex = sex
+  this.species = species
+ }
 }
 
 function createAnimals() {
-  // seu código aqui
+  const animals = []
+  data.animals.forEach(animal =>(
+    animal.residents.forEach(resident =>(
+      animals.push(new animal())
+    ))
+  ))
+  return animals
 }
 
 // function createEmployee(personalInfo, associatedWith) {
