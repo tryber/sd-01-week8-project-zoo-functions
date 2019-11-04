@@ -1,11 +1,24 @@
 const data = require('./data')
 
 function entryCalculator (entrants) {
-  // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0
+  }
+  return Object.keys(entrants).reduce((acc, key) => {
+    return acc + (data.prices[key] * entrants[key]);
+  }, 0)
+  
 };
 
 function schedule (dayName) {
-  // seu código aqui
+  const schedule = data.hours
+  Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+  schedule.Monday = "CLOSED"
+  if (dayName == undefined) {
+    return schedule
+  } else {
+    return ({dayName : schedule[dayName]})
+  }
 };
 
 function animalCount (species) {
