@@ -43,37 +43,49 @@ function animalCount(species = 0) {
   return obj
 }
 
-function animalMap(options) {
-  const animals = data.animals
-  const isSpecie = (animal, species) => animal.name === species
-  const filterAnimals = (animals, species) => animals.filter(
-    (animal) => isSpecie(animal, species))
-  const locations = [...new Set(animals.map(select => select.location))]
-  const obj = {}
-  // let newAnimal = Object.values(animals)
-  // for (const location of locations) {
-  //   mapAnimals[location] = animals.filter((animals) => {
-  //     if(animals.location == location){
-  //     for(let i = 0; i < newAnimal.length; i++){
-  //       return newAnimal[i].name
-  //     }
-  //   }
-  //   })
-  // }
-  locations.forEach((item) => {
-    obj[item] = filterAnimals(animals,item).map((item)=>item.name)
-  })
+function animalMap(options = 0) {
+  const animals = data.animals, obj = {}
+  const isLocation = (animal, location) => animal.location === location
+  const filterAnimals = (animals, location) => animals.filter(
+    (animal) => isLocation(animal, location))
+  const locations = [...new Set(animals.map(animal => animal.location))]
+  if (options == 0) {
+    locations.forEach((item) => {
+      obj[item] = filterAnimals(animals, item).map((item) => item.name)
+    })
+    return obj
+  } else if (options.includeNames == true) {
+    if (options.sorted == true) {
 
+    } else if (options.sex) {
+
+    } else {
+      locations.forEach((item) => {
+        obj[item] = filterAnimals(animals, item).map((item) => item.residents)
+        // .map((item) => item.residents)
+      })
+    }
+  } else {
+    return 'lions'
+  }
   console.log(obj)
 }
-animalMap()
 
 function animalPopularity(rating) {
   // seu código aqui
 }
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  const animals = data.animals
+  const find = []
+  if (!ids) {
+    return find
+  } else {
+    for (let i = 0; i < ids.length; i++) {
+      find.push(animals.find(animals => animals.id === ids[i]))
+    }
+    return find
+  }
 }
 
 function animalByName(animalName) {
@@ -85,7 +97,14 @@ function employeesByIds(ids) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const animals = data.employees
+  if (!employeeName) {
+    return {}
+  } else {
+    const find = animals.find(animals => animals.firstName === employeeName || animals.lastName === employeeName)
+    return find
+  }
+
 }
 
 function managersForEmployee(idOrName) {
@@ -93,7 +112,30 @@ function managersForEmployee(idOrName) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const func = data.employees
+  const animals = data.animals
+  const obj = {}
+  if (!idOrName) {
+    Object.keys(func).forEach((key) => {
+      obj[func[key].firstName + ' ' + func[key].lastName] = animals.filter((animal) => {
+        for (let i = 0; i < func[key].responsibleFor.length; i++) {
+          if (func[key].responsibleFor[i] === animal.id) {
+            return animal
+          }
+        }
+      }).map(animal => animal.name)
+    })
+  } else {
+    const idFunc = func.find(func => func.id === idOrName || func.firstName === idOrName || func.lastName === idOrName)
+    obj[idFunc.firstName + ' ' + idFunc.lastName] = animals.filter((animal) => {
+      for (let i = 0; i < idFunc.responsibleFor.length; i++) {
+        if (idFunc.responsibleFor[i] === animal.id) {
+          return animal
+        }
+      }
+    }).map(animal => animal.name)
+  }
+  return obj
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -101,15 +143,24 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const func = data.employees
+  return func.some(element => element.managers.some(elem => elem === id))
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const animals = data.animals
+  const findAnimal = animals.find(animals => animals.name == animal)
+  return findAnimal.residents.every(animals => animals.age >= age)
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const findFunc = data.employees.find(element => element.id == id)
+  const findAnimal = data.animals.find(animal => animal.id == findFunc.responsibleFor[0]).residents.map(resident => resident)
+  const oldestAnimal = findAnimal.map(resident => resident.age)
+  const oldestAnimal2 = Math.max(...oldestAnimal)
+  const array = findAnimal.find(animal => animal.age == oldestAnimal2)
+  return [array.name, array.sex, array.age]
+  
 }
 
 function increasePrices(percentage) {
