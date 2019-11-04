@@ -38,13 +38,33 @@ function animalCount(species) {
   }
 };
 
-function animalMap(options) {
+function animalMap(options = {}) {
+  const { includeNames, sex, sorted } = options
   const obj = {}
   const locations = [...new Set(data.animals.map(species => species.location))]
-  locations.forEach(location => obj[location] = data.animals.filter(animal => animal.location == location).map(species => species.name))
-  if (options == undefined) {
-    return obj
-  }
+  locations.forEach(location => {
+    if (!includeNames) {
+      obj[location] = data.animals
+        .filter(animal => animal.location == location)
+        .map(species => species.name)
+      return obj
+    }
+
+    obj[location] = data.animals
+      .filter(animal => animal.location == location)
+      .map(species => {
+        let residents = species.residents
+        if (sex) {
+          residents = residents.filter(resident => resident.sex === sex)
+        }
+        let animalNames = residents.map(({name}) => name)
+        if (sorted) {
+          animalNames = animalNames.sort()
+        }
+        return { [species.name]: animalNames }
+      })
+  })
+  return obj
 };
 
 function animalPopularity (rating) {
