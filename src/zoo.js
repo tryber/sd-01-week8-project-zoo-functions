@@ -286,7 +286,6 @@ if (options.hasOwnProperty('includeNames') === true) {
 
     for (const key in prices) {
       prices[key] = ( prices[key] * (100+percentage) / 100 )
-      console.log (prices[key])
 
       prices[key] = roundTo(prices[key], 2)
 
@@ -295,11 +294,23 @@ if (options.hasOwnProperty('includeNames') === true) {
   }
 
   class Animal {
-    // seu código aqui
+    constructor ( ...animals ){
+      const animalArray = []
+      for (const animal of animals) {
+        for (const resident of animal.residents) {
+        this.name = resident.name
+        this.sex = resident.sex
+        this.age = resident.age
+        this.species = animal.name
+        animalArray.push(this)
+        }
+      }
+        return animalArray
+    }
   }
 
   function createAnimals() {
-    // seu código aqui
+    return new Animal(...data.animals)
   }
 
   function createEmployee(personalInfo, associatedWith) {
