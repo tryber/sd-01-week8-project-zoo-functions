@@ -295,17 +295,22 @@ if (options.hasOwnProperty('includeNames') === true) {
 
   class Animal {
     constructor ( ...animals ){
-      const animalArray = []
       for (const animal of animals) {
         for (const resident of animal.residents) {
-        this.name = resident.name
-        this.sex = resident.sex
-        this.age = resident.age
-        this.species = animal.name
-        animalArray.push(this)
+          resident.name,
+          resident.sex,
+          resident.age,
+          animal.name
+          console.log (animal)
+
         }
+
       }
-        return animalArray
+
+    }
+
+    info() {
+      // console.log (`${this.name} is a ${this.age} years old ${this.sex} ${this.species}`)
     }
   }
 
