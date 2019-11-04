@@ -1,16 +1,13 @@
   const data = require('./data')
 
-  //default params:
   function entryCalculator (entrants = 0){
     if ( Object.keys(entrants).length === 0) {
       return 0
     }
-
     return Object.keys(entrants).reduce( ( total, entrant )  => {
       return total + (data.prices[entrant] * entrants[entrant])
     }, 0)
     
-  
   };
 
   function schedule (dayName) {
@@ -34,10 +31,7 @@
       return data.hours
     }
     
-
     return {[dayName] : data.hours[dayName]}
-
-
   };
 
   function animalCount (species) {
@@ -58,9 +52,7 @@
 
 
 function animalMap (options = {}) {
-  // seu código aqui
   let animalObj = {}
-
   if (Object.keys(options).length === 0 ) {
     function filterAnimals (region) {
       const animalsRegion = data.animals.filter (animal => animal.location == region)
@@ -82,7 +74,6 @@ function animalMap (options = {}) {
   
   function optionSort(param) {
       param.sort()
-  
   }
 
   function filterAnimalsResidents (region) {
@@ -106,8 +97,7 @@ function animalMap (options = {}) {
       residentAnimals = []
     }
     
-  let animalGroupings = {[region] : animalsObjArray}
-  return animalGroupings
+  return  {[region] : animalsObjArray}
 }
 
 function returnObject() {
@@ -115,50 +105,39 @@ function returnObject() {
   const animalsNW = filterAnimalsResidents("NW")
   const animalsSE = filterAnimalsResidents("SE")
   const animalsSW = filterAnimalsResidents("SW")
-
   const animalGroupings = Object.assign({}, animalsNE, animalsNW, animalsSE, animalsSW)
+
   return animalGroupings
 }
 
-
 if (options.hasOwnProperty('includeNames') === true) {
-
     return returnObject()
-
   }
-
   else {
-
     const animalGroupings = returnObject()
     for (let key in animalGroupings) {
       for (let animal of animalGroupings[key]) {
-        return { [key] : Object.keys(animal) }
 
+        return { [key] : Object.keys(animal) }
       }
     }
   }
-
 }
-    
 
   function animalPopularity (rating) {
     // seu código aqui
   };
-
 
   function animalsByIds (...ids) {
     if ( ids[0] == undefined  ) {
       // console.log("[]")
       return ids
     }
-
     else {
       let animalArr = []
-
       for (let id of ids) {
         animalArr.push (data.animals.find( item => item.id == id) )
       }
-
         return animalArr
     }
   };
@@ -186,9 +165,7 @@ if (options.hasOwnProperty('includeNames') === true) {
   };
 
   function employeeCoverage (idOrName = "") {
-
     const employees = data.employees
-
     if (idOrName == "") {
       let fullName
       let animalArr = []
@@ -215,12 +192,9 @@ if (options.hasOwnProperty('includeNames') === true) {
         idedAnimal = data.animals.find( item => item.id == id)
         animalArr.push(idedAnimal.name)
       }
-      
       const employeeCoverage = {
         [fullName] : animalArr
       }
-      
-
       return employeeCoverage
     }
   };
@@ -260,7 +234,6 @@ if (options.hasOwnProperty('includeNames') === true) {
 
   function oldestFromFirstSpecies(id) {
     const employeeObj = data.employees.find (employee => employee.id == id)
-
     const firstSpecieId = employeeObj.responsibleFor[0]
     const animalObj = data.animals.find ( animal => animal.id == firstSpecieId)
     const ageArray = animalObj.residents.map (element => element.age)
@@ -272,12 +245,10 @@ if (options.hasOwnProperty('includeNames') === true) {
 
   function increasePrices(percentage) {
     let prices = data.prices
-
     function roundTo(n, digits) {
       if (digits === undefined) {
         digits = 0;
       }
- 
       var multiplicator = Math.pow(10, digits);
       n = parseFloat((n * multiplicator).toFixed(11));
       var test =(Math.round(n) / multiplicator);
@@ -286,10 +257,9 @@ if (options.hasOwnProperty('includeNames') === true) {
 
     for (const key in prices) {
       prices[key] = ( prices[key] * (100+percentage) / 100 )
-
       prices[key] = roundTo(prices[key], 2)
-
     }
+
     return data.prices
   }
 
@@ -301,7 +271,6 @@ if (options.hasOwnProperty('includeNames') === true) {
       this.species = species.slice(0, -1)
       Animal.numInstances = (Animal.numInstances || 0) + 1;
     }
-    
 
     info() {
       const { name, age, sex, species } = this
