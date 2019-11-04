@@ -42,7 +42,6 @@ function animalMap(options) {
   const obj = {}
   const locations = [...new Set(data.animals.map(species => species.location))]
   locations.forEach(location => obj[location] = data.animals.filter(animal => animal.location == location).map(species => species.name))
-
   if (options == undefined) {
     return obj
   }
@@ -105,7 +104,7 @@ function createAnimals() {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return {...personalInfo, ...associatedWith}
 }
 
 module.exports = {
