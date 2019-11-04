@@ -8,7 +8,6 @@ function entryCalculator(entrants=0) {
   
   function schedule (dayName=0) {
     const cronograma = Object.assign({}, data.hours)
-    
     Object.keys(cronograma).forEach((key)=>{
       cronograma[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close -12}pm`;
     })
@@ -37,27 +36,30 @@ function entryCalculator(entrants=0) {
     }
     return obj
   } 
-  
+
   function animalMap (options) {
     const animals = data.animals, obj = {}
     const isLocation = (animal, location) => animal.location === location
     const filterAnimals = (animals, location) => animals.filter((animal) => isLocation(animal, location))
     const getAllLocation = data.animals.map((animal)=>animal.location)
     const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
+
     if(options===undefined || options['includeNames']===undefined){
-      locationReduce.forEach((item)=>{
-        obj[item]=filterAnimals(animals,item).map((item)=>item.name)
-      })} else if(options) {
-        locationReduce.forEach((item)=>{
-          obj[item]=filterAnimals(animals,item)
-          .map((item)=>( { [item.name] : item.residents.map((nome)=>nome.name) } ) )})
+      locationReduce.forEach((location)=>{
+        obj[location]=filterAnimals(animals,location)
+        .map((species)=>species.name)
+      })
+    } else if(options) {
+        locationReduce.forEach((location)=>{
+          obj[location]=filterAnimals(animals,location)
+          .map((species)=>({[species.name] : species.residents.map((nome)=>nome.name)}))})
           if(options['sorted']){
             Object.keys(obj).forEach((item)=>
             (obj[item].forEach((item2)=>Object.keys(item2).forEach((item3)=>item2[item3].sort()))))
           }
           if(options['sex']=='female'){
-            locationReduce.forEach((item)=>{
-              obj[item]=filterAnimals(animals,item)
+            locationReduce.forEach((location)=>{
+              obj[location]=filterAnimals(animals,location)
               .map((item)=>( { [item.name] : item.residents
                 .filter((nameAnimal)=>nameAnimal.sex==='female')
                 .map((value)=>value.name)
@@ -166,16 +168,30 @@ function entryCalculator(entrants=0) {
             this.name=name;
             this.sex=sex;
             this.age=age;
-            this.species=species;
+            this.species=species.slice(0,-1);
+            
+          }
+
+          info(){
+            return `${this.name} is a ${this.age} year old ${this.sex} ${this.species}`
+          } 
+
+          static total_animals(){
+            return data.animals.reduce((acc,specie)=>acc + specie.residents.length,0)
           }
         }
-        
+
         function createAnimals() {
-          // seu código aqui
+          const animalObject=[]
+          data.animals.forEach(specie=>{
+            specie.residents.forEach((animal)=>{
+            animalObject.push(new Animal(...Object.values(animal),specie.name)
+            )})})
+          return animalObject;
         }
         
         function createEmployee(personalInfo, associatedWith) {
-          // seu código aqui
+          return {...personalInfo,...associatedWith}
         }
         
         module.exports = {
