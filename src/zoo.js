@@ -294,32 +294,38 @@ if (options.hasOwnProperty('includeNames') === true) {
   }
 
   class Animal {
-    constructor ( ...animals ){
-      for (const animal of animals) {
-        for (const resident of animal.residents) {
-          resident.name,
-          resident.sex,
-          resident.age,
-          animal.name
-          console.log (animal)
-
-        }
-
-      }
-
+    constructor ( name, age, sex, species){
+      this.name = name
+      this.age = age
+      this.sex = sex
+      this.species = species.slice(0, -1)
+      Animal.numInstances = (Animal.numInstances || 0) + 1;
     }
+    
 
     info() {
-      // console.log (`${this.name} is a ${this.age} years old ${this.sex} ${this.species}`)
+      const { name, age, sex, species } = this
+      return(`${name} is a ${age} year old ${sex} ${species}`)
+    }
+
+    static total_animals() {
+      return Animal.numInstances
     }
   }
 
   function createAnimals() {
-    return new Animal(...data.animals)
+    const animals = data.animals.reduce((arr, animal) => {
+      animal.residents.map(( {name, age, sex} ) => {
+        const newAnimal = new Animal(name, age, sex, animal.name) 
+        arr.push(newAnimal)
+      })
+      return arr
+    },[])  
+    return animals
   }
 
   function createEmployee(personalInfo, associatedWith) {
-    // seu código aqui
+    return Object.assign({}, personalInfo, associatedWith)
   }
 
   module.exports = {
