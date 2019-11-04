@@ -104,8 +104,14 @@ function createAnimals() {
   // seu código aqui
 }
 
+// function createEmployee(personalInfo, associatedWith) {
+//   const { id, firstName, lastname } = personalInfo
+//   const { managers, responsibleFor } = associatedWith
+//   return { id, firstName, lastname, managers, responsibleFor}
+// }
+
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return{ ...personalInfo, ...associatedWith }
 }
 
 module.exports = {
