@@ -382,11 +382,11 @@ assert.equal(data.employees.length, 10)
 /*************/
 
 // testa se o id passado é de um gerente
-acutal = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
+actual = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
 expected = false
 assert.deepEqual(actual, expected)
 
-acutal = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
+actual = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
 expected = true
 assert.deepEqual(actual, expected)
 
@@ -398,15 +398,15 @@ assert.deepEqual(actual, expected)
 
 // passados o nome de uma espécie e uma idade, testa se todos os animais desta
 // espécie possuem a idade mínima especificada
-actual = zoo.animalsOlderThan('otter', 7)
+actual = zoo.animalsOlderThan('otters', 7)
 expected = true
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
 actual = zoo.animalsOlderThan('penguins', 10)
 expected = false
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
 /******************************************************************************/
 
@@ -417,16 +417,15 @@ assert.deepEqual(acutal, expected)
 // passado o id de um funcionário, encontra a primeira espécie de animal
 // gerenciado pelo funcionáio, e retorna um array com nome, sexo e idade do
 // animal mais velho dessa espécide
-actual = zoo.oldestFromFirstSpecies('01422318-ca2d-46b8-b66c-3e9e188244ed')
+actual = zoo.oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')
 expected = ['Vicky', 'female', 12]
 
-assert.deepEqual(acutal, expected)
+assert.deepEqual(actual, expected)
 
-actual = zoo.oldestFromFirstSpecies('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae')
+actual = zoo.oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad')
 expected = ['Margherita', 'female', 10]
 
-assert.deepEqual(acutal, expected)
-
+assert.deepEqual(actual, expected)
 /******************************************************************************/
 
 /******************/
@@ -442,17 +441,16 @@ expected = {
   'Child': 31.49
 }
 
-assert.deepEqual(prices, expected)
+assert.deepEqual(data.prices, expected)
 
 zoo.increasePrices(30)
 expected = {
   'Adult': 97.49,
   'Senior': 48.74,
-  'Child': 40.93
+  'Child': 40.94
 }
 
-assert.deepEqual(prices, expected)
-
+assert.deepEqual(data.prices, expected)
 /******************************************************************************/
 
 /*****************/
