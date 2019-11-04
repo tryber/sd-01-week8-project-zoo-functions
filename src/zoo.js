@@ -52,96 +52,133 @@ function entryCalculator(entrants=0) {
           obj[item]=filterAnimals(animals,item)
           .map((item)=>( { [item.name] : item.residents.map((nome)=>nome.name) } ) )})
           if(options['sorted']){
-            Object.keys(obj).forEach((item)=>(obj[item].forEach((item2)=>Object.keys(item2).forEach((item3)=>item2[item3].sort()))))
+            Object.keys(obj).forEach((item)=>
+            (obj[item].forEach((item2)=>Object.keys(item2).forEach((item3)=>item2[item3].sort()))))
           }
           if(options['sex']=='female'){
             locationReduce.forEach((item)=>{
               obj[item]=filterAnimals(animals,item)
-              .map((item)=>( { [item.name] : item.residents.filter((nameAnimal)=>nameAnimal.sex==='female').map((value)=>value.name)}))})}
-            }
-            return obj
-          };
-          
-          
-          function animalPopularity (rating) {
-            // seu código aqui
-          };
-          
-          function animalsByIds (ids) {
-            // seu código aqui
-          };
-          
-          function animalByName (animalName) {
-            // seu código aqui
-          };
-          
-          function employeesByIds (ids) {
-            // seu código aqui
-          };
-          
-          function employeeByName (employeeName) {
-            // seu código aqui
-          };
-          
-          function managersForEmployee (idOrName) {
-            // seu código aqui
-          };
-          
-          function employeeCoverage (idOrName) {
-            // seu código aqui
-          };
-          
-          function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-            // seu código aqui
-          }
-          
-          function isManager(id) {
-            // seu código aqui
-          }
-          
-          function animalsOlderThan(animal, age) {
-            // seu código aqui
-          }
-          
-          function oldestFromFirstSpecies(id) {
-            // seu código aqui
-          }
-          
-          function increasePrices(percentage) {
-            // seu código aqui
-          }
-          
-          class Animal {
-            // seu código aqui
-          }
-          
-          function createAnimals() {
-            // seu código aqui
-          }
-          
-          function createEmployee(personalInfo, associatedWith) {
-            // seu código aqui
-          }
-          
-          module.exports = {
-            entryCalculator: entryCalculator,
-            schedule: schedule,
-            animalCount: animalCount,
-            animalMap: animalMap,
-            animalPopularity: animalPopularity,
-            animalsByIds: animalsByIds,
-            animalByName: animalByName,
-            employeesByIds: employeesByIds,
-            employeeByName: employeeByName,
-            managersForEmployee: managersForEmployee,
-            employeeCoverage: employeeCoverage,
-            addEmployee: addEmployee,
-            isManager: isManager,
-            animalsOlderThan: animalsOlderThan,
-            oldestFromFirstSpecies: oldestFromFirstSpecies,
-            increasePrices: increasePrices,
-            createAnimals: createAnimals,
-            Animal: Animal,
-            createEmployee: createEmployee
-          }
-          
+              .map((item)=>( { [item.name] : item.residents
+                .filter((nameAnimal)=>nameAnimal.sex==='female')
+                .map((value)=>value.name)}))})}}
+                return obj
+              };
+              
+              
+              function animalPopularity (rating) {
+                // seu código aqui
+              };
+              
+              function animalsByIds (...ids) {
+                const obj=[];
+                ids.map((item)=>obj.push(data.animals.find((animal)=>animal.id===item)));
+                return obj;
+              };
+              
+              function animalByName (animalName) {
+                // seu código aqui
+              };
+              
+              function employeesByIds (ids) {
+                // seu código aqui
+              };
+              
+              function employeeByName (employeeName) {      
+                let obj;
+                if(employeeName===undefined){
+                  obj={};
+                }else {
+                  obj=data.employees.find((employe)=>employe.firstName===employeeName || employe.lastName===employeeName)
+                }
+                return obj
+              };
+              
+              function managersForEmployee (idOrName) {
+                // seu código aqui
+              };
+              
+              function employeeCoverage (idOrName) {
+                let obj={}
+                const allIddata= data.employees.map((item)=>item.id);
+                const returnIdResponsibleForById=(idEmployee)=>
+                data.employees.find((employee)=>employee.id===idEmployee)
+                const funcGetResult=id=>{
+                  obj[`${returnIdResponsibleForById(id).firstName} ${returnIdResponsibleForById(id).lastName}`]=
+                  returnIdResponsibleForById(id).responsibleFor.map((idAnimal)=>
+                  data.animals.find((animal)=>animal.id===idAnimal).name);
+                }
+                if(idOrName===undefined){
+                  allIddata.forEach((id)=>funcGetResult(id));
+                } else {
+                  let value={};
+                  if(idOrName.length<36){
+                    value=data.employees.find(item=>item.firstName===idOrName || item.lastName===idOrName)
+                    funcGetResult(value['id']) 
+                  } else {
+                    value=data.employees.find(item=>item.id===idOrName)
+                    funcGetResult(value['id'])
+                  }
+                }
+                return obj;
+              };
+              
+              function addEmployee(...arr) {
+                const property = Object.keys(data.employees[0])
+                const newEmployees={}
+                const checkUndefined=index=>(arr[index]===undefined)?arr[index]=[]:arr[index];
+                property.forEach((item,index)=>{
+                  newEmployees[item]=checkUndefined(index);
+                })
+                data.employees.push(newEmployees)
+              }
+              
+              function isManager(id) {
+                // seu código aqui
+              }
+              
+              function animalsOlderThan(animal, age) {
+                // seu código aqui
+              }
+              
+              function oldestFromFirstSpecies(id) {
+                // seu código aqui
+              }
+              
+              function increasePrices(percentage) {
+                // seu código aqui
+              }
+              
+              class Animal {
+                // seu código aqui
+              }
+              
+              function createAnimals() {
+                // seu código aqui
+              }
+              
+              function createEmployee(personalInfo, associatedWith) {
+                // seu código aqui
+              }
+              
+              module.exports = {
+                entryCalculator: entryCalculator,
+                schedule: schedule,
+                animalCount: animalCount,
+                animalMap: animalMap,
+                animalPopularity: animalPopularity,
+                animalsByIds: animalsByIds,
+                animalByName: animalByName,
+                employeesByIds: employeesByIds,
+                employeeByName: employeeByName,
+                managersForEmployee: managersForEmployee,
+                employeeCoverage: employeeCoverage,
+                addEmployee: addEmployee,
+                isManager: isManager,
+                animalsOlderThan: animalsOlderThan,
+                oldestFromFirstSpecies: oldestFromFirstSpecies,
+                increasePrices: increasePrices,
+                createAnimals: createAnimals,
+                Animal: Animal,
+                createEmployee: createEmployee
+              }
+              
