@@ -137,7 +137,7 @@ function entryCalculator(entrants=0) {
       
       function isManager(id) {
         return data.employees.some(employee=>
-          employee.managers.some(items=>items===id))
+          employee.managers.some(ids=>ids===id))
         }
         
         function animalsOlderThan(animal, age) {
@@ -156,11 +156,18 @@ function entryCalculator(entrants=0) {
         }
         
         function increasePrices(percentage) {
-          // seu código aqui
+          const calculate=(perc,value)=>value+=((value/100)*perc)
+          Object.keys(data.prices).forEach(type=>
+            data.prices[type]=Math.round(calculate(percentage,data.prices[type])*100)/100)
         }
         
         class Animal {
-          // seu código aqui
+          constructor(name,sex,age,species){
+            this.name=name;
+            this.sex=sex;
+            this.age=age;
+            this.species=species;
+          }
         }
         
         function createAnimals() {
