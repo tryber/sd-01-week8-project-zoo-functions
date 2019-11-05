@@ -4,15 +4,15 @@ function entryCalculator (entrants = 0) {
   if (Object.keys(entrants).length === 0) {
     return 0
   }
-  return Object.keys(entrants).reduce( (total, entrant) => {
-    return total + (data.prices[entrant]*entrants[entrant])
+  return Object.keys(entrants).reduce((total, entrant) => {
+    return total + (data.prices[entrant] * entrants[entrant])
   }, 0)
 };
 
 function schedule (dayName) {
   const hours = data.hours
   const hourKeys = Object.keys(data.hours)
-  if (dayName == undefined) {
+  if (dayName === undefined) {
     for (let key of hourKeys) {
       if (hours[key].open == 0 && hours[key].close == 0) {
         hours[key] = 'CLOSED'
@@ -40,6 +40,7 @@ function animalCount (species) {
 };
 
 function animalMap (options = {}) {
+  const { sex = false, sorted = false } = options
   if (Object.keys(options).length === 0 ) {
     let animalObj = {}
     filterAnimals("NE", animalObj)
@@ -49,10 +50,9 @@ function animalMap (options = {}) {
     return animalObj
   }
   function returnObject() {
-    const animalsNE = filterAnimalsResidents("NE", options)
-    const animalsNW = filterAnimalsResidents("NW", options)
-    const animalsSE = filterAnimalsResidents("SE", options)
-    const animalsSW = filterAnimalsResidents("SW", options)
+    const animals = [ filterAnimalsResidents("NE", options), filterAnimalsResidents("NW", options), 
+    filterAnimalsResidents("SE", options), filterAnimalsResidents("SW", options)]
+    const [animalsNE, animalsNW, animalsSE, animalsSW] = animals
     const animalGroupings = Object.assign({}, animalsNE, animalsNW, animalsSE, animalsSW)
     return animalGroupings
     }
@@ -153,11 +153,11 @@ function employeeCoverage (idOrName = "") {
 };
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  let newEmployee = { id : id,
-    firstName: firstName,
-    lastName: lastName,
-    managers: managers,
-    responsibleFor: responsibleFor }
+  let newEmployee = { id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor}
   data.employees.push(newEmployee)
 }
 
