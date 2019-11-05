@@ -28,7 +28,7 @@ function animalCount(species) {
   const animalQuantity = data.animals.map(quantity => quantity.residents.length)
   const count = {}
 
-  for (let index = 0; index < animalSpecies.length; index = index + 1) {
+  for (let index = 0; index < animalSpecies.length; index++) {
     count[animalSpecies[index]] = animalQuantity[index]
   }
 
@@ -59,6 +59,7 @@ function animalMap(options = {}) {
         if (sorted) animalNames = animalNames.sort()
         return { [species.name]: animalNames }
       })
+    return
   })
   return obj
 };
@@ -94,7 +95,7 @@ function managersForEmployee (idOrName) {
 
 function employeeCoverage(idOrName) {
   const obj = []
-  data.employees.forEach(employee => {
+  data.employees.forEach((employee) => {
     obj[`${employee.firstName} ${employee.lastName}`] =
       employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
   })
