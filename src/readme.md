@@ -68,3 +68,26 @@ const assert = require('assert'),
         'Monday': 'CLOSED'
     };
 assert.deepEqual(schedule(), expected);
+
+
+
+{
+        'Tuesday': { open: 8, close: 18 },
+        'Wednesday': { open: 8, close: 18 },
+        'Thursday': { open: 10, close: 20 },
+        'Friday': { open: 10, close: 20 },
+        'Saturday': { open: 8, close: 22 },
+        'Sunday': { open: 8, close: 20 },
+        'Monday': { open: 0, close: 0 }
+    }
+
+[ { open: 8, close: 18 },
+  { open: 8, close: 18 },
+  { open: 10, close: 20 },
+  { open: 10, close: 20 },
+  { open: 8, close: 22 },
+  { open: 8, close: 20 },
+  { open: 0, close: 0 } ]
+
+
+

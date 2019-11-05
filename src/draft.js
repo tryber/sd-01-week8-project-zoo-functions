@@ -107,33 +107,65 @@
 // // for (x of f) {
 // //     document.getElementById("demo").innerHTML += x;
 // // }
-// // from()
+// // // from()
 
 
-// // Concat arrays
+// // // Concat arrays
 
-// function concatArray(array_1, array_2) {
-//     const array_3 = new Array;
-//     for (const element of array_3) {
-//         array_3 = array_1.concat(array_2)
-//     }
-//     return array_3
-// }
-// console.log(concatArray(newArray, newArray))
+// // function concatArray(array_1, array_2) {
+// //     const array_3 = new Array;
+// //     for (const element of array_3) {
+// //         array_3 = array_1.concat(array_2)
+// //     }
+// //     return array_3
+// // }
+// // console.log(concatArray(newArray, newArray))
 
-var andy = { andy: "andy", bolivar: "bolivar" }
-console.log((typeof andy) == "object")
+// var andy = { andy: "andy", bolivar: "bolivar" }
+// console.log((typeof andy) == "object")
 
 
-const objectZoo = new Object;
+// const objectZoo = new Object;
 
-function makeObject(objectZoo, )
-objectZoo
 
-const key = ["andy", "andy", "andy"]
 
-const value = [1, 2, 3]
 
-const { helo = [1, 2, 3] } = objectZoo
+// const key = ["andy", "andy", "andy"]
 
-console.log(objectZoo)
+// const value = [1, 2, 3]
+
+// const { helo = [1, 2, 3] } = objectZoo
+
+// console.log(objectZoo)
+
+
+console.log(getObjectSize() == {})
+
+
+
+// data: {4*{ key : x }} // x data depth variation
+
+
+// data.animals: [4*{key:value}{key:[3*{key:value}]}]
+
+// key.forEach((element) => createObject(objectZoo, element, value))
+
+
+// key_section_1.forEach((element) => logic.createObject(zooDates, element, bigSearch(element)))
+
+
+// logic.getKeyName(data).forEach((element) => logic.createObject(zooDates, element, "taylor"))
+
+// console.log(data.hours)
+// console.log(logic.getNodes(data.hours))
+
+// console.log(data.prices)
+// console.log(logic.getNodes(data.prices))
+// console.log(typeof data)console.log(logic.getKeyName(data.animals[0].residents[0])).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals))))
+
+
+// logic.getKeyName(data.animals[0]).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals)))
+console.log(logic.getKeyName(data.animals[0]).forEach((element) => console.log(logic.arraySerchObjectElement(element, ...data.animals))))
+
+
+// making a object
