@@ -66,9 +66,9 @@ function animalMap(options = {}) {
   return obj
 }
 
-function animalPopularity(rating) {
-  // seu código aqui
-};
+// function animalPopularity(rating) {
+//   // seu código aqui
+// };
 
 function animalsByIds(...ids) {
   const arrayIdsAnimals = []
@@ -84,21 +84,21 @@ function animalsByIds(...ids) {
   }
 };
 
-function animalByName(animalName) {
-  // seu código aqui
-};
+// function animalByName(animalName) {
+//   // seu código aqui
+// };
 
-function employeesByIds(ids) {
-  // seu código aqui
-};
+// function employeesByIds(ids) {
+//   // seu código aqui
+// };
 
 function employeeByName(employeeName) {
   // seu código aqui
 };
 
-function managersForEmployee(idOrName) {
-  // seu código aqui
-};
+// function managersForEmployee(idOrName) {
+//   // seu código aqui
+// };
 
 function employeeCoverage(idOrName) {
   // seu código aqui
