@@ -57,7 +57,7 @@ function animalMap(options = {}) {
         if (sex) {
           residents = residents.filter(resident => resident.sex === sex)
         }
-        let animalNames = residents.map(({name}) => name)
+        let animalNames = residents.map(({ name }) => name)
         if (sorted) {
           animalNames = animalNames.sort()
         }
@@ -87,7 +87,8 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  // seu código aqui
+  if (employeeName == undefined) return {}
+  return data.employees.find(employee => employee.firstName == employeeName || employee.lastName == employeeName)
 };
 
 function managersForEmployee (idOrName) {
