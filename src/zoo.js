@@ -59,7 +59,7 @@ function animalMap(options = {}) {
         if (sorted) animalNames = animalNames.sort()
         return { [species.name]: animalNames }
       })
-    return
+    return true;
   })
   return obj
 };
