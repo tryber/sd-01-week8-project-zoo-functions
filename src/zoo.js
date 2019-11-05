@@ -5,22 +5,45 @@ function entryCalculator (entrants) {
     return 0
   }
   return Object.keys(entrants).reduce((acc, key) => {
-    return acc + 
-    (data.prices[key] * entrants[key]);
+    return acc + (data.prices[key] * entrants[key]);
   }, 0)
 }; 
 
-function schedule (dayName) {
-  // seu código aqui
-
-};
+function schedule(dayName = 0) {
+  const cronograma = data.hours;
+  if (dayName == 0) {
+    Object.keys(cronograma).forEach((key) => {
+      cronograma[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`;
+    })
+    cronograma.Monday = 'CLOSED';
+    return cronograma;
+  } else {
+    let obj = {}
+    obj[dayName] = cronograma[dayName]
+    return obj;
+  }
+}
 
 function animalCount (species) {
-  // seu código aqui
+ if (species == undefined) {
+   let animalsObject = {}
+   const animal = data.animals.forEach((actualAnimal) => {
+    animalsObject[actualAnimal.name] = actualAnimal.residents.length
+  })
+  return animalsObject
+ }
+ return data.animals.find(animal => animal.name == species).residents.length
 };
 
 function animalMap (options) {
-  // seu código aqui
+  const { includeNames, sex, sorted } = options
+
+  const result = data.animals.reduce((obj, animal) => {
+    const animalInLocation = obj[animal.location] || []
+    obj[animal.location] = [...animalInLocation, animal.name]
+    return obj
+  }, {})
+  return result
 };
 
 function animalPopularity (rating) {
@@ -76,11 +99,11 @@ class Animal {
 }
 
 function createAnimals() {
-  // seu código aqui
+
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith }
 }
 
 module.exports = {
