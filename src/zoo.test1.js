@@ -10,7 +10,7 @@ let actual, expected, options
 /* entryCalculator */
 /*******************/
 
-// retorna 0 se nenhum argumento for passado
+// returna 0 se nenhum argumento for passado
 actual = zoo.entryCalculator();
 assert.equal(actual, 0);
 
@@ -67,7 +67,7 @@ assert.deepEqual(actual, expected);
 /* animalCount */
 /***************/
 
-// sem parâmetros, retorna animais e suas quantidades
+// sem parâmetros, returna animais e suas quantidades
 actual = zoo.animalCount();
 expected = {
   'lions': 4,
@@ -202,7 +202,7 @@ assert.deepEqual(actual, expected);
 actual = zoo.animalsByIds();
 expected = [];
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // com um único id, retorna os animais com este id
 actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
@@ -219,7 +219,7 @@ expected = [{
   ]
 }];
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // com mais de um id, retorna os animais que têm um desses ids
 actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
@@ -246,7 +246,7 @@ expected = [{
   ]
 }];
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -258,7 +258,7 @@ expected = [{
 actual = zoo.employeeByName();
 expected = {};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // quando provido o primeiro nome do funcionário, retorna o objeto do
 // funcionário
@@ -273,7 +273,7 @@ expected = {
                     '0938aa23-f153-4937-9f88-4858b24d6bce']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // quando provido o último nome do funcionário, retorna o objeto do funcionário
 actual = zoo.employeeByName('Wishart');
@@ -287,7 +287,7 @@ expected = {
                     'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -303,7 +303,7 @@ expected = {
   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
   'Wilburn Wishart': ['snakes', 'elephants'],
-  'Stephanie Strauss': ['giraffes', 'otters'],
+  'Stephanie Strauss': ['giraffes'],
   'Sharonda Spry': ['otters', 'frogs'],
   'Ardith Azevado': ['tigers', 'bears'],
   'Emery Elser': ['elephants', 'bears', 'lions']
@@ -321,7 +321,7 @@ assert.deepEqual(actual, expected);
 // com o primeiro nome de um funcionário, retorna os animais pelos quais o
 // funcionário é responsável
 actual = zoo.employeeCoverage('Stephanie');
-expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
+expected = { 'Stephanie Strauss': ['giraffes'] };
 
 assert.deepEqual(actual, expected);
 
@@ -342,7 +342,7 @@ assert.deepEqual(actual, expected);
 zoo.addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe')
 
 assert.equal(data.employees.length, 9)
-let lastEmployee = data.employees[8]
+let lastEmployee = data.employess[8]
 assert.equal(lastEmployee.id, '39800c14-4b76-454a-858d-2f8d168146a7')
 assert.equal(lastEmployee.firstName, 'John')
 assert.equal(lastEmployee.lastName, 'Doe')
@@ -383,11 +383,11 @@ assert.equal(data.employees.length, 10)
 /*************/
 
 // testa se o id passado é de um gerente
-actual = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
+acutal = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
 expected = false
 assert.deepEqual(actual, expected)
 
-actual = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
+acutal = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
 expected = true
 assert.deepEqual(actual, expected)
 
@@ -399,15 +399,15 @@ assert.deepEqual(actual, expected)
 
 // passados o nome de uma espécie e uma idade, testa se todos os animais desta
 // espécie possuem a idade mínima especificada
-actual = zoo.animalsOlderThan('otters', 7)
+actual = zoo.animalsOlderThan('otter', 7)
 expected = true
 
-// assert.deepEqual(actual, expected)
+assert.deepEqual(acutal, expected)
 
 actual = zoo.animalsOlderThan('penguins', 10)
 expected = false
 
-// assert.deepEqual(actual, expected)
+assert.deepEqual(acutal, expected)
 
 /******************************************************************************/
 
@@ -418,15 +418,15 @@ expected = false
 // passado o id de um funcionário, encontra a primeira espécie de animal
 // gerenciado pelo funcionáio, e retorna um array com nome, sexo e idade do
 // animal mais velho dessa espécide
-actual = zoo.oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')
+actual = zoo.oldestFromFirstSpecies('01422318-ca2d-46b8-b66c-3e9e188244ed')
 expected = ['Vicky', 'female', 12]
 
-assert.deepEqual(actual, expected)
+assert.deepEqual(acutal, expected)
 
-actual = zoo.oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad')
+actual = zoo.oldestFromFirstSpecies('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae')
 expected = ['Margherita', 'female', 10]
 
-assert.deepEqual(actual, expected)
+assert.deepEqual(acutal, expected)
 
 /******************************************************************************/
 
@@ -443,16 +443,16 @@ expected = {
   'Child': 31.49
 }
 
-assert.deepEqual(data.prices, expected)
+assert.deepEqual(prices, expected)
 
 zoo.increasePrices(30)
 expected = {
   'Adult': 97.49,
   'Senior': 48.74,
-  'Child': 40.94
+  'Child': 40.93
 }
 
-assert.deepEqual(data.prices, expected)
+assert.deepEqual(prices, expected)
 
 /******************************************************************************/
 
@@ -488,7 +488,7 @@ assert.equal(animals[30].info(), 'Bernard is a 6 year old male giraffe')
 /************************/
 
 // retorna o número total de animais existentes
-assert.equal(zoo.Animal.total_animals(), 31)
+assert.equal(zoo.Animal.total_animals, 31)
 
 /******************************************************************************/
 

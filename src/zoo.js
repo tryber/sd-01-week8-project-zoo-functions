@@ -36,22 +36,24 @@ function animalCount (species) {
 };
 
 function animalMap (options) {
-  const { includeNames, sex, sorted } = options
-
-  const result = data.animals.reduce((obj, animal) => {
-    const animalInLocation = obj[animal.location] || []
-    obj[animal.location] = [...animalInLocation, animal.name]
-    return obj
-  }, {})
-  return result
+ // seu código aqui
 };
 
 function animalPopularity (rating) {
   // seu código aqui
 };
 
-function animalsByIds (ids) {
-  // seu código aqui
+function animalsByIds (...ids) {
+  if (ids === undefined) {
+    return idEmpty = []
+  }
+
+  const idsObject = []
+  ids.forEach(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
+  return idsObject
+
+  // const animalWithId = [data.animals.find(actualAnimal => actualAnimal.id == ids)]
+  // return animalWithId
 };
 
 function animalByName (animalName) {
