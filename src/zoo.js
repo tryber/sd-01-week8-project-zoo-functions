@@ -1,5 +1,24 @@
 const data = require('./data')
 
+// let; Check
+// const; Check
+// arrow functions; Check
+// template literals; check
+// spread operator; check
+// parâmetro rest; check
+// object destructuring;check
+// array destructuring; check
+// default destructuring;check
+// abbreviation object literal;check
+// default params; check
+// higher order functions; check
+// classes;check  
+// atributos de classes; check
+// métodos de instâncias de classes; check
+// métodos estáticos de classes. check
+
+
+
 function entryCalculator(entrants = 0) {
   if (Object.keys(entrants).length === 0) return 0;
   return Object.keys(entrants).reduce((acc, key) => {
@@ -106,14 +125,6 @@ function managersForEmployee(idOrName) {
   // seu código aqui
 };
 
-// function employeeCoverage (idOrName) {
-//   data.employees.reduce((obj,employee)=>{
-//     const nameEmployee =obj[]
-//   },{})
-// }
-
-
-
 function employeeCoverage(idOrName) {
   let obj = {}
 
@@ -141,24 +152,23 @@ function employeeCoverage(idOrName) {
   return obj;
 };
 
-function addEmployee(...arr) {
-  const property = Object.keys(data.employees[0])
-  const newEmployees = {}
-  const checkUndefined = index => (arr[index] === undefined) ? arr[index] = [] : arr[index];
-  property.forEach((item, index) => {
-    newEmployees[item] = checkUndefined(index);
-  })
-  data.employees.push(newEmployees)
+
+function addEmployee(...arg) {
+  const allEmployees = [...data.employees]
+  const newEmployees = ([id, firstName, lastName, managers = [], responsibleFor = []]) => 
+  ({ id, firstName, lastName, managers, responsibleFor })
+  data.employees = [...allEmployees, newEmployees(arg)]
 }
 
-function isManager(id) {
-  return data.employees.some(employee =>
-    employee.managers.some(ids => ids === id))
+
+function isManager(valueId) {
+  return data.employees.some(({ managers }) =>
+    managers.some(ids => ids === valueId))
 }
 
-function animalsOlderThan(animal, age) {
-  return data.animals.find(objAnimal => objAnimal.name === animal)
-    .residents.every(value => value['age'] >= age)
+function animalsOlderThan(animal, valueAge) {
+  return data.animals.find(({ name }) => name === animal)
+    .residents.every(({ age }) => age >= valueAge)
 }
 
 function oldestFromFirstSpecies(id) {
@@ -187,7 +197,8 @@ class Animal {
   }
 
   info() {
-    return `${this.name} is a ${this.age} year old ${this.sex} ${this.species}`
+    const { name, age, sex, species } = this
+    return `${name} is a ${age} year old ${sex} ${species}`
   }
 
   static total_animals() {
@@ -198,10 +209,7 @@ class Animal {
 function createAnimals() {
   const animalObject = []
   data.animals.forEach(specie => {
-    specie.residents.forEach((animal) => {
-      animalObject.push(new Animal(...Object.values(animal), specie.name)
-      )
-    })
+    specie.residents.forEach((animal) => animalObject.push(new Animal(...Object.values(animal), specie.name)))
   })
   return animalObject;
 }
