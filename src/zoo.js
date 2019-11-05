@@ -34,16 +34,15 @@ function animalCount(species) {
 
   if (species === undefined) {
     return count
-  } else {
-    return count[species]
   }
+  return count[species]
 };
 
 function animalMap(options = {}) {
   const { includeNames, sex, sorted } = options
   const obj = {}
   const locations = [...new Set(data.animals.map(species => species.location))]
-  locations.forEach(location => {
+  locations.forEach((location) => {
     if (!includeNames) {
       obj[location] = data.animals
         .filter(animal => animal.location === location)
@@ -51,9 +50,9 @@ function animalMap(options = {}) {
       return obj
     }
 
-    obj[location] = data.animals
+    return obj[location] = data.animals
       .filter(animal => animal.location === location)
-      .map(species => {
+      .map((species) => {
         let residents = species.residents
         if (sex) {
           residents = residents.filter(resident => resident.sex === sex)
@@ -89,7 +88,8 @@ function employeesByIds (ids) {
 
 function employeeByName (employeeName) {
   if (employeeName === undefined) return {}
-  return data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName)
+  return data.employees.find(employee => employee.firstName === employeeName 
+    || employee.lastName === employeeName)
 };
 
 function managersForEmployee (idOrName) {
@@ -113,9 +113,7 @@ function employeeCoverage(idOrName) {
   if (idOrName === undefined) {
     return obj
   }
-  else {
-    return { [searchEmployee(idOrName)]: obj[searchEmployee(idOrName)] }
-  }
+  return { [searchEmployee(idOrName)]: obj[searchEmployee(idOrName)] }
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
