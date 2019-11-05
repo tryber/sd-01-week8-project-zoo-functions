@@ -24,10 +24,23 @@ function displayValues(node, key_deep_node) {
     return node.map((elm) => elm[key_deep_node]);
 }
 
+// Getting objects size
+
+// console.log(Object.keys(newObject).length)
+
+function getObjectSize(object) {
+    const keyName = new Array;
+    for (var key in object) {
+        keyName.push(key);
+    }
+    return keyName.length
+}
+
 module.exports = {
     getKeyName: getKeyName,
     getValues: getValues,
-    displayValues: displayValues
+    displayValues: displayValues,
+    getObjectSize: getObjectSize
 }
 
 
@@ -47,17 +60,7 @@ module.exports = {
 
 // // console.log(getValues(newObject));
 
-// // Getting objects size
 
-// // console.log(Object.keys(newObject).length)
-
-// function getObjectSize(object) {
-//     const keyName = new Array;
-//     for (var key in object) {
-//         keyName.push(key);
-//     }
-//     return keyName.length
-// }
 
 // // Search [{key:value}]
 // function arraySerchObjectElement(key_name, ...array) {

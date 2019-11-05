@@ -2,57 +2,73 @@ const data = require('./data');
 const logic = require('./logic')
 
 
+function bigDates(name) {
+    switch (name) {
+        case "key_layer_1":
+            return logic.getKeyName(data);
+        case "key_layer_2_animals":
+            return logic.getKeyName(data.animals[0]);
+        case "key_layer_3_animals":
+            return logic.getKeyName(data.animals[0].residents[0]);
+        case "key_layer_2_employees":
+            return logic.getKeyName(data.employees[0]);
+        case "key_layer_2_hours":
+            return logic.getKeyName(data.hours);
+        case "key_layer_3_hours_dayName":
+            return logic.getKeyName(data.hours.Thursday);
+        case "key_later_2_prices":
+            return logic.getKeyName(data.prices);
+        case "animals_id_value":
+            return logic.displayValues(data.animals, "id");
+        case "animals_name_value":
+            return logic.displayValues(data.animals, "name");
+        case "animals_popularity_value":
+            return logic.displayValues(data.animals, "popularity");
+        case "animals_location_value":
+            return logic.displayValues(data.animals, "location");
+        case "animals_residents_name_value":
+            return logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "name"));
+        case "animals_residents_sex_value":
+            return logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "sex"));
+        case "animals_residents_age_value":
+            return logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "age"));
+        case "employees_id_value":
+            return logic.displayValues(data.employees, "id");
+        case "employees_firstName_value":
+            return logic.displayValues(data.employees, "firstName");
+        case "employees_lastName_value":
+            return logic.displayValues(data.employees, "lastName");
+        case "employees_managers_value":
+            return logic.displayValues(data.employees, "managers");
+        case "employees_responsibleFor_value":
+            return logic.displayValues(data.employees, "responsibleFor");
+        case "hours_open_value":
+            return bigDates("key_layer_2_hours").map((elm) => data.hours[elm].open);
+        case "hours_close_value":
+            return bigDates("key_later_2_prices").map((elm) => data.hours[elm].close);
+        case "prices_value":
+            return bigDates("key_later_2_prices").map((elm) => data.prices[elm]);
+        default:
+            console.log(`List of Valid Search: 
+            "key_layer_1"; "key_layer_2_animals"; "key_layer_3_animals";
+            "key_layer_2_employees"; "key_layer_2_hours"; "key_layer_3_hours_dayName";
+            "key_later_2_prices"; "animals_id_value"; "animals_name_value";
+            "animals_popularity_value"; "animals_location_value"; "animals_residents_name_value";
+            "animals_residents_sex_value"; "animals_residents_age_value"; "employees_id_value";
+            "employees_firstName_value"; "employees_lastName_value"; "employees_managers_value";
+            "employees_responsibleFor_value"; "hours_open_value"; "hours_close_value";
+            "prices_value";
+            `)
+    }
+}
 
-
-const key_layer_1 = logic.getKeyName(data);
-const key_layer_2_animals = logic.getKeyName(data.animals[0]);
-const key_layer_3_animals = logic.getKeyName(data.animals[0].residents[0]);
-const key_layer_2_employees = logic.getKeyName(data.employees[0]);
-const key_layer_2_hours = logic.getKeyName(data.hours);
-const key_layer_3_hours_dayName = logic.getKeyName(data.hours.Thursday);
-const key_later_2_prices = logic.getKeyName(data.prices);
-const animals_id_value = logic.displayValues(data.animals, "id");
-const animals_name_value = logic.displayValues(data.animals, "name");
-const animals_popularity_value = logic.displayValues(data.animals, "popularity");
-const animals_location_value = logic.displayValues(data.animals, "location");
-const animals_residents_name_value = logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "name"))
-const animals_residents_sex_value = logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "sex"))
-const animals_residents_age_value = logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "age"))
-const employees_id_value = logic.displayValues(data.employees, "id");
-const employees_firstName_value = logic.displayValues(data.employees, "firstName");
-const employees_lastName_value = logic.displayValues(data.employees, "lastName");
-const employees_managers_value = logic.displayValues(data.employees, "managers");
-const employees_responsibleFor_value = logic.displayValues(data.employees, "responsibleFor");
-const hours_open_value = key_layer_2_hours.map((elm) => data.hours[elm].open);
-const hours_close_value = key_layer_2_hours.map((elm) => data.hours[elm].close);
-const prices_value = key_later_2_prices.map((elm) => data.prices[elm]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function entryCalculator(entrants) {
-//     if ((entrants == false) || (logic.getObjectSize(entrants) == 0)) {
-//         return "0"
-//     } else {
-//         const array_Prices = logic.getValues(data.prices);
-//         const array_Order_People = new Array;
-//         logic.getKeyName(data.prices).forEach((key) => array_Order_People.push(entrants[key]));
-//         const array_sum = array_Prices.map((elm, index) => (elm * array_Order_People[index]));
-//         const number_sum = array_sum.reduce((total, elm) => (total += elm));
-//         return number_sum
-//     }
-// };
+function entryCalculator(entrants) {
+    if (entrants == undefined || logic.getObjectSize(entrants) == 0) {
+        return "0"
+    } else {
+        return bigDates("key_later_2_prices").map((elm, index) => entrants[elm] * bigDates("prices_value")[index]).reduce((total, elm) => total + elm);
+    }
+}
 
 // function schedule(dayName) {
 //     if (dayName == undefined) {
@@ -183,24 +199,24 @@ const prices_value = key_later_2_prices.map((elm) => data.prices[elm]);
 //             // seu código aqui
 //         }
 
-// module.exports = {
-//     entryCalculator: entryCalculator,
-//     schedule: schedule,
-//     animalCount: animalCount,
-//     animalMap: animalMap,
-//     animalPopularity: animalPopularity,
-//     animalsByIds: animalsByIds,
-//     animalByName: animalByName,
-//     employeesByIds: employeesByIds,
-//     employeeByName: employeeByName,
-//     managersForEmployee: managersForEmployee,
-//     employeeCoverage: employeeCoverage,
-//     addEmployee: addEmployee,
-//     isManager: isManager,
-//     animalsOlderThan: animalsOlderThan,
-//     oldestFromFirstSpecies: oldestFromFirstSpecies,
-//     increasePrices: increasePrices,
-//     createAnimals: createAnimals,
-//     Animal: Animal,
-//     createEmployee: createEmployee
-//
+module.exports = {
+    entryCalculator: entryCalculator,
+    // schedule: schedule,
+    // animalCount: animalCount,
+    // animalMap: animalMap,
+    // animalPopularity: animalPopularity,
+    // animalsByIds: animalsByIds,
+    // animalByName: animalByName,
+    // employeesByIds: employeesByIds,
+    // employeeByName: employeeByName,
+    // managersForEmployee: managersForEmployee,
+    // employeeCoverage: employeeCoverage,
+    // addEmployee: addEmployee,
+    // isManager: isManager,
+    // animalsOlderThan: animalsOlderThan,
+    // oldestFromFirstSpecies: oldestFromFirstSpecies,
+    // increasePrices: increasePrices,
+    // createAnimals: createAnimals,
+    // Animal: Animal,
+    // createEmployee: createEmployee
+}
