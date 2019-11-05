@@ -70,15 +70,17 @@ function animalPopularity(rating) {
   // seu código aqui
 };
 
-function animalsByIds(ids = 0) {
+function animalsByIds(...ids) {
   const arrayIdsAnimals = []
   if (ids == 0) {
     return []
-  } else if (ids.length > 0) {
-    const animalsArray = data.animals
-    const idAnimals = animalsArray.find(animal => animal.id == ids)
-    return [idAnimals]
-
+  } else {
+    for(let id of ids){
+      const animalsArray = data.animals
+      const idAnimals = animalsArray.find(animal => animal.id == id)
+      arrayIdsAnimals.push(idAnimals)
+    }
+    return arrayIdsAnimals
   }
 };
 
