@@ -12,9 +12,9 @@ function entryCalculator (entrants = 0) {
 function schedule(dayName) {
   const fullSchedule = {}
   fullSchedule.Monday = 'teste'
-  Object.keys(data.hours).forEach(key => {(
+  Object.keys(data.hours).forEach((key) => {
     fullSchedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`
-  )})
+  })
   fullSchedule.Monday = 'CLOSED'
 
   if (dayName === undefined) {
@@ -32,7 +32,7 @@ function animalCount(species) {
     count[animalSpecies[index]] = animalQuantity[index]
   }
 
-  if (species == undefined) {
+  if (species === undefined) {
     return count
   } else {
     return count[species]
@@ -46,13 +46,13 @@ function animalMap(options = {}) {
   locations.forEach(location => {
     if (!includeNames) {
       obj[location] = data.animals
-        .filter(animal => animal.location == location)
+        .filter(animal => animal.location === location)
         .map(species => species.name)
       return obj
     }
 
     obj[location] = data.animals
-      .filter(animal => animal.location == location)
+      .filter(animal => animal.location === location)
       .map(species => {
         let residents = species.residents
         if (sex) {
@@ -73,9 +73,9 @@ function animalPopularity (rating) {
 };
 
 function animalsByIds (...ids) {
-  if (ids.length == 0) return ids
+  if (ids.length === 0) return ids
   const obj = []
-  ids.forEach(id => obj.push(data.animals.find(animal => animal.id == id)))
+  ids.forEach(id => obj.push(data.animals.find(animal => animal.id === id)))
   return obj
 };
 
@@ -88,8 +88,8 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  if (employeeName == undefined) return {}
-  return data.employees.find(employee => employee.firstName == employeeName || employee.lastName == employeeName)
+  if (employeeName === undefined) return {}
+  return data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName)
 };
 
 function managersForEmployee (idOrName) {
@@ -97,7 +97,7 @@ function managersForEmployee (idOrName) {
 };
 
 function employeeCoverage (idOrName) {
-  
+
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
