@@ -67,7 +67,7 @@ assert.deepEqual(actual, expected);
 /* animalCount */
 /***************/
 
-// sem parâmetros, returna animais e suas quantidades
+// sem parâmetros, retorne animais e suas quantidades
 actual = zoo.animalCount();
 expected = {
   'lions': 4,

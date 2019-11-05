@@ -16,8 +16,23 @@ entryCalculator = (entrants = 0) => {
   }
 }
 
-function schedule (dayName) {
-  // seu código aqui
+const {hours} = require('./data')
+const open = "Open from"
+const until = "until"
+const {Tuesday, Wednesday, Thursday, friday, Saturday, Sunday, Monday} = hours
+schedule = (dayName = 0) => {
+  if (Object.keys(dayName).length === 0) {
+    Object.keys(hours).forEach(days => {
+      hours[days] =`${open} ${hours[days].open}am ${until} ${hours[days].close -12}pm`
+    });
+    hours.Monday =  "CLOSED"
+    return hours
+  }
+  else{
+    const obj = {}
+    obj[dayName] = hours[dayName]
+    return obj
+  }
 };
 
 function animalCount (species) {
@@ -28,29 +43,13 @@ function animalMap (options) {
   // seu código aqui
 };
 
-// function animalPopularity (rating) {
-//   // seu código aqui
-// };
-
 function animalsByIds (ids) {
   // seu código aqui
 };
 
-// function animalByName (animalName) {
-//   // seu código aqui
-// };
-
-// function employeesByIds (ids) {
-//   // seu código aqui
-// };
-
 function employeeByName (employeeName) {
   // seu código aqui
 };
-
-// function managersForEmployee (idOrName) {
-//   // seu código aqui
-// };
 
 function employeeCoverage (idOrName) {
   // seu código aqui
@@ -93,12 +92,8 @@ module.exports = {
   schedule: schedule,
   animalCount: animalCount,
   animalMap: animalMap,
-  animalPopularity: animalPopularity,
   animalsByIds: animalsByIds,
-  animalByName: animalByName,
-  employeesByIds: employeesByIds,
   employeeByName: employeeByName,
-  managersForEmployee: managersForEmployee,
   employeeCoverage: employeeCoverage,
   addEmployee: addEmployee,
   isManager: isManager,
