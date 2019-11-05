@@ -146,7 +146,7 @@ class Animal {
   }
 
   static totalAnimals() {
-    return data.animals.reduce((acc, el) => {
+    return data.animals.reduce(acc, el => {
       return acc + el.residents.length
     }, 0)
   }
