@@ -28,7 +28,7 @@ function animalCount(species) {
   const animalQuantity = data.animals.map(quantity => quantity.residents.length)
   const count = {}
 
-  for (let index = 0; index < animalSpecies.length; index++) {
+  for (let index = 0; index < animalSpecies.length; index += 1) {
     count[animalSpecies[index]] = animalQuantity[index]
   }
 
