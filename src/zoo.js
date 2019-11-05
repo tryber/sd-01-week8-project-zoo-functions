@@ -92,13 +92,8 @@ function animalPopularity(rating) {
 };
 
 function animalsByIds(...ids) {
-    // console.log('----------******/////////////***********---------')
-    // console.log(ids)
-    // console.log('----------******/////////////***********---------')
     const bichos = data.animals
     const lista = []
-        // const resultado = bichos.find(select => select.id === ids[0])
-        // console.log(resultado)
     if (ids.length === 0) {
         return ids
     } else {
@@ -110,16 +105,29 @@ function animalsByIds(...ids) {
 };
 
 function animalByName(animalName) {
-    // seu código aqui
+
 };
 
 function employeesByIds(ids) {
-    // seu código aqui
+
 };
 
 function employeeByName(employeeName) {
-    // seu código aqui
-};
+    const empregado = data.employees
+    const obj = {}
+    console.log('*********************************')
+    console.log(empregado.find(select => select.lastName == employeeName))
+    console.log('*********************************')
+    if (employeeName === undefined || Object.keys(employeeName).length === 0) {
+        return obj
+    } else if (empregado.map(select => select.firstName === employeeName)) {
+        return empregado.find(select => select.firstName === employeeName)
+    } else if (empregado.map(select => select.lastName === employeeName)) {
+        const teste2 = empregado.find(select => select.lastName === employeeName)
+        console.log(teste2)
+        return teste2
+    }
+}
 
 function managersForEmployee(idOrName) {
     // seu código aqui
