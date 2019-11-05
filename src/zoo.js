@@ -120,8 +120,8 @@ function isManager(id) {
 }
 
 function animalsOlderThan(animal, age) {
-  let specie = data.animals.find(({name}) => name === animal)
-  return specie.residents.every(animal => animal.age > age)
+  const specie = data.animals.find(({ name }) => name === animal)
+  return specie.residents.every(resident => resident.age > age)
 }
 
 function oldestFromFirstSpecies(id) {
@@ -147,8 +147,7 @@ class Animal {
 
   static totalAnimals() {
     return data.animals.reduce((acc, el) => {
-      acc += el.residents.length
-      return acc
+      return acc + el.residents.length
     }, 0)
   }
 }
