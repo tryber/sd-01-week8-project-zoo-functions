@@ -2,13 +2,12 @@ const data = require('./data')
 
 function entryCalculator(entrants = 0) {
   let price = 0
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants
 
-  if (Object.keys(entrants).length === 0) {
-    price = 0
-  } else {
-    price = entrants.Adult * data.prices.Adult
-    price += entrants.Child * data.prices.Child
-    price += entrants.Senior * data.prices.Senior
+  if (Object.keys(entrants).length != 0) {
+    price = Adult * data.prices.Adult
+    price += Child * data.prices.Child
+    price += Senior * data.prices.Senior
   }
   return price
 }
@@ -29,7 +28,8 @@ function schedule(dayName = 0) {
 }
 
 function animalCount(species = 0) {
-  const animals = data.animals, obj = {}
+  const animals = data.animals
+  const obj = {}
   const isSpecie = (animal, species) => animal.name === species
   const filterAnimals = (animals, species) => animals.filter(
     (animal) => isSpecie(animal, species))
@@ -44,31 +44,30 @@ function animalCount(species = 0) {
 }
 
 function animalMap(options = 0) {
-  const animals = data.animals, obj = {}
-  const isLocation = (animal, location) => animal.location === location
-  const filterAnimals = (animals, location) => animals.filter(
-    (animal) => isLocation(animal, location))
-  const locations = [...new Set(animals.map(animal => animal.location))]
-  if (options == 0) {
-    locations.forEach((item) => {
-      obj[item] = filterAnimals(animals, item).map((item) => item.name)
-    })
-    return obj
-  } else if (options.includeNames == true) {
-    if (options.sorted == true) {
+  const { includeNames, sex, sorted } = options
 
-    } else if (options.sex) {
+  const result = data.animals.reduce((obj, animal) => {
+    const animalsInLocation = obj[animal.location] || []
 
-    } else {
-      locations.forEach((item) => {
-        obj[item] = filterAnimals(animals, item).map((item) => item.residents)
-        // .map((item) => item.residents)
-      })
+    if (!includeNames) {
+      obj[animal.location] = [...animalsInLocation, animal.name]
+      return obj
     }
-  } else {
-    return 'lions'
-  }
-  console.log(obj)
+    let residents = animal.residents
+
+    if (sex) {
+      residents = residents.filter(resident => resident.sex === sex)
+    }
+    let animalNames = residents.map(({ name }) => name)
+
+    if (sorted) {
+      animalNames = animalNames.sort()
+    }
+    obj[animal.location] = [...animalsInLocation, { [animal.name]: animalNames }]
+
+    return obj
+  }, {})
+  return result
 }
 
 function animalPopularity(rating) {
@@ -77,9 +76,7 @@ function animalPopularity(rating) {
 
 function animalsByIds(...ids) {
   const find = []
-  if (!ids) {
-    return find
-  } else {
+  if (ids) {
     ids.map((id) => find.push(data.animals.find(animals => animals.id === id)))
   }
   return find
@@ -94,11 +91,10 @@ function employeesByIds(ids) {
 }
 
 function employeeByName(employeeName) {
-  const animals = data.employees
   if (!employeeName) {
     return {}
   } else {
-    return animals.find(animals => animals.firstName === employeeName || animals.lastName === employeeName)
+    return data.employees.find(animals => animals.firstName === employeeName || animals.lastName === employeeName)
   }
 }
 
@@ -107,24 +103,23 @@ function managersForEmployee(idOrName) {
 }
 
 function employeeCoverage(idOrName) {
-  const func = data.employees
-  const animals = data.animals
+  const employess = data.employees
   const obj = {}
   if (!idOrName) {
-    Object.keys(func).forEach((key) => {
-      obj[func[key].firstName + ' ' + func[key].lastName] = animals.filter((animal) => {
-        for (let i = 0; i < func[key].responsibleFor.length; i++) {
-          if (func[key].responsibleFor[i] === animal.id) {
+    Object.keys(employess).forEach((key) => {
+      obj[`${employess[key].firstName} ${employess[key].lastName}`] = data.animals.filter((animal) => {
+        for (let i = 0; i < employess[key].responsibleFor.length; i++) {
+          if (employess[key].responsibleFor[i] === animal.id) {
             return animal
           }
         }
       }).map(animal => animal.name)
     })
   } else {
-    const idFunc = func.find(func => func.id === idOrName || func.firstName === idOrName || func.lastName === idOrName)
-    obj[idFunc.firstName + ' ' + idFunc.lastName] = animals.filter((animal) => {
-      for (let i = 0; i < idFunc.responsibleFor.length; i++) {
-        if (idFunc.responsibleFor[i] === animal.id) {
+    const idEmployess = employess.find(employess => employess.id === idOrName || employess.firstName === idOrName || employess.lastName === idOrName)
+    obj[`${idEmployess.firstName} ${idEmployess.lastName}`] = data.animals.filter((animal) => {
+      for (let i = 0; i < idEmployess.responsibleFor.length; i++) {
+        if (idEmployess.responsibleFor[i] === animal.id) {
           return animal
         }
       }
@@ -132,6 +127,7 @@ function employeeCoverage(idOrName) {
   }
   return obj
 }
+
 
 function addEmployee(id = [], firstName = [], lastName = [], managers = [], responsibleFor = []) {
   const newArray = []
@@ -148,9 +144,7 @@ function isManager(id) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animals = data.animals
-  const findAnimal = animals.find(animals => animals.name == animal)
-  return findAnimal.residents.every(animals => animals.age >= age)
+  return data.animals.find(animals => animals.name == animal).residents.every(animals => animals.age >= age)
 }
 
 function oldestFromFirstSpecies(id) {
@@ -163,9 +157,8 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const newPercentage = percentage / 100
   Object.keys(data.prices).forEach((key) => {
-    data.prices[key] = Math.round((data.prices[key] + (data.prices[key] * newPercentage)) * 100) / 100
+    data.prices[key] = Math.round((data.prices[key] + (data.prices[key] * (percentage / 100))) * 100) / 100
   })
   return data.prices
 }
