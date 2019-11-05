@@ -23,11 +23,13 @@ function schedule (dayName) {
 
 function animalCount (species) {
   if(species == null) {
-    return data.animals.map((animais) => `${animais.name}: ${animais.popularity}`)
+    let animalObj = {}
+    const animais = data.animals.forEach(posicaoAnimal => {
+      animalObj[posicaoAnimal.name] = posicaoAnimal.residents.length
+    })
+    return animalObj
   }
-  else {
-    return data.animals
-  }
+    return data.animals.find(beast => beast.name == species).residents.length 
 };
 
 
@@ -43,11 +45,11 @@ function animalMap (options = {}) {
   } 
 };
 
-function animalPopularity (rating) {
+function animalPopularity (rating) { //nao tem
   // seu código aqui
 };
 
-function animalsByIds (...ids) {
+function animalsByIds (ids) {
   if(ids === undefined){
     return ids = []
   } 
@@ -58,11 +60,11 @@ function animalsByIds (...ids) {
 
 };
 
-function animalByName (animalName) {
+function animalByName (animalName) { //nao tem
   // seu código aqui
 };
 
-function employeesByIds (ids) {
+function employeesByIds (ids) { //nao tem
   // seu código aqui
 };
 
@@ -71,13 +73,13 @@ function employeeByName (employeeName) {
     return employeeName = {}
   } 
   else {
-    const firstNam = data.employees.find((nameFirst) => nameFirst.firstName == employeeName)
+    const firstNam = data.employees.find(nameFirst => nameFirst.firstName == employeeName || nameFirst.lastName == employeeName)
     return firstNam
   }
   
 };
 
-function managersForEmployee (idOrName) {
+function managersForEmployee (idOrName) { //nao tem
   // seu código aqui
 };
 

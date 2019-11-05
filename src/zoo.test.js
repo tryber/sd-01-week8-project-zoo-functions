@@ -4,7 +4,7 @@ const assert = require('assert'),
 
 let actual, expected, options
 
-// /******************************************************************************/
+/******************************************************************************/
 
 // /*******************/
 // /* entryCalculator */
@@ -60,322 +60,322 @@ let actual, expected, options
 //   'Tuesday': 'Open from 8am until 6pm'
 // };
 
-// //assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
-// /******************************************************************************/
+/******************************************************************************/
 
-// /***************/
-// /* animalCount */
-// /***************/
+/***************/
+/* animalCount */
+/***************/
 
-// // sem parâmetros, returna animais e suas quantidades
-// actual = zoo.animalCount();
+// sem parâmetros, returna animais e suas quantidades
+actual = zoo.animalCount();
+expected = {
+  'lions': 4,
+  'tigers': 2,
+  'bears': 3,
+  'penguins': 4,
+  'otters': 4,
+  'frogs': 2,
+  'snakes': 2,
+  'elephants': 4,
+  'giraffes': 6
+};
+
+assert.deepEqual(actual, expected);
+
+// com o nome de uma espécide de animal, retorna somente a quantidade
+actual = zoo.animalCount('lions');
+expected = 4;
+
+assert.deepEqual(actual, expected);
+
+actual = zoo.animalCount('snakes');
+expected = 2;
+
+assert.deepEqual(actual, expected);
+
+/******************************************************************************/
+
+/*************/
+/* animalMap */
+/*************/
+
+// // sem parâmetros, retorna animais categorizados por localização
+// actual = zoo.animalMap();
 // expected = {
-//   'lions': 4,
-//   'tigers': 2,
-//   'bears': 3,
-//   'penguins': 4,
-//   'otters': 4,
-//   'frogs': 2,
-//   'snakes': 2,
-//   'elephants': 4,
-//   'giraffes': 6
+//   NE: ['lions', 'giraffes'],
+//   NW: ['tigers', 'bears', 'elephants'],
+//   SE: ['penguins', 'otters'],
+//   SW: ['frogs', 'snakes']
 // };
 
-// //assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
-// // com o nome de uma espécide de animal, retorna somente a quantidade
-// actual = zoo.animalCount('lions');
-// expected = 4;
+// com opções especificadas, retorna nomes de animais
+options = { includeNames: true }
+actual = zoo.animalMap(options);
+expected = {
+  NE: [
+    { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
+    { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
+  ],
+  NW: [
+    { tigers: ['Shu', 'Esther'] },
+    { bears: ['Hiram', 'Edwardo', 'Milan'] },
+    { elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'] }
+  ],
+  SE: [
+    { penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'] },
+    { otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'] }
+  ],
+  SW: [
+    { frogs: ['Cathey', 'Annice'] },
+    { snakes: ['Paulette', 'Bill'] }
+  ]
+};
 
-// //assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
-// actual = zoo.animalCount('snakes');
-// expected = 2;
+// com opções especificadas, retorna nomes de animais ordenados
+options = { includeNames: true, sorted: true }
+actual = zoo.animalMap(options);
+expected = {
+  NE: [
+    { lions: ['Dee', 'Faustino', 'Maxwell', 'Zena'] },
+    { giraffes: ['Antone', 'Arron', 'Bernard', 'Clay', 'Gracia', 'Vicky'] }
+  ],
+  NW: [
+    { tigers: ['Esther', 'Shu'] },
+    { bears: ['Edwardo', 'Hiram', 'Milan'] },
+    { elephants: ['Bea', 'Ilana', 'Jefferson', 'Orval'] }
+  ],
+  SE: [
+    { penguins: ['Joe', 'Keri', 'Nicholas', 'Tad'] },
+    { otters: ['Lloyd', 'Margherita', 'Mercedes', 'Neville'] }
+  ],
+  SW: [
+    { frogs: ['Annice', 'Cathey'] }, { snakes: ['Bill', 'Paulette'] }
+  ]
+};
 
-// //assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
-// /******************************************************************************/
+// com oções especificadas, retorna somente nomes de animais macho/fêmea
+options = { includeNames: true, sex: 'female' }
+actual = zoo.animalMap(options);
+expected = {
+  NE: [
+    { lions: ['Zena', 'Dee'] },
+    { giraffes: ['Gracia', 'Vicky'] }
+  ],
+  NW: [
+    { tigers: ['Shu', 'Esther'] },
+    { bears: [] },
+    { elephants: ['Ilana', 'Bea'] }
+  ],
+  SE: [
+    { penguins: ['Keri'] },
+    { otters: ['Mercedes', 'Margherita'] }
+  ],
+  SW: [
+    { frogs: ['Cathey', 'Annice'] },
+    { snakes: ['Paulette'] }
+  ]
+};
 
-// /*************/
-// /* animalMap */
-// /*************/
+//assert.deepEqual(actual, expected);
 
-// // // sem parâmetros, retorna animais categorizados por localização
-// // actual = zoo.animalMap();
-// // expected = {
-// //   NE: ['lions', 'giraffes'],
-// //   NW: ['tigers', 'bears', 'elephants'],
-// //   SE: ['penguins', 'otters'],
-// //   SW: ['frogs', 'snakes']
-// // };
+// só retorna informações específicas de gênero se includeNames for setado
+// options = { sex: 'female' }
+// actual = zoo.animalMap(options)['NE'][0];
+// expected = 'lions';
 
-// //assert.deepEqual(actual, expected);
+//assert.equal(actual, expected);
 
-// // com opções especificadas, retorna nomes de animais
-// options = { includeNames: true }
-// actual = zoo.animalMap(options);
-// expected = {
-//   NE: [
-//     { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
-//     { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
-//   ],
-//   NW: [
-//     { tigers: ['Shu', 'Esther'] },
-//     { bears: ['Hiram', 'Edwardo', 'Milan'] },
-//     { elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'] }
-//   ],
-//   SE: [
-//     { penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'] },
-//     { otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'] }
-//   ],
-//   SW: [
-//     { frogs: ['Cathey', 'Annice'] },
-//     { snakes: ['Paulette', 'Bill'] }
-//   ]
-// };
+/******************************************************************************/
 
-// //assert.deepEqual(actual, expected);
+/****************/
+/* animalsByIds */
+/****************/
 
-// // com opções especificadas, retorna nomes de animais ordenados
-// options = { includeNames: true, sorted: true }
-// actual = zoo.animalMap(options);
-// expected = {
-//   NE: [
-//     { lions: ['Dee', 'Faustino', 'Maxwell', 'Zena'] },
-//     { giraffes: ['Antone', 'Arron', 'Bernard', 'Clay', 'Gracia', 'Vicky'] }
-//   ],
-//   NW: [
-//     { tigers: ['Esther', 'Shu'] },
-//     { bears: ['Edwardo', 'Hiram', 'Milan'] },
-//     { elephants: ['Bea', 'Ilana', 'Jefferson', 'Orval'] }
-//   ],
-//   SE: [
-//     { penguins: ['Joe', 'Keri', 'Nicholas', 'Tad'] },
-//     { otters: ['Lloyd', 'Margherita', 'Mercedes', 'Neville'] }
-//   ],
-//   SW: [
-//     { frogs: ['Annice', 'Cathey'] }, { snakes: ['Bill', 'Paulette'] }
-//   ]
-// };
+// sem parâmetros, retorna um array vazio
+actual = zoo.animalsByIds();
+expected = [];
 
-// //assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // com oções especificadas, retorna somente nomes de animais macho/fêmea
-// options = { includeNames: true, sex: 'female' }
-// actual = zoo.animalMap(options);
-// expected = {
-//   NE: [
-//     { lions: ['Zena', 'Dee'] },
-//     { giraffes: ['Gracia', 'Vicky'] }
-//   ],
-//   NW: [
-//     { tigers: ['Shu', 'Esther'] },
-//     { bears: [] },
-//     { elephants: ['Ilana', 'Bea'] }
-//   ],
-//   SE: [
-//     { penguins: ['Keri'] },
-//     { otters: ['Mercedes', 'Margherita'] }
-//   ],
-//   SW: [
-//     { frogs: ['Cathey', 'Annice'] },
-//     { snakes: ['Paulette'] }
-//   ]
-// };
+// com um único id, retorna os animais com este id
+actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
+expected = [{
+  id: '0938aa23-f153-4937-9f88-4858b24d6bce',
+  name: 'lions',
+  popularity: 4,
+  location: 'NE',
+  residents: [
+    { name: 'Zena', sex: 'female', age: 12 },
+    { name: 'Maxwell', sex: 'male', age: 15 },
+    { name: 'Faustino', sex: 'male', age: 7 },
+    { name: 'Dee', sex: 'female', age: 14 }
+  ]
+}];
 
-// //assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // só retorna informações específicas de gênero se includeNames for setado
-// // options = { sex: 'female' }
-// // actual = zoo.animalMap(options)['NE'][0];
-// // expected = 'lions';
+// com mais de um id, retorna os animais que têm um desses ids
+actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
+                          'e8481c1d-42ea-4610-8e11-1752cfc05a46');
+expected = [{
+  id: '0938aa23-f153-4937-9f88-4858b24d6bce',
+  name: 'lions',
+  popularity: 4,
+  location: 'NE',
+  residents: [
+    { name: 'Zena', sex: 'female', age: 12 },
+    { name: 'Maxwell', sex: 'male', age: 15 },
+    { name: 'Faustino', sex: 'male', age: 7 },
+    { name: 'Dee', sex: 'female', age: 14 }
+  ]
+}, {
+  id: 'e8481c1d-42ea-4610-8e11-1752cfc05a46',
+  name: 'tigers',
+  popularity: 5,
+  location: 'NW',
+  residents: [
+    { name: 'Shu', sex: 'female', age: 19 },
+    { name: 'Esther', sex: 'female', age: 17 }
+  ]
+}];
 
-// //assert.equal(actual, expected);
+assert.deepEqual(actual, expected);
 
-// /******************************************************************************/
+/******************************************************************************/
 
-// /****************/
-// /* animalsByIds */
-// /****************/
+/******************/
+/* employeeByName */
+/******************/
 
-// // sem parâmetros, retorna um array vazio
-// actual = zoo.animalsByIds();
-// expected = [];
+// sem parâmetros, retorna um objeto vazio
+actual = zoo.employeeByName();
+expected = {};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // com um único id, retorna os animais com este id
-// actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
-// expected = [{
-//   id: '0938aa23-f153-4937-9f88-4858b24d6bce',
-//   name: 'lions',
-//   popularity: 4,
-//   location: 'NE',
-//   residents: [
-//     { name: 'Zena', sex: 'female', age: 12 },
-//     { name: 'Maxwell', sex: 'male', age: 15 },
-//     { name: 'Faustino', sex: 'male', age: 7 },
-//     { name: 'Dee', sex: 'female', age: 14 }
-//   ]
-// }];
+// quando provido o primeiro nome do funcionário, retorna o objeto do
+// funcionário
+actual = zoo.employeeByName('Emery');
+expected = {
+  id: 'b0dc644a-5335-489b-8a2c-4e086c7819a2',
+  firstName: 'Emery',
+  lastName: 'Elser',
+  managers: ['9e7d4524-363c-416a-8759-8aa7e50c0992'],
+  responsibleFor: ['bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
+                    'baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
+                    '0938aa23-f153-4937-9f88-4858b24d6bce']
+};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // com mais de um id, retorna os animais que têm um desses ids
-// actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
-//                           'e8481c1d-42ea-4610-8e11-1752cfc05a46');
-// expected = [{
-//   id: '0938aa23-f153-4937-9f88-4858b24d6bce',
-//   name: 'lions',
-//   popularity: 4,
-//   location: 'NE',
-//   residents: [
-//     { name: 'Zena', sex: 'female', age: 12 },
-//     { name: 'Maxwell', sex: 'male', age: 15 },
-//     { name: 'Faustino', sex: 'male', age: 7 },
-//     { name: 'Dee', sex: 'female', age: 14 }
-//   ]
-// }, {
-//   id: 'e8481c1d-42ea-4610-8e11-1752cfc05a46',
-//   name: 'tigers',
-//   popularity: 5,
-//   location: 'NW',
-//   residents: [
-//     { name: 'Shu', sex: 'female', age: 19 },
-//     { name: 'Esther', sex: 'female', age: 17 }
-//   ]
-// }];
+// quando provido o último nome do funcionário, retorna o objeto do funcionário
+actual = zoo.employeeByName('Wishart');
+expected = {
+  id: '56d43ba3-a5a7-40f6-8dd7-cbb05082383f',
+  firstName: 'Wilburn',
+  lastName: 'Wishart',
+  managers: ['0e7b460e-acf4-4e17-bcb3-ee472265db83',
+              'fdb2543b-5662-46a7-badc-93d960fdc0a8'],
+  responsibleFor: ['78460a91-f4da-4dea-a469-86fd2b8ccc84',
+                    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
+};
 
-// //assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
-// /******************************************************************************/
+/******************************************************************************/
 
-// /******************/
-// /* employeeByName */
-// /******************/
+/********************/
+/* employeeCoverage */
+/********************/
 
-// // sem parâmetros, retorna um objeto vazio
-// actual = zoo.employeeByName();
-// expected = {};
+// sem parâmetros, retorna uma lista de funcionários e os animais pelos quais
+// eles são responsáveis
+actual = zoo.employeeCoverage();
+expected = {
+  'Nigel Nelson': ['lions', 'tigers'],
+  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+  'Wilburn Wishart': ['snakes', 'elephants'],
+  'Stephanie Strauss': ['giraffes'],
+  'Sharonda Spry': ['otters', 'frogs'],
+  'Ardith Azevado': ['tigers', 'bears'],
+  'Emery Elser': ['elephants', 'bears', 'lions']
+};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // quando provido o primeiro nome do funcionário, retorna o objeto do
-// // funcionário
-// actual = zoo.employeeByName('Emery');
-// expected = {
-//   id: 'b0dc644a-5335-489b-8a2c-4e086c7819a2',
-//   firstName: 'Emery',
-//   lastName: 'Elser',
-//   managers: ['9e7d4524-363c-416a-8759-8aa7e50c0992'],
-//   responsibleFor: ['bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
-//                     'baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
-//                     '0938aa23-f153-4937-9f88-4858b24d6bce']
-// };
+// com o id de um funcionário, retorna os animais pelos quais o funcionário é
+// responsável
+actual = zoo.employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
+expected = { 'Sharonda Spry': ['otters', 'frogs'] };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // quando provido o último nome do funcionário, retorna o objeto do funcionário
-// actual = zoo.employeeByName('Wishart');
-// expected = {
-//   id: '56d43ba3-a5a7-40f6-8dd7-cbb05082383f',
-//   firstName: 'Wilburn',
-//   lastName: 'Wishart',
-//   managers: ['0e7b460e-acf4-4e17-bcb3-ee472265db83',
-//               'fdb2543b-5662-46a7-badc-93d960fdc0a8'],
-//   responsibleFor: ['78460a91-f4da-4dea-a469-86fd2b8ccc84',
-//                     'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
-// };
+// com o primeiro nome de um funcionário, retorna os animais pelos quais o
+// funcionário é responsável
+actual = zoo.employeeCoverage('Stephanie');
+expected = { 'Stephanie Strauss': ['giraffes'] };
 
-// //assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// /******************************************************************************/
+// com o último nome de um um funcionário, retorna os animais pelos quais o
+// funcionário é responsável
+actual = zoo.employeeCoverage('Azevado');
+expected = { 'Ardith Azevado': ['tigers', 'bears'] };
 
-// /********************/
-// /* employeeCoverage */
-// /********************/
+assert.deepEqual(actual, expected);
 
-// // sem parâmetros, retorna uma lista de funcionários e os animais pelos quais
-// // eles são responsáveis
-// actual = zoo.employeeCoverage();
-// expected = {
-//   'Nigel Nelson': ['lions', 'tigers'],
-//   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-//   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-//   'Wilburn Wishart': ['snakes', 'elephants'],
-//   'Stephanie Strauss': ['giraffes'],
-//   'Sharonda Spry': ['otters', 'frogs'],
-//   'Ardith Azevado': ['tigers', 'bears'],
-//   'Emery Elser': ['elephants', 'bears', 'lions']
-// };
+/******************************************************************************/
 
-// assert.deepEqual(actual, expected);
+/**************/
+/* addEmploye */
+/**************/
 
-// // com o id de um funcionário, retorna os animais pelos quais o funcionário é
-// // responsável
-// actual = zoo.employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
-// expected = { 'Sharonda Spry': ['otters', 'frogs'] };
+// adiciona um funcionário no fim da lista
+zoo.addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe')
 
-// assert.deepEqual(actual, expected);
+assert.equal(data.employees.length, 9)
+let lastEmployee = data.employess[8]
+assert.equal(lastEmployee.id, '39800c14-4b76-454a-858d-2f8d168146a7')
+assert.equal(lastEmployee.firstName, 'John')
+assert.equal(lastEmployee.lastName, 'Doe')
+assert.deepEqual(lastEmployee.managers, [])
+assert.deepEqual(lastEmployee.responsibleFor, [])
 
-// // com o primeiro nome de um funcionário, retorna os animais pelos quais o
-// // funcionário é responsável
-// actual = zoo.employeeCoverage('Stephanie');
-// expected = { 'Stephanie Strauss': ['giraffes'] };
+zoo.addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
+                [
+                  '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+                  'a67a36ee-3765-4c74-8e0f-13f881f6588a'
+                ],
+                [
+                  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+                  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
+                ])
 
-// assert.deepEqual(actual, expected);
+assert.equal(data.employees.length, 10)
+lastEmployee = data.employees[9]
+assert.equal(lastEmployee.id, '4141da1c-a6ed-4cf7-90c4-99c657ba4ef3')
+assert.equal(lastEmployee.firstName, 'Jane')
+assert.equal(lastEmployee.lastName, 'Doe')
+assert.deepEqual(lastEmployee.managers, 
+                [
+                  '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+                  'a67a36ee-3765-4c74-8e0f-13f881f6588a'
+                ])
+assert.deepEqual(lastEmployee.responsibleFor, [
+                  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+                  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
+                ])
 
-// // com o último nome de um um funcionário, retorna os animais pelos quais o
-// // funcionário é responsável
-// actual = zoo.employeeCoverage('Azevado');
-// expected = { 'Ardith Azevado': ['tigers', 'bears'] };
-
-// assert.deepEqual(actual, expected);
-
-// /******************************************************************************/
-
-// /**************/
-// /* addEmploye */
-// /**************/
-
-// // adiciona um funcionário no fim da lista
-// zoo.addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe')
-
-// assert.equal(data.employees.length, 9)
-// let lastEmployee = data.employess[8]
-// assert.equal(lastEmployee.id, '39800c14-4b76-454a-858d-2f8d168146a7')
-// assert.equal(lastEmployee.firstName, 'John')
-// assert.equal(lastEmployee.lastName, 'Doe')
-// assert.deepEqual(lastEmployee.managers, [])
-// assert.deepEqual(lastEmployee.responsibleFor, [])
-
-// zoo.addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
-//                 [
-//                   '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-//                   'a67a36ee-3765-4c74-8e0f-13f881f6588a'
-//                 ],
-//                 [
-//                   'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-//                   '210fcd23-aa7b-4975-91b7-0230ebb27b99'
-//                 ])
-
-// assert.equal(data.employees.length, 10)
-// lastEmployee = data.employees[9]
-// assert.equal(lastEmployee.id, '4141da1c-a6ed-4cf7-90c4-99c657ba4ef3')
-// assert.equal(lastEmployee.firstName, 'Jane')
-// assert.equal(lastEmployee.lastName, 'Doe')
-// assert.deepEqual(lastEmployee.managers, 
-//                 [
-//                   '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-//                   'a67a36ee-3765-4c74-8e0f-13f881f6588a'
-//                 ])
-// assert.deepEqual(lastEmployee.responsibleFor, [
-//                   'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-//                   '210fcd23-aa7b-4975-91b7-0230ebb27b99'
-//                 ])
-
-// assert.equal(data.employees.length, 10)
+assert.equal(data.employees.length, 10)
 
 /******************************************************************************/
 
