@@ -44,16 +44,13 @@ function animalPopularity (rating) {
 };
 
 function animalsByIds (...ids) {
-  if (ids === undefined) {
-    return idEmpty = []
-  }
-
   const idsObject = []
-  ids.forEach(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
+  if (ids === undefined) {
+    return idsObject
+  } else {
+  ids.filter(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
   return idsObject
-
-  // const animalWithId = [data.animals.find(actualAnimal => actualAnimal.id == ids)]
-  // return animalWithId
+  }
 };
 
 function animalByName (animalName) {
@@ -65,8 +62,8 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  // seu código aqui
-};
+  return data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName) || {}
+}
 
 function managersForEmployee (idOrName) {
   // seu código aqui

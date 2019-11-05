@@ -258,7 +258,7 @@ expected = [{
 actual = zoo.employeeByName();
 expected = {};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // quando provido o primeiro nome do funcionário, retorna o objeto do
 // funcionário
@@ -273,7 +273,7 @@ expected = {
                     '0938aa23-f153-4937-9f88-4858b24d6bce']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // quando provido o último nome do funcionário, retorna o objeto do funcionário
 actual = zoo.employeeByName('Wishart');
@@ -287,7 +287,7 @@ expected = {
                     'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
