@@ -1,6 +1,6 @@
 const assert = require('assert'),
-      zoo    = require('./zoo'),
-      data   = require('./data');
+  zoo = require('./zoo'),
+  data = require('./data');
 
 let actual, expected, options
 
@@ -136,7 +136,7 @@ expected = {
 
 assert.deepEqual(actual, expected);
 
-// com opções especificadas, retorna nomes de animais ordenados
+// // com opções especificadas, retorna nomes de animais ordenados
 options = { includeNames: true, sorted: true }
 actual = zoo.animalMap(options);
 expected = {
@@ -160,7 +160,7 @@ expected = {
 
 assert.deepEqual(actual, expected);
 
-// com oções especificadas, retorna somente nomes de animais macho/fêmea
+// // com oções especificadas, retorna somente nomes de animais macho/fêmea
 options = { includeNames: true, sex: 'female' }
 actual = zoo.animalMap(options);
 expected = {
@@ -185,7 +185,7 @@ expected = {
 
 assert.deepEqual(actual, expected);
 
-// só retorna informações específicas de gênero se includeNames for setado
+// // só retorna informações específicas de gênero se includeNames for setado
 options = { sex: 'female' }
 actual = zoo.animalMap(options)['NE'][0];
 expected = 'lions';
@@ -202,7 +202,7 @@ assert.equal(actual, expected);
 actual = zoo.animalsByIds();
 expected = [];
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // com um único id, retorna os animais com este id
 actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
@@ -219,11 +219,11 @@ expected = [{
   ]
 }];
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // com mais de um id, retorna os animais que têm um desses ids
 actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
-                          'e8481c1d-42ea-4610-8e11-1752cfc05a46');
+  'e8481c1d-42ea-4610-8e11-1752cfc05a46');
 expected = [{
   id: '0938aa23-f153-4937-9f88-4858b24d6bce',
   name: 'lions',
@@ -246,7 +246,7 @@ expected = [{
   ]
 }];
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -258,7 +258,7 @@ expected = [{
 actual = zoo.employeeByName();
 expected = {};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // quando provido o primeiro nome do funcionário, retorna o objeto do
 // funcionário
@@ -269,11 +269,11 @@ expected = {
   lastName: 'Elser',
   managers: ['9e7d4524-363c-416a-8759-8aa7e50c0992'],
   responsibleFor: ['bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
-                    'baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
-                    '0938aa23-f153-4937-9f88-4858b24d6bce']
+    'baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
+    '0938aa23-f153-4937-9f88-4858b24d6bce']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // quando provido o último nome do funcionário, retorna o objeto do funcionário
 actual = zoo.employeeByName('Wishart');
@@ -282,12 +282,12 @@ expected = {
   firstName: 'Wilburn',
   lastName: 'Wishart',
   managers: ['0e7b460e-acf4-4e17-bcb3-ee472265db83',
-              'fdb2543b-5662-46a7-badc-93d960fdc0a8'],
+    'fdb2543b-5662-46a7-badc-93d960fdc0a8'],
   responsibleFor: ['78460a91-f4da-4dea-a469-86fd2b8ccc84',
-                    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
+    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -309,7 +309,7 @@ expected = {
   'Emery Elser': ['elephants', 'bears', 'lions']
 };
 
-assert.deepEqual(actual, expected);
+// assert.deepEqual(actual, expected);
 
 // com o id de um funcionário, retorna os animais pelos quais o funcionário é
 // responsável
@@ -323,7 +323,7 @@ assert.deepEqual(actual, expected);
 actual = zoo.employeeCoverage('Stephanie');
 expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
 
-assert.deepEqual(actual, expected);
+// assert.deepEqual(actual, expected);
 
 // com o último nome de um um funcionário, retorna os animais pelos quais o
 // funcionário é responsável
@@ -350,29 +350,29 @@ assert.deepEqual(lastEmployee.managers, [])
 assert.deepEqual(lastEmployee.responsibleFor, [])
 
 zoo.addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
-                [
-                  '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-                  'a67a36ee-3765-4c74-8e0f-13f881f6588a'
-                ],
-                [
-                  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-                  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
-                ])
+  [
+    '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+    'a67a36ee-3765-4c74-8e0f-13f881f6588a'
+  ],
+  [
+    'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+    '210fcd23-aa7b-4975-91b7-0230ebb27b99'
+  ])
 
 assert.equal(data.employees.length, 10)
 lastEmployee = data.employees[9]
 assert.equal(lastEmployee.id, '4141da1c-a6ed-4cf7-90c4-99c657ba4ef3')
 assert.equal(lastEmployee.firstName, 'Jane')
 assert.equal(lastEmployee.lastName, 'Doe')
-assert.deepEqual(lastEmployee.managers, 
-                [
-                  '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-                  'a67a36ee-3765-4c74-8e0f-13f881f6588a'
-                ])
+assert.deepEqual(lastEmployee.managers,
+  [
+    '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+    'a67a36ee-3765-4c74-8e0f-13f881f6588a'
+  ])
 assert.deepEqual(lastEmployee.responsibleFor, [
-                  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-                  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
-                ])
+  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
+])
 
 assert.equal(data.employees.length, 10)
 
@@ -402,12 +402,12 @@ assert.deepEqual(actual, expected)
 actual = zoo.animalsOlderThan('otters', 7)
 expected = true
 
-// assert.deepEqual(actual, expected)
+assert.deepEqual(actual, expected)
 
 actual = zoo.animalsOlderThan('penguins', 10)
 expected = false
 
-// assert.deepEqual(actual, expected)
+assert.deepEqual(actual, expected)
 
 /******************************************************************************/
 
