@@ -22,19 +22,40 @@ function schedule (dayName) {
 };
 
 function animalCount (species) {
-  // seu código aqui
+  if(species == null) {
+    return data.animals.map((animais) => `${animais.name}: ${animais.popularity}`)
+  }
+  else {
+    return data.animals
+  }
 };
 
-function animalMap (options) {
-  // seu código aqui
+
+function animalMap (options = {}) {
+  const { includeNames } = options
+  const obj = {}
+  const locations = [...new Set(data.animals.map(species => species.location))]
+  locations.forEach(location => obj[location] = data.animals
+    .filter(animal => animal.location == location)
+    .map(species => species.name))
+  if (options == undefined) {
+    return obj
+  } 
 };
 
 function animalPopularity (rating) {
   // seu código aqui
 };
 
-function animalsByIds (ids) {
-  // seu código aqui
+function animalsByIds (...ids) {
+  if(ids === undefined){
+    return ids = []
+  } 
+  else {
+    const dados = [ data.animals.find((animal) => animal.id == ids) ]
+    return dados
+  }
+
 };
 
 function animalByName (animalName) {
@@ -46,7 +67,14 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  // seu código aqui
+  if (employeeName == undefined) {
+    return employeeName = {}
+  } 
+  else {
+    const firstNam = data.employees.find((nameFirst) => nameFirst.firstName == employeeName)
+    return firstNam
+  }
+  
 };
 
 function managersForEmployee (idOrName) {
@@ -54,7 +82,7 @@ function managersForEmployee (idOrName) {
 };
 
 function employeeCoverage (idOrName) {
-  // seu código aqui
+
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -62,7 +90,13 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  // let manager = false;
+  // if (manager = data.employees.((gerente) => gerente.managers == id)) {
+  // return manager
+  // }
+  // else {
+  //   return false
+  // }
 }
 
 function animalsOlderThan(animal, age) {
@@ -86,8 +120,17 @@ function createAnimals() {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo        
+  const {managers, responsibleFor } = associatedWith
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  }
 }
+// return {...personalInfo, ...associatedwidth} 
 
 module.exports = {
   entryCalculator: entryCalculator,
