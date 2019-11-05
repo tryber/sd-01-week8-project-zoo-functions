@@ -12,20 +12,19 @@ function entryCalculator (entrants = 0) {
 function schedule(dayName) {
   const fullSchedule = {}
   fullSchedule.Monday = 'teste'
-  Object.keys(data.hours).forEach(key => {
+  Object.keys(data.hours).forEach(key => {(
     fullSchedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`
-  })
+  )})
   fullSchedule.Monday = 'CLOSED'
 
-  if (dayName == undefined) {
+  if (dayName === undefined) {
     return fullSchedule
-  } else {
-    return { [dayName]: fullSchedule[dayName] } 
   }
+  return { [dayName]: fullSchedule[dayName] }
 };
 
 function animalCount(species) {
-  const animalSpecies = data.animals.map(species => species.name)
+  const animalSpecies = data.animals.map(specie => specie.name)
   const animalQuantity = data.animals.map(quantity => quantity.residents.length)
   const count = {}
 
@@ -98,7 +97,7 @@ function managersForEmployee (idOrName) {
 };
 
 function employeeCoverage (idOrName) {
-  // seu código aqui
+  
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
