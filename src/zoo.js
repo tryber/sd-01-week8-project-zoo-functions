@@ -50,7 +50,7 @@ function animalMap(options = {}) {
       return obj
     }
 
-    const objWithName = obj[location] = data.animals
+    obj[location] = data.animals
       .filter(animal => animal.location === location)
       .map((species) => {
         let residents = species.residents
@@ -59,7 +59,6 @@ function animalMap(options = {}) {
         if (sorted) animalNames = animalNames.sort()
         return { [species.name]: animalNames }
       })
-    return objWithName
   })
   return obj
 };
@@ -95,9 +94,10 @@ function managersForEmployee (idOrName) {
 
 function employeeCoverage(idOrName) {
   const obj = []
-  data.employees.forEach(employee => obj[`${employee.firstName} ${employee.lastName}`] =
-    employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
-  )
+  data.employees.forEach(employee => {
+    obj[`${employee.firstName} ${employee.lastName}`] =
+      employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
+  })
 
   const searchEmployee = (condition) => {
     const employeeDetails = data.employees.find(employee => employee.firstName === condition
