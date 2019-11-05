@@ -402,7 +402,7 @@ assert.deepEqual(actual, expected)
 actual = zoo.animalsOlderThan('otters', 7)
 expected = true
 
-// assert.deepEqual(actual, expected)
+//assert.deepEqual(actual, expected)
 
 actual = zoo.animalsOlderThan('penguins', 10)
 expected = false

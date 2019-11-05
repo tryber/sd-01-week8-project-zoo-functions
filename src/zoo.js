@@ -113,20 +113,7 @@ function employeesByIds(ids) {
 };
 
 function employeeByName(employeeName) {
-    const empregado = data.employees
-    const obj = {}
-    console.log('*********************************')
-    console.log(empregado.find(select => select.lastName == employeeName))
-    console.log('*********************************')
-    if (employeeName === undefined || Object.keys(employeeName).length === 0) {
-        return obj
-    } else if (empregado.map(select => select.firstName === employeeName)) {
-        return empregado.find(select => select.firstName === employeeName)
-    } else if (empregado.map(select => select.lastName === employeeName)) {
-        const teste2 = empregado.find(select => select.lastName === employeeName)
-        console.log(teste2)
-        return teste2
-    }
+    return data.employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName) || {}
 }
 
 function managersForEmployee(idOrName) {
@@ -134,15 +121,29 @@ function managersForEmployee(idOrName) {
 };
 
 function employeeCoverage(idOrName) {
-    // seu código aqui
-};
+    const obj = {}
+    const empregado = data.employees
+    const animal = data.animals
+    if (idOrName === undefined || Object.keys(idOrName).length === 0) {
+        empregado.forEach(idFuncionarios => {
+            obj[`${idFuncionarios['firstName']} ${idFuncionarios['lastName']}`] = idFuncionarios.responsibleFor
+                .map(animaisPeloId => animal.find(animalIdComparar => animalIdComparar.id === animaisPeloId).name)
+        })
+    } else {
+        const listaEmpregado = empregado.find(({ firstName, lastName, id }) => firstName === idOrName || lastName === idOrName || id === idOrName)
+        obj[`${listaEmpregado.firstName} ${listaEmpregado.lastName}`] = listaEmpregado.responsibleFor
+            .map(animaisPeloId => animal.find(animalIdComparar => animalIdComparar.id === animaisPeloId).name)
+    }
+    return obj
+}
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-    // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+    const empregadoNovo = { id, firstName, lastName, managers, responsibleFor }
+    return data.employees.push(empregadoNovo)
 }
 
 function isManager(id) {
-    // seu código aqui
+    return data.employees.some(gerente => gerente.managers.some(dis => dis === id))
 }
 
 function animalsOlderThan(animal, age) {
@@ -150,7 +151,18 @@ function animalsOlderThan(animal, age) {
 }
 
 function oldestFromFirstSpecies(id) {
-    // seu código aqui
+    const funcionario = data.employees
+    const animais = data.animals
+    const valores = funcionario.find(select => select.id === id).responsibleFor[0]
+    const teste = animais.find(select => select.id === valores).residents
+    console.log('//////////*********------------')
+    console.log(teste)
+    console.log('////////////////************-----------')
+    const teste2 = teste.reduce((a, b) => a.age - b.age, 0)
+    console.log('//////////*********------------')
+    console.log(teste2)
+    console.log('////////////////************-----------')
+    return teste
 }
 
 function increasePrices(percentage) {
