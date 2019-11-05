@@ -143,12 +143,6 @@ function createAnimals() {
   return animals
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   const { id, firstName, lastname } = personalInfo
-//   const { managers, responsibleFor } = associatedWith
-//   return { id, firstName, lastname, managers, responsibleFor}
-// }
-
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith }
 }
