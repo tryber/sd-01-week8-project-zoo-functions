@@ -99,7 +99,7 @@ function animalPopularity(rating) {
 
 function animalsByIds(...values) {
   const obj = [];
-  values.map((item) => obj.push(data.animals.find((animal) => animal.id === item)));
+  values.forEach((item) => obj.push(data.animals.find((animal) => animal.id === item)));
   return obj;
 };
 
@@ -112,13 +112,7 @@ function employeesByIds(ids) {
 };
 
 function employeeByName(employeeName) {
-  let obj;
-  if (employeeName === undefined) {
-    obj = {};
-  } else {
-    obj = data.employees.find((employe) => employe.firstName === employeeName || employe.lastName === employeeName)
-  }
-  return obj
+  return data.employees.find(({firstName,lastName}) => firstName === employeeName || lastName === employeeName) || {}
 };
 
 function managersForEmployee(idOrName) {
@@ -126,12 +120,10 @@ function managersForEmployee(idOrName) {
 };
 
 function employeeCoverage(idOrName) {
-  let obj = {}
-
+  const obj = {}
   const allIddata = data.employees.map((item) => item.id);
   const returnIdResponsibleForById = (idEmployee) =>
-    data.employees.find((employee) => employee.id === idEmployee)
-
+  data.employees.find((employee) => employee.id === idEmployee)
   const funcGetResult = id => {
     obj[`${returnIdResponsibleForById(id).firstName} ${returnIdResponsibleForById(id).lastName}`] =
       returnIdResponsibleForById(id).responsibleFor.map((idAnimal) =>
@@ -141,17 +133,11 @@ function employeeCoverage(idOrName) {
     allIddata.forEach((id) => funcGetResult(id));
   } else {
     let value = {};
-    if (idOrName.length < 36) {
-      value = data.employees.find(item => item.firstName === idOrName || item.lastName === idOrName)
-      funcGetResult(value['id'])
-    } else {
-      value = data.employees.find(item => item.id === idOrName)
-      funcGetResult(value['id'])
-    }
+    value = data.employees.find(item => item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName)
+    funcGetResult(value['id'])
   }
   return obj;
 };
-
 
 function addEmployee(...arg) {
   const allEmployees = [...data.employees]
