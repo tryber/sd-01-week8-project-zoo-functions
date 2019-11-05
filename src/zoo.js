@@ -50,19 +50,16 @@ function animalMap(options = {}) {
       return obj
     }
 
-    return obj[location] = data.animals
+    const objWithName = obj[location] = data.animals
       .filter(animal => animal.location === location)
       .map((species) => {
         let residents = species.residents
-        if (sex) {
-          residents = residents.filter(resident => resident.sex === sex)
-        }
+        if (sex) residents = residents.filter(resident => resident.sex === sex)
         let animalNames = residents.map(({ name }) => name)
-        if (sorted) {
-          animalNames = animalNames.sort()
-        }
+        if (sorted) animalNames = animalNames.sort()
         return { [species.name]: animalNames }
       })
+    return objWithName
   })
   return obj
 };
@@ -88,7 +85,7 @@ function employeesByIds (ids) {
 
 function employeeByName (employeeName) {
   if (employeeName === undefined) return {}
-  return data.employees.find(employee => employee.firstName === employeeName 
+  return data.employees.find(employee => employee.firstName === employeeName
     || employee.lastName === employeeName)
 };
 
@@ -98,21 +95,18 @@ function managersForEmployee (idOrName) {
 
 function employeeCoverage(idOrName) {
   const obj = []
-  data.employees.forEach(employee => {
-    obj[`${employee.firstName} ${employee.lastName}`] =
-      employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
-  })
+  data.employees.forEach(employee => obj[`${employee.firstName} ${employee.lastName}`] =
+    employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
+  )
 
-  const searchEmployee = (idOrName) => {
-    let employeeDetails = data.employees.find(employee => employee.firstName === idOrName
-      || employee.lastName === idOrName
-      || employee.id === idOrName)
+  const searchEmployee = (condition) => {
+    const employeeDetails = data.employees.find(employee => employee.firstName === condition
+      || employee.lastName === condition
+      || employee.id === condition)
     return `${employeeDetails.firstName} ${employeeDetails.lastName}`
   }
 
-  if (idOrName === undefined) {
-    return obj
-  }
+  if (idOrName === undefined) return obj
   return { [searchEmployee(idOrName)]: obj[searchEmployee(idOrName)] }
 };
 
@@ -145,7 +139,7 @@ function createAnimals() {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith}
+  return { ...personalInfo, ...associatedWith }
 }
 
 module.exports = {
