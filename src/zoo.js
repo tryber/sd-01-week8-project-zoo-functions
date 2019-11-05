@@ -1,17 +1,20 @@
 const data = require('./data')
 
-const entrant = {
-  Senior: 3,
-  Children: 5,
-  Adults: 4
+
+
+const {prices} = require('./data')
+entryCalculator = (entrants = 0) => {
+  if (Object.keys(entrants).length === 0) {
+    return 0
+  }
+  else{
+    let result = 0
+    result += entrants.Adult * prices["Adult"]
+    result += entrants.Senior * prices["Senior"]
+    result += entrants.Child  * prices["Child"]
+    return result
+  }
 }
-
-entryCalculator = (entrants) => {
-  const senior = entrant.find((element) => { element.toLowerCase() == 'senior'})
-  return senior
-};
-console.log(entryCalculator())
-
 
 function schedule (dayName) {
   // seu código aqui
@@ -25,29 +28,29 @@ function animalMap (options) {
   // seu código aqui
 };
 
-function animalPopularity (rating) {
-  // seu código aqui
-};
+// function animalPopularity (rating) {
+//   // seu código aqui
+// };
 
 function animalsByIds (ids) {
   // seu código aqui
 };
 
-function animalByName (animalName) {
-  // seu código aqui
-};
+// function animalByName (animalName) {
+//   // seu código aqui
+// };
 
-function employeesByIds (ids) {
-  // seu código aqui
-};
+// function employeesByIds (ids) {
+//   // seu código aqui
+// };
 
 function employeeByName (employeeName) {
   // seu código aqui
 };
 
-function managersForEmployee (idOrName) {
-  // seu código aqui
-};
+// function managersForEmployee (idOrName) {
+//   // seu código aqui
+// };
 
 function employeeCoverage (idOrName) {
   // seu código aqui
