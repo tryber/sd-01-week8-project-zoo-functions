@@ -140,23 +140,19 @@ class Animal {
   }
 
   info() {
-    const { name, age, sex, species} = this
+    const { name, age, sex, species } = this
     return `${name} is a ${age} year old ${sex} ${species}`
   }
 
-  static total_animals() {
-    return data.animals.reduce((acc, el) => (
-      acc += el.residents.length
-    ), 0)
+  static totalAnimals() {
+    return data.animals.reduce((acc, el) => acc += el.residents.length, 0)
   }
 }
 
 function createAnimals() {
   const animals = []
-  data.animals.forEach((animal) => (
-    animal.residents.forEach(({ name, age, sex }) => {
-      animals.push(new Animal(name, age, sex, animal.name))
-    })
+  data.animals.forEach((animal) => animal.residents.forEach(({ name, age, sex }) =>
+    animals.push(new Animal(name, age, sex, animal.name))
   ))
   return animals
 }
