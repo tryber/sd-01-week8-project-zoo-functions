@@ -2,64 +2,63 @@ const data = require('./data')
 
 function entryCalculator(entrants = 0) {
   if (Object.keys(entrants).length === 0) return 0;
-  return Object.keys(entrants).reduce((acc, key) => {
-    return (acc + (data.prices[key] * entrants[key]));
-  }, 0)
+  return Object.keys(entrants).reduce((acc, key) => (acc + (data.prices[key] * entrants[key])), 0)
 };
 
 function schedule(dayName = 0) {
   const cronograma = Object.assign({}, data.hours)
+  let obj = {}
   Object.keys(cronograma).forEach((key) => {
     cronograma[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`;
   })
   cronograma.Monday = 'CLOSED';
 
   if (dayName === 0) {
-    return cronograma;
+    obj = cronograma;
   } else {
-    let obj = {}
     obj[dayName] = cronograma[dayName]
-    return obj;
   }
+  return obj
 }
 
 function animalCount(species = 0) {
   const animals = data.animals;
   const obj = {}
-  let num=undefined;
+  let num = undefined;
   const isSpecie = (animal, species) => animal.name === species
   const filterAnimals = (animals, species) =>
     animals.filter((animal) => isSpecie(animal, species))
   if (species === 0) {
-    Object.keys(animals).forEach((key) => {
+    Object.keys(animals).forEach(key => {
       obj[data.animals[key].name] = data.animals[key].residents.length
     })
   } else {
-    num =  filterAnimals(data.animals, species)[0].residents.length
+    num = filterAnimals(data.animals, species)[0].residents.length
   }
   return num || obj
 }
 
 function animalMap(options) {
-  const animals = data.animals, obj = {}
+  const animals = data.animals;
+  const obj = {};
   const isLocation = (animal, location) => animal.location === location
-  const filterAnimals = (animals, location) => animals.filter((animal) => isLocation(animal, location))
-  const getAllLocation = data.animals.map((animal) => animal.location)
+  const filterAnimals = (animals, location) => animals.filter(animal => isLocation(animal, location))
+  const getAllLocation = data.animals.map(animal => animal.location)
   const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
 
   if (options === undefined || options['includeNames'] === undefined) {
-    locationReduce.forEach((location) => {
+    locationReduce.forEach(location => {
       obj[location] = filterAnimals(animals, location)
-        .map((species) => species.name)
+        .map(species => species.name)
     })
   } else if (options) {
-    locationReduce.forEach((location) => {
+    locationReduce.forEach(location => {
       obj[location] = filterAnimals(animals, location)
-        .map((species) => ({ [species.name]: species.residents.map((nome) => nome.name) }))
+        .map(species => ({ [species.name]: species.residents.map(nome => nome.name) }))
     })
     if (options['sorted']) {
-      Object.keys(obj).forEach((item) =>
-        (obj[item].forEach((item2) => Object.keys(item2).forEach((item3) => item2[item3].sort()))))
+      Object.keys(obj).forEach(item =>
+        (obj[item].forEach(item2 => Object.keys(item2).forEach(item3 => item2[item3].sort()))))
     }
     if (options['sex'] === 'female') {
       locationReduce.forEach((location) => {
