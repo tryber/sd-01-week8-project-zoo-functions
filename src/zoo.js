@@ -37,41 +37,49 @@ function animalCount(species = 0) {
   return obj
 }
 
-function animalMap(options) {
-  // const animals = data.animals, obj = {}
-  // const isLocation = (animal, location) => animal.location === location
-  // const filterAnimals = (animals, location) => animals.filter((animal) => isLocation(animal, location))
-  // const getAllLocation = data.animals.map((animal)=>animal.location)
-  // const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
-  // locationReduce.forEach(location => {
-  //   obj[location] = filterAnimals(animals,location).map(item => item.name)
-  // })
-  // return obj
-  const { includeNames } = options
+function animalMap(options = {}) {
+  const { includeNames, sex, sorted } = options
   const obj = {}
-  const locations = [...new set(data.animals.map(species => species.location))]
+  const locations = [...new Set(data.animals.map(species => species.location))]
   locations.forEach(location => {
-    if(includeNames){
+    if (!includeNames) {
       obj[location] = data.animals
+        .filter(animal => animal.location == location)
+        .map(species => species.name)
+      return obj
+    }
+    obj[location] = data.animals
       .filter(animal => animal.location == location)
       .map(species => {
-        const name = species.name
-        const residents = species.resident
-        return { [name]: residents}
+        let residents = species.residents
+        if (sex) {
+          residents = residents.filter(resident => resident.sex === sex)
+        }
+        let animalNames = residents.map(resident => resident.name)
+        if (sorted) {
+          animalNames = animalNames.sort()
+        }
+        return { [species.name]: animalNames }
       })
-    }else{
-      obj[location] = data.animals
-      .filter(animal => animal.location == location )
-      .map(species => species.name)
-    }
-  })
+  }
+  )
+  return obj
 }
+
 function animalPopularity(rating) {
   // seu código aqui
 };
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(ids = 0) {
+  const arrayIdsAnimals = []
+  if (ids == 0) {
+    return []
+  } else if (ids.length > 0) {
+    const animalsArray = data.animals
+    const idAnimals = animalsArray.find(animal => animal.id == ids)
+    return [idAnimals]
+
+  }
 };
 
 function animalByName(animalName) {
@@ -115,18 +123,18 @@ function increasePrices(percentage) {
 }
 
 class Animal {
- constructor(name, age, sex, species){
-  this.name = name
-  this.age = age
-  this.sex = sex
-  this.species = species
- }
+  constructor(name, age, sex, species) {
+    this.name = name
+    this.age = age
+    this.sex = sex
+    this.species = species
+  }
 }
 
 function createAnimals() {
   const animals = []
-  data.animals.forEach(animal =>(
-    animal.residents.forEach(resident =>(
+  data.animals.forEach(animal => (
+    animal.residents.forEach(resident => (
       animals.push(new animal())
     ))
   ))
@@ -140,7 +148,7 @@ function createAnimals() {
 // }
 
 function createEmployee(personalInfo, associatedWith) {
-  return{ ...personalInfo, ...associatedWith }
+  return { ...personalInfo, ...associatedWith }
 }
 
 module.exports = {
