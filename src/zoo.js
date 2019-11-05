@@ -24,10 +24,10 @@ function schedule(dayName = 0) {
 function animalCount(species = 0) {
   const animals = data.animals;
   const obj = {}
-  let num = undefined;
-  const isSpecie = (animal, species) => animal.name === species
-  const filterAnimals = (animals, species) =>
-    animals.filter((animal) => isSpecie(animal, species))
+  let num;
+  const isSpecie = ({name}, specie) => name === specie
+  const filterAnimals = (animals, specieAnimal) =>
+    animals.filter((animal) => isSpecie(animal, specieAnimal))
   if (species === 0) {
     Object.keys(animals).forEach(key => {
       obj[data.animals[key].name] = data.animals[key].residents.length
