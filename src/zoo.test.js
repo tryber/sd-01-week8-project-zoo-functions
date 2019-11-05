@@ -309,7 +309,7 @@ expected = {
   'Emery Elser': ['elephants', 'bears', 'lions']
 };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // com o id de um funcionário, retorna os animais pelos quais o funcionário é
 // responsável
@@ -323,7 +323,7 @@ assert.deepEqual(actual, expected);
 actual = zoo.employeeCoverage('Stephanie');
 expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
 // com o último nome de um um funcionário, retorna os animais pelos quais o
 // funcionário é responsável
