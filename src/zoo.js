@@ -10,15 +10,17 @@ function entryCalculator (entrants = 0) {
 };
 
 function schedule(dayName) {
-  const schedule = {}
-  schedule.Monday = "teste"
-  Object.keys(data.hours).forEach(key => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
-  schedule.Monday = "CLOSED"
-  
+  const fullSchedule = {}
+  fullSchedule.Monday = 'teste'
+  Object.keys(data.hours).forEach(key => {
+    fullSchedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`
+  })
+  fullSchedule.Monday = 'CLOSED'
+
   if (dayName == undefined) {
-    return schedule
+    return fullSchedule
   } else {
-    return { [dayName]: schedule[dayName] } 
+    return { [dayName]: fullSchedule[dayName] } 
   }
 };
 
