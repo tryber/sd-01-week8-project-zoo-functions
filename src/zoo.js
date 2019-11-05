@@ -132,11 +132,33 @@ function increasePrices(percentage) {
 }
 
 class Animal {
-  // seu código aqui
+  constructor(name, age, sex, species) {
+    this.name = name
+    this.age = age
+    this.sex = sex
+    this.species = species.slice(0, -1)
+  }
+
+  info() {
+    const { name, age, sex, species} = this
+    return `${name} is a ${age} year old ${sex} ${species}`
+  }
+
+  static total_animals() {
+    return data.animals.reduce((acc, el) => (
+      acc += el.residents.length
+    ), 0)
+  }
 }
 
 function createAnimals() {
-  // seu código aqui
+  const animals = []
+  data.animals.forEach((animal) => (
+    animal.residents.forEach(({ name, age, sex }) => {
+      animals.push(new Animal(name, age, sex, animal.name))
+    })
+  ))
+  return animals
 }
 
 function createEmployee(personalInfo, associatedWith) {
