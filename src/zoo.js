@@ -116,11 +116,12 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(employee => employee.managers.includes(id))
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  let specie = data.animals.find(({name}) => name === animal)
+  return specie.residents.every(animal => animal.age > age)
 }
 
 function oldestFromFirstSpecies(id) {
@@ -145,13 +146,16 @@ class Animal {
   }
 
   static totalAnimals() {
-    return data.animals.reduce((acc, el) => acc += el.residents.length, 0)
+    return data.animals.reduce((acc, el) => {
+      acc += el.residents.length
+      return acc
+    }, 0)
   }
 }
 
 function createAnimals() {
   const animals = []
-  data.animals.forEach((animal) => animal.residents.forEach(({ name, age, sex }) =>
+  data.animals.forEach(animal => animal.residents.forEach(({ name, age, sex }) =>
     animals.push(new Animal(name, age, sex, animal.name))
   ))
   return animals
