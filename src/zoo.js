@@ -75,7 +75,7 @@ function animalsByIds(...ids) {
   if (ids == 0) {
     return []
   } else {
-    for(let id of ids){
+    for (let id of ids) {
       const animalsArray = data.animals
       const idAnimals = animalsArray.find(animal => animal.id == id)
       arrayIdsAnimals.push(idAnimals)
