@@ -1,28 +1,9 @@
 const data = require('./data')
 
-// let; Check
-// const; Check
-// arrow functions; Check
-// template literals; check
-// spread operator; check
-// parâmetro rest; check
-// object destructuring;check
-// array destructuring; check
-// default destructuring;check
-// abbreviation object literal;check
-// default params; check
-// higher order functions; check
-// classes;check  
-// atributos de classes; check
-// métodos de instâncias de classes; check
-// métodos estáticos de classes. check
-
-
-
 function entryCalculator(entrants = 0) {
   if (Object.keys(entrants).length === 0) return 0;
   return Object.keys(entrants).reduce((acc, key) => {
-    return acc + data.prices[key] * entrants[key];
+    return (acc + (data.prices[key] * entrants[key]));
   }, 0)
 };
 
@@ -33,7 +14,7 @@ function schedule(dayName = 0) {
   })
   cronograma.Monday = 'CLOSED';
 
-  if (dayName == 0) {
+  if (dayName === 0) {
     return cronograma;
   } else {
     let obj = {}
@@ -43,18 +24,20 @@ function schedule(dayName = 0) {
 }
 
 function animalCount(species = 0) {
-  const animals = data.animals, obj = {}
+  const animals = data.animals;
+  const obj = {}
+  let num=undefined;
   const isSpecie = (animal, species) => animal.name === species
   const filterAnimals = (animals, species) =>
     animals.filter((animal) => isSpecie(animal, species))
-  if (species == 0) {
+  if (species === 0) {
     Object.keys(animals).forEach((key) => {
       obj[data.animals[key].name] = data.animals[key].residents.length
     })
   } else {
-    return filterAnimals(data.animals, species)[0].residents.length
+    num =  filterAnimals(data.animals, species)[0].residents.length
   }
-  return obj
+  return num || obj
 }
 
 function animalMap(options) {
@@ -78,7 +61,7 @@ function animalMap(options) {
       Object.keys(obj).forEach((item) =>
         (obj[item].forEach((item2) => Object.keys(item2).forEach((item3) => item2[item3].sort()))))
     }
-    if (options['sex'] == 'female') {
+    if (options['sex'] === 'female') {
       locationReduce.forEach((location) => {
         obj[location] = filterAnimals(animals, location)
           .map((item) => ({
@@ -112,7 +95,7 @@ function employeesByIds(ids) {
 };
 
 function employeeByName(employeeName) {
-  return data.employees.find(({firstName,lastName}) => firstName === employeeName || lastName === employeeName) || {}
+  return data.employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName) || {}
 };
 
 function managersForEmployee(idOrName) {
@@ -123,7 +106,7 @@ function employeeCoverage(idOrName) {
   const obj = {}
   const allIddata = data.employees.map((item) => item.id);
   const returnIdResponsibleForById = (idEmployee) =>
-  data.employees.find((employee) => employee.id === idEmployee)
+    data.employees.find((employee) => employee.id === idEmployee)
   const funcGetResult = id => {
     obj[`${returnIdResponsibleForById(id).firstName} ${returnIdResponsibleForById(id).lastName}`] =
       returnIdResponsibleForById(id).responsibleFor.map((idAnimal) =>
@@ -141,8 +124,8 @@ function employeeCoverage(idOrName) {
 
 function addEmployee(...arg) {
   const allEmployees = [...data.employees]
-  const newEmployees = ([id, firstName, lastName, managers = [], responsibleFor = []]) => 
-  ({ id, firstName, lastName, managers, responsibleFor })
+  const newEmployees = ([id, firstName, lastName, managers = [], responsibleFor = []]) =>
+    ({ id, firstName, lastName, managers, responsibleFor })
   data.employees = [...allEmployees, newEmployees(arg)]
 }
 
