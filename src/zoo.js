@@ -96,8 +96,26 @@ function managersForEmployee (idOrName) {
   // seu código aqui
 };
 
-function employeeCoverage (idOrName) {
+function employeeCoverage(idOrName) {
+  const obj = []
+  data.employees.forEach(employee => {
+    obj[`${employee.firstName} ${employee.lastName}`] =
+      employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
+  })
 
+  const searchEmployee = (idOrName) => {
+    let employeeDetails = data.employees.find(employee => employee.firstName === idOrName
+      || employee.lastName === idOrName
+      || employee.id === idOrName)
+    return `${employeeDetails.firstName} ${employeeDetails.lastName}`
+  }
+
+  if (idOrName === undefined) {
+    return obj
+  }
+  else {
+    return { [searchEmployee(idOrName)]: obj[searchEmployee(idOrName)] }
+  }
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
