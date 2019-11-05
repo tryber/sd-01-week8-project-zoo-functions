@@ -71,8 +71,11 @@ function animalPopularity (rating) {
   // seu código aqui
 };
 
-function animalsByIds (ids) {
-  // seu código aqui
+function animalsByIds (...ids) {
+  if (ids.length == 0) return ids
+  const obj = []
+  ids.forEach(id => obj.push(data.animals.find(animal => animal.id == id)))
+  return obj
 };
 
 function animalByName (animalName) {
