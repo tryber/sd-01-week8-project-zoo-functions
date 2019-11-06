@@ -24,14 +24,14 @@ function schedule(dayName = 0) {
 }
 
 function animalCount (species) {
-  if (species == undefined) {
-    let animalsObject = {}
+  if (species === undefined) {
+    const animalsObject = {}
     const animal = data.animals.forEach((actualAnimal) => {
       animalsObject[actualAnimal.name] = actualAnimal.residents.length
     })
     return animalsObject
   }
-  return data.animals.find(animal => animal.name == species).residents.length
+  return data.animals.find(animal => animal.name === species).residents.length
 };
 
 function animalMap (options) {
@@ -60,7 +60,8 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  return data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName) || {}
+  return data.employees.find(name => name.firstName === employeeName || 
+  name.lastName === employeeName) || {}
 }
 
 function managersForEmployee (idOrName) {
@@ -73,7 +74,7 @@ function employeeCoverage (idOrName) {
     return accumuateValues
   }, {})
   
-  if (idOrName == undefined) {
+  if (idOrName === undefined) {
     return employee
   } else {
     
