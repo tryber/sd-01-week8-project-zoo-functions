@@ -131,7 +131,9 @@ function animalsOlderThan(animal, age) {
 function oldestFromFirstSpecies(id) {
   const firstSpecie = data.employees.find(employee => employee.id === id).responsibleFor[0]
   const animals = data.animals.find(animal => animal.id === firstSpecie).residents
-  let oldestAge = 0, oldestName, oldestSex
+  let oldestAge = 0
+  let oldestName = ''
+  let oldestSex = ''
   animals.forEach((animal) => {
     if (animal.age > oldestAge) {
       oldestAge = animal.age
