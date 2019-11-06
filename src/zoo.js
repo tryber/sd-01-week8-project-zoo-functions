@@ -25,18 +25,18 @@ function schedule(dayName = 0) {
 }
 
 function animalCount (species) {
- if (species == undefined) {
-   let animalsObject = {}
-   const animal = data.animals.forEach((actualAnimal) => {
-    animalsObject[actualAnimal.name] = actualAnimal.residents.length
-  })
-  return animalsObject
- }
- return data.animals.find(animal => animal.name == species).residents.length
+  if (species == undefined) {
+    let animalsObject = {}
+    const animal = data.animals.forEach((actualAnimal) => {
+      animalsObject[actualAnimal.name] = actualAnimal.residents.length
+    })
+    return animalsObject
+  }
+  return data.animals.find(animal => animal.name == species).residents.length
 };
 
 function animalMap (options) {
- // seu código aqui
+  // seu código aqui
 };
 
 function animalPopularity (rating) {
@@ -47,10 +47,9 @@ function animalsByIds (...ids) {
   const idsObject = []
   if (ids === undefined) {
     return idsObject
-  } else {
-  ids.filter(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
-  return idsObject
   }
+  ids.map(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
+  return idsObject  
 };
 
 function animalByName (animalName) {
@@ -70,7 +69,16 @@ function managersForEmployee (idOrName) {
 };
 
 function employeeCoverage (idOrName) {
-  // seu código aqui
+    const employee = data.employees.reduce((accumuateValues, actualArray) => {
+      accumuateValues[`${actualArray.firstName} ${actualArray.lastName}`] = actualArray.responsibleFor.map(id => data.animals.find(animal => animal.id == id).name)
+      return accumuateValues
+    }, {})
+
+  if (idOrName == undefined) {
+    return employee
+  } else {
+    
+  }
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -78,7 +86,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(({ managers }) => managers.some(ids => ids === id))
 }
 
 function animalsOlderThan(animal, age) {
@@ -98,7 +106,7 @@ class Animal {
 }
 
 function createAnimals() {
-
+  
 }
 
 function createEmployee(personalInfo, associatedWith) {
