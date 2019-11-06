@@ -155,8 +155,8 @@ function increasePrices(percentage) {
     const result = value + ((value / 100) * perc)
     return result;
   }
-  Object.keys(data.prices).forEach(type => {
-    (data.prices[type] = Math.round(calculate(percentage, data.prices[type]) * 100) / 100)
+  Object.keys(data.prices).forEach((type) => {
+    data.prices[type] = Math.round(calculate(percentage, data.prices[type]) * 100) / 100
     return 0;
   }
   )
