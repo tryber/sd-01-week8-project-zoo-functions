@@ -102,14 +102,15 @@ function employeeCoverage(idOrName) {
     data.employees.find(employee => employee.id === idEmployee))
   const funcGetResult = id => (
     obj[`${returnIdResponsibleForById(id).firstName} ${returnIdResponsibleForById(id).lastName}`] =
-      returnIdResponsibleForById(id).responsibleFor.map(idAnimal =>
-        data.animals.find(animal => animal.id === idAnimal).name)
+    returnIdResponsibleForById(id).responsibleFor.map(idAnimal =>
+      data.animals.find(animal => animal.id === idAnimal).name)
   )
   if (idOrName === undefined) {
     allIddata.forEach(id => funcGetResult(id));
   } else {
     let value = {};
-    value = data.employees.find(item => item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName)
+    value = data.employees.find(item => (
+      item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName))
     funcGetResult(value.id)
   }
   return obj;
@@ -137,12 +138,13 @@ function oldestFromFirstSpecies(id) {
   const employee = employeeCoverage(id)
   const specie = Object.values(employee)[0][0]
 
-  const obj = Object.values(data.animals.find((animal) => animal.name === specie)
+  const obj = Object.values(data.animals.find(animal => animal.name === specie)
     .residents.reduce((previus, currentValue) => {
+      let result = previus;
       if (previus.age < currentValue.age) {
-        previus = currentValue
+        result = currentValue
       }
-      return previus
+      return result;
     }))
   return obj;
 }
@@ -152,8 +154,10 @@ function increasePrices(percentage) {
     const result = value + ((value / 100) * perc)
     return result;
   }
-  Object.keys(data.prices).forEach(type =>
-    data.prices[type] = Math.round(calculate(percentage, data.prices[type]) * 100) / 100)
+  Object.keys(data.prices).forEach(type => {
+    data.prices[type] = Math.round(calculate(percentage, data.prices[type]) * 100) / 100
+    return 0;
+  })
 }
 
 class Animal {
@@ -177,7 +181,7 @@ class Animal {
 function createAnimals() {
   const animalObject = []
   data.animals.forEach(specie => (
-    specie.residents.forEach((animal) => (animalObject
+    specie.residents.forEach(animal => (animalObject
       .push(new Animal(...Object.values(animal), specie.name))))
   ))
   return animalObject;
