@@ -14,17 +14,17 @@ function entryCalculator(entrants = 0) {
 
 function schedule(dayName = 0) {
   const cronograma = data.hours
+  let obj = {}
   if (dayName === 0) {
     Object.keys(cronograma).forEach((key) => {
       cronograma[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`
     })
     cronograma.Monday = 'CLOSED'
-    return cronograma
+    obj = cronograma
   } else {
-    const obj = {}
     obj[dayName] = cronograma[dayName]
-    return obj
   }
+  return obj
 }
 
 function animalCount(species = 0) {
@@ -91,11 +91,11 @@ function employeesByIds(ids) {
 }
 
 function employeeByName(employeeName) {
-  if (!employeeName) {
-    return {}
-  } else {
-    return data.employees.find(animals => animals.firstName === employeeName || animals.lastName === employeeName)
+  let employee = {}
+  if (employeeName) {
+    employee = data.employees.find(animals => animals.firstName === employeeName || animals.lastName === employeeName)
   }
+  return employee
 }
 
 function managersForEmployee(idOrName) {
@@ -117,7 +117,6 @@ function employeeCoverage(idOrName) {
     })
   } else {
     const idEmployess = employess.find(employess => employess.id === idOrName || employess.firstName === idOrName || employess.lastName === idOrName)
-    console.log(idEmployess)
     obj[`${idEmployess.firstName} ${idEmployess.lastName}`] = data.animals.filter((animal) => {
       for (let i = 0; i < idEmployess.responsibleFor.length; i++) {
         if (idEmployess.responsibleFor[i] === animal.id) {
@@ -129,15 +128,11 @@ function employeeCoverage(idOrName) {
   return obj
 }
 
-
-function addEmployee(id = [], firstName = [], lastName = [], managers = [], responsibleFor = []) {
-  const newArray = []
-  newArray.id = id
-  newArray.firstName = firstName
-  newArray.lastName = lastName
-  newArray.managers = managers
-  newArray.responsibleFor = responsibleFor
-  return data.employees.push(newArray)
+function addEmployee(...arg) {
+  const allEmployees = [...data.employees]
+  const newEmployees = ([id, firstName, lastName, managers = [], responsibleFor = []]) =>
+    ({ id, firstName, lastName, managers, responsibleFor })
+  data.employees = [...allEmployees, newEmployees(arg)]
 }
 
 function isManager(id) {
@@ -177,7 +172,7 @@ class Animal {
     return `${name} is a ${age} year old ${sex} ${species}`
   }
 
-  static total_animals() {
+  static totalAnimals() {
     return createAnimals().length
   }
 }
