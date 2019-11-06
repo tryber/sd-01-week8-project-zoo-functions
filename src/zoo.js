@@ -26,6 +26,8 @@ function bigDates(name) {
             return logic.displayValues(data.animals, "popularity");
         case "animals_location_value":
             return logic.displayValues(data.animals, "location");
+        case "animals_residents_value":
+            return logic.displayValues(data.animals, "residents");
         case "animals_residents_name_value":
             return logic.displayValues(data.animals, "residents").map((elm) => logic.displayValues(elm, "name"));
         case "animals_residents_sex_value":
@@ -45,7 +47,7 @@ function bigDates(name) {
         case "hours_open_value":
             return bigDates("key_layer_2_hours").map((elm) => data.hours[elm].open);
         case "hours_close_value":
-            return bigDates("key_later_2_prices").map((elm) => data.hours[elm].close);
+            return bigDates("key_layer_2_hours").map((elm) => data.hours[elm].close);
         case "prices_value":
             return bigDates("key_later_2_prices").map((elm) => data.prices[elm]);
         default:
@@ -70,118 +72,169 @@ function entryCalculator(entrants) {
     }
 }
 
-// function schedule(dayName) {
-//     if (dayName == undefined) {
-//         const key_Day = logic.getKeyName(data.hours)
-//         const openHours = new Array;
-//         key_Day.forEach((key) => openHours.push(data.hours[key].open));
-//         const closeHours = new Array;
-//         key_Day.forEach((key) => closeHours.push(data.hours[key].close));
-//         const openHoursAMPM = logic.setHour(...openHours);
-//         const closeHoursAMPM = logic.setHour(...closeHours);
-//         const obj = new Object;
-//         for (i = 0; i < key_Day.length; i++) {
-//             if (i == (key_Day.length - 1)) {
-//                 obj[key_Day[i]] = 'CLOSED'
-//             } else {
-//                 obj[key_Day[i]] = `Open from ${openHoursAMPM[i]} until ${closeHoursAMPM[i]}`
-//             }
-//         }
-//         return obj
-//     } else {
-//         const openHoursAMPM = logic.setHour(data.hours[`${dayName}`].open);
-//         const closeHoursAMPM = logic.setHour(data.hours[`${dayName}`].close);
-//         const obj = new Object;
-//         if (dayName == "Monday") {
-//             obj[dayName] = 'CLOSED'
-//         } else {
-//             obj[dayName] = `Open from ${openHoursAMPM} until ${closeHoursAMPM}`
-//         }
-//         return obj
-//     }
+
+function hourDisplay(index) {
+    if (index == (bigDates("key_layer_2_hours").length - 1)) {
+        return "CLOSED"
+    } else {
+        return `Open from ${logic.setHour(...bigDates("hours_open_value"))[index]} until ${logic.setHour(...bigDates("hours_close_value"))[index]}`
+    }
+}
+
+function schedule(dayName) {
+    const obj = new Object
+    if (dayName == undefined) {
+        bigDates("key_layer_2_hours").forEach((elm, index) => logic.addNode(obj, elm, hourDisplay(index)));
+        return obj
+    } else {
+        logic.addNode(obj, dayName, hourDisplay(bigDates("key_layer_2_hours").indexOf(dayName)));
+        return obj
+    }
+}
+
+function animalCount(species) {
+    const obj = new Object
+    if (species == undefined) {
+        bigDates("animals_name_value").forEach((elm, index) => logic.addNode(obj, elm, bigDates("animals_residents_name_value")[index].length));
+        return obj
+    } else {
+        return bigDates("animals_residents_name_value")[bigDates("animals_name_value").indexOf(species)].length
+    }
+}
+
+function relatedData(index, dataIndex, dataKey) {
+    const newArray = new Array
+    for (let i = 0; i < dataIndex.length; i++) {
+        if (dataIndex[i] == index) {
+            newArray.push(dataKey[i])
+        }
+    }
+    return newArray
+}
+
+// console.log(animalMap({ includeNames: true }))
+
+// const array_location_filter = bigDates("animals_location_value").filter((elm, index) => bigDates("animals_location_value").indexOf(elm) === index)
+
+// const newArray = new Array;
+// bigDates("animals_name_value").forEach((elm, index) => newArray.push(logic.createObject(elm, bigDates("animals_residents_name_value")[index].sort())))
+
+// const newObject = new Object;
+// array_location_filter.forEach((elm) => logic.addNode(newObject, elm, getIndex(elm)))
+// console.log(newObject)
+
+// function getIndex(elm) {
+//     const newnewArray = new Array;
+//     // .forEach((elmt) => newnewArray.push((newArray.filter((elmm) => elmm[elmt]))))
+//     const array = relatedData(elm, bigDates("animals_location_value"), bigDates("animals_name_value"))
+//     console.log(array)
+//     console.log(newArray.filter((elmt) => array.forEach((elmm) => (elmt[`${elmm}`]))))
+
+//     return newnewArray
 // }
-
-
-// function animalCount(species) {
-//     const obj = new Object;
-//     const array_Animals = new Array
-//     data.animals.forEach((elm) => array_Animals.push(elm.name))
-//     const array_Residents = new Array
-//     data.animals.forEach((elm) => array_Residents.push(elm.residents.length))
-//     array_Animals.forEach((elm, index) => logic.createObject(obj, elm, array_Residents[index]))
-//     if (species == undefined) {
+// function animalMap(options) {
+//     const obj = new Object
+//     if (options == undefined) {
+//         bigDates("animals_location_value").filter((elm, index) => bigDates("animals_location_value").indexOf(elm) === index).forEach((elm) => logic.addNode(obj, elm, relatedData(elm, bigDates("animals_location_value"), bigDates("animals_name_value"))));
 //         return obj
-//     } else {
-//         return obj[species]
+//     } else if (options.includeNames) {
+
+//         return
 //     }
 // };
-
-
-// animalMap()
-
-// function animalMap(options) {
-//     const obj = new Object;
-//     const array_Animals = new Array
-//     data.animals.forEach((elm) => array_Animals.push(elm.name))
-//     const array_Location = new Array
-//     data.animals.forEach((elm) => array_Location.push(elm.location))
-//     const array_Residents_Name = new Array
-//     data.animals.forEach((elm) => elm.residents.forEach((elm) => array_Residents_Name.push(elm.name)))
-//     const array_Residents_Sex = new Array
-//     data.animals.forEach((elm) => elm.residents.forEach((elm) => array_Residents_Sex.push(elm.sex)))
-//     const array_Location_Filter = array_Location.filter((elm, index) => array_Location.indexOf(elm) === index);
-//     if (options == undefined) {
-//         array_Location_Filter.forEach((elm) => logic.createObject(obj, elm, array_Animals.filter((elmt) => array_Animals.indexOf(elmt) === array_Location.indexOf(elm))))
-//         array_Location.map((elm) => {
-//                 if (elm == "NE") {
-//                     array_Location.indexOf()
-//                 }
-//             }
-//         };
 
 //         function animalPopularity(rating) {
 //             // seu código aqui
 //         };
 
-//         function animalsByIds(ids) {
-//             // seu código aqui
-//         };
+function animalsByIds(...ids) {
+    const newArray = new Array
+    for (let i of ids) {
+        const array = data.animals.filter((elm) => elm.id == i)
+        newArray.push(array[0]);
+    }
+    return newArray
+};
 
-//         function animalByName(animalName) {
-//             // seu código aqui
-//         };
+function employeeByName(employeeName) {
+    if (employeeName == undefined) {
+        return {}
+    } else {
+        const ind1 = bigDates("employees_firstName_value").indexOf(employeeName);
+        const ind2 = bigDates("employees_lastName_value").indexOf(employeeName);
+        if (ind1 > 0) {
+            return data.employees[ind1]
+        } else if (ind2 > 0) {
+            return data.employees[ind2]
+        } else {
+            alert("Invalid Name")
+        }
+    }
+};
 
-//         function employeesByIds(ids) {
-//             // seu código aqui
-//         };
+function employeeCoverage(idOrName) {
+    const obj = new Object
+    const complete_Name = bigDates("employees_firstName_value").map((elm, index) => `${elm} ${bigDates("employees_lastName_value")[index]}`)
+    complete_Name.forEach((elm, index) => logic.addNode(obj, elm, bigDates("employees_responsibleFor_value")[index].map((elmId) => ((data.animals.filter((animal) => animal.id == elmId)).map((elmm) => elmm.name)).toString())))
+    if (idOrName == undefined) {
+        return obj
+    } else {
+        const ind1 = bigDates("employees_firstName_value").indexOf(idOrName);
+        const ind2 = bigDates("employees_lastName_value").indexOf(idOrName);
+        const ind3 = bigDates("employees_id_value").indexOf(idOrName);
+        const newObj = new Object
+        if (ind1 > 0) {
+            logic.addNode(newObj, complete_Name[ind1], obj[complete_Name[ind1]])
+            return newObj
+        } else if (ind2 > 0) {
+            logic.addNode(newObj, complete_Name[ind2], obj[complete_Name[ind2]])
+            return newObj
+        } else if (ind3 > 0) {
+            logic.addNode(newObj, complete_Name[ind3], obj[complete_Name[ind3]])
+            return newObj
+        }
+    }
+};
 
-//         function employeeByName(employeeName) {
-//             // seu código aqui
-//         };
 
-//         function managersForEmployee(idOrName) {
-//             // seu código aqui
-//         };
+function addEmployee(id = [], firstName = [], lastName = [], managers = [], responsibleFor = []) {
+    var obj = new Object
+    logic.addNode(obj, "id", id)
+    logic.addNode(obj, "firstName", firstName)
+    logic.addNode(obj, "lastName", lastName)
+    logic.addNode(obj, "managers", managers)
+    logic.addNode(obj, "responsibleFor", responsibleFor)
+    data.employees.push(obj)
+}
 
-//         function employeeCoverage(idOrName) {
-//             // seu código aqui
-//         };
+function isManager(id) {
+    const managers_Array = new Array;
+    bigDates("employees_managers_value").forEach((elm) => elm.forEach((elmt) => managers_Array.push(elmt)))
+    if ((managers_Array.find((elm) => elm == id)) == undefined) {
+        return false
+    } else {
+        return true
+    }
+}
 
-//         function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//             // seu código aqui
-//         }
 
-//         function isManager(id) {
-//             // seu código aqui
-//         }
 
-//         function animalsOlderThan(animal, age) {
-//             // seu código aqui
-//         }
+function animalsOlderThan(animal, age) {
+    return bigDates("animals_residents_age_value")[bigDates("animals_name_value").indexOf(animal)].some((elm) => elm > age)
+}
 
-//         function oldestFromFirstSpecies(id) {
-//             // seu código aqui
-//         }
+function oldestFromFirstSpecies(id) {
+    const first_Specie = bigDates("employees_responsibleFor_value")[bigDates("employees_id_value").indexOf(id)][0]
+    const array_Ages = bigDates("animals_residents_age_value")[bigDates("animals_id_value").indexOf(first_Specie)]
+    const array_Sex = bigDates("animals_residents_sex_value")[bigDates("animals_id_value").indexOf(first_Specie)]
+    const array_Name = bigDates("animals_residents_name_value")[bigDates("animals_id_value").indexOf(first_Specie)]
+    const index = array_Ages.indexOf(array_Ages.reduce((a, b) => Math.max(a, b)))
+    const newArray = new Array;
+    newArray.push(array_Name[index])
+    newArray.push(array_Sex[index])
+    newArray.push(array_Ages[index])
+    return newArray
+}
 
 //         function increasePrices(percentage) {
 //             // seu código aqui
@@ -195,28 +248,27 @@ function entryCalculator(entrants) {
 //             // seu código aqui
 //         }
 
-//         function createEmployee(personalInfo, associatedWith) {
-//             // seu código aqui
-//         }
+function createEmployee(personalInfo, associatedWith) {
+    const obj = new Object
+    logic.getKeyName(personalInfo).forEach((elm) => logic.addNode(obj, elm, personalInfo[elm]))
+    logic.getKeyName(associatedWith).forEach((elm) => logic.addNode(obj, elm, associatedWith[elm]))
+    return obj
+}
 
 module.exports = {
     entryCalculator: entryCalculator,
-    // schedule: schedule,
-    // animalCount: animalCount,
+    schedule: schedule,
+    animalCount: animalCount,
     // animalMap: animalMap,
-    // animalPopularity: animalPopularity,
-    // animalsByIds: animalsByIds,
-    // animalByName: animalByName,
-    // employeesByIds: employeesByIds,
-    // employeeByName: employeeByName,
-    // managersForEmployee: managersForEmployee,
-    // employeeCoverage: employeeCoverage,
-    // addEmployee: addEmployee,
-    // isManager: isManager,
-    // animalsOlderThan: animalsOlderThan,
-    // oldestFromFirstSpecies: oldestFromFirstSpecies,
+    animalsByIds: animalsByIds,
+    employeeByName: employeeByName,
+    employeeCoverage: employeeCoverage,
+    addEmployee: addEmployee,
+    isManager: isManager,
+    animalsOlderThan: animalsOlderThan,
+    oldestFromFirstSpecies: oldestFromFirstSpecies,
     // increasePrices: increasePrices,
     // createAnimals: createAnimals,
     // Animal: Animal,
-    // createEmployee: createEmployee
+    createEmployee: createEmployee
 }
