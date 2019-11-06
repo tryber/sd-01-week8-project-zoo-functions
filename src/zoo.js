@@ -30,9 +30,9 @@ function schedule(dayName = 0) {
 function animalCount(species = 0) {
   const animals = data.animals
   const obj = {}
-  const isSpecie = (animal, species) => animal.name === species
-  const filterAnimals = (animals, species) => animals.filter(
-    (animal) => isSpecie(animal, species))
+  const isSpecie = (animal, animalSpecies) => animal.name === animalSpecies
+  const filterAnimals = (animalsFiltered, otherSpecies) => animalsFiltered.filter(
+    animal => isSpecie(animal, otherSpecies))
   if (species === 0) {
     Object.keys(animals).forEach((key) => {
       obj[data.animals[key].name] = data.animals[key].residents.length
@@ -77,7 +77,7 @@ function animalPopularity(rating) {
 function animalsByIds(...ids) {
   const find = []
   if (ids) {
-    ids.map((id) => find.push(data.animals.find(animals => animals.id === id)))
+    ids.map(id => find.push(data.animals.find(animals => animals.id === id)))
   }
   return find
 }
@@ -93,7 +93,8 @@ function employeesByIds(ids) {
 function employeeByName(employeeName) {
   let employee = {}
   if (employeeName) {
-    employee = data.employees.find(animals => animals.firstName === employeeName || animals.lastName === employeeName)
+    employee = data.employees.find(animals =>
+      animals.firstName === employeeName || animals.lastName === employeeName)
   }
   return employee
 }
@@ -108,17 +109,18 @@ function employeeCoverage(idOrName) {
   if (!idOrName) {
     Object.keys(employess).forEach((key) => {
       obj[`${employess[key].firstName} ${employess[key].lastName}`] = data.animals.filter((animal) => {
-        for (let i = 0; i < employess[key].responsibleFor.length; i++) {
+        for (let i = 0; i < employess[key].responsibleFor.length; i += 1) {
           if (employess[key].responsibleFor[i] === animal.id) {
             return animal
           }
         }
       }).map(animal => animal.name)
-    })
+      return })
   } else {
-    const idEmployess = employess.find(employess => employess.id === idOrName || employess.firstName === idOrName || employess.lastName === idOrName)
+    const idEmployess = employess.find(employess => employess.id === idOrName ||
+      employess.firstName === idOrName || employess.lastName === idOrName)
     obj[`${idEmployess.firstName} ${idEmployess.lastName}`] = data.animals.filter((animal) => {
-      for (let i = 0; i < idEmployess.responsibleFor.length; i++) {
+      for (let i = 0; i < idEmployess.responsibleFor.length; i += 1) {
         if (idEmployess.responsibleFor[i] === animal.id) {
           return animal
         }
