@@ -65,7 +65,7 @@ function animalMap(options = {}) {
             })
     })
     return obj
-};
+}
 
 function animalPopularity(rating) {
     // seu código aqui
@@ -151,29 +151,37 @@ function increasePrices(percentage) {
 }
 
 class Animal {
-    constructor(name, sex, age, species) {
+    constructor(name, age, sex, species) {
         this.name = name
-        this.sex = sex
         this.age = age
-        this.species = species
-    }
-    static info() {
-        return `${this.name} is a ${this.age} year old ${this.sex} ${this.species}`
-    }
-    static totalAnimal() {
-        return data.animais.length
+        this.sex = sex
+        this.species = species.slice(0, -1)
     }
 
+    info() {
+        const { name, age, sex, species } = this
+        return `${name} is a ${age} year old ${sex} ${species}`
+    }
+
+    static total_animals() {
+        return createAnimals().length
+    }
 }
 
-function createAnimals(name = {}, sex, age, species) {
-    const criandoNovoAnimal = data.animals
-    console.log('************************************')
-    console.log(criandoNovoAnimal.length)
-    console.log('************************************')
-    const obj = { name, sex, age, species }
-    criandoNovoAnimal.push(obj)
-    return criandoNovoAnimal
+function createAnimals() {
+    const bichos = []
+    const bicharada = data.animals
+    console.log('********************************************')
+    console.log(bicharada[8].residents)
+    console.log('********************************************')
+
+    bicharada.forEach(animal => (
+        animal.residents.forEach(({ name, age, sex }) => (
+            bichos.push(new Animal(name, age, sex, animal.name))
+        ))
+    ))
+
+    return bichos
 }
 
 function createEmployee(personalInfo, associatedWith) {
