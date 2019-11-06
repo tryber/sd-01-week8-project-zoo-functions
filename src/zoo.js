@@ -146,14 +146,13 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const prices = data.prices
-  increasedAdultPrice = prices.Adult + (prices.Adult * percentage / 100)
-  increasedChildPrice = prices.Child + (prices.Child * percentage / 100)
-  increasedSeniorPrice = prices.Senior + (prices.Senior * percentage / 100)
+  let increasedAdultPrice = prices.Adult + prices.Adult * percentage / 100
+  let increasedChildPrice = prices.Child + prices.Child * percentage / 100
+  let increasedSeniorPrice = prices.Senior + prices.Senior * percentage / 100
 
   prices.Adult = Math.round(increasedAdultPrice * 100) / 100
   prices.Child = Math.round(increasedChildPrice * 100) / 100
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100
-  
 }
 
 class Animal {
