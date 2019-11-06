@@ -11,17 +11,16 @@ function entryCalculator (entrants) {
 
 function schedule(dayName = 0) {
   const cronograma = data.hours;
-  if (dayName == 0) {
+  if (dayName === 0) {
     Object.keys(cronograma).forEach((key) => {
       cronograma[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`;
     })
     cronograma.Monday = 'CLOSED';
     return cronograma;
-  } else {
-    let obj = {}
-    obj[dayName] = cronograma[dayName]
-    return obj;
   }
+  const obj = {}
+  obj[dayName] = cronograma[dayName]
+  return obj;
 }
 
 function animalCount (species) {
@@ -69,11 +68,11 @@ function managersForEmployee (idOrName) {
 };
 
 function employeeCoverage (idOrName) {
-    const employee = data.employees.reduce((accumuateValues, actualArray) => {
-      accumuateValues[`${actualArray.firstName} ${actualArray.lastName}`] = actualArray.responsibleFor.map(id => data.animals.find(animal => animal.id == id).name)
-      return accumuateValues
-    }, {})
-
+  const employee = data.employees.reduce((accumuateValues, actualArray) => {
+    accumuateValues[`${actualArray.firstName} ${actualArray.lastName}`] = actualArray.responsibleFor.map(id => data.animals.find(animal => animal.id == id).name)
+    return accumuateValues
+  }, {})
+  
   if (idOrName == undefined) {
     return employee
   } else {
