@@ -38,22 +38,23 @@ function animalCount(species = 0) {
   return num || obj
 }
 
+const isLocation = (animal, location) => animal.location === location
+const filterAnimalsByLocation = (animals, location) => animals.filter(animal => isLocation(animal, location))
+
 function animalMap(options) {
   const animals = data.animals;
   const obj = {};
-  const isLocation = (animal, location) => animal.location === location
-  const filterAnimals = (animals, location) => animals.filter(animal => isLocation(animal, location))
   const getAllLocation = data.animals.map(animal => animal.location)
   const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
 
   if (options === undefined || options['includeNames'] === undefined) {
     locationReduce.forEach(location => {
-      obj[location] = filterAnimals(animals, location)
+      obj[location] = filterAnimalsByLocation(animals, location)
         .map(species => species.name)
     })
   } else if (options) {
     locationReduce.forEach(location => {
-      obj[location] = filterAnimals(animals, location)
+      obj[location] = filterAnimalsByLocation(animals, location)
         .map(species => ({ [species.name]: species.residents.map(nome => nome.name) }))
     })
     if (options['sorted']) {
@@ -62,7 +63,7 @@ function animalMap(options) {
     }
     if (options['sex'] === 'female') {
       locationReduce.forEach((location) => {
-        obj[location] = filterAnimals(animals, location)
+        obj[location] = filterAnimalsByLocation(animals, location)
           .map((item) => ({
             [item.name]: item.residents
               .filter((nameAnimal) => nameAnimal.sex === 'female')
