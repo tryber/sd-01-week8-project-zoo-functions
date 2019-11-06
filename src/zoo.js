@@ -1,8 +1,7 @@
 const data = require('./data')
 
-
-
 const { prices } = require('./data')
+
 entryCalculator = (entrants = 0) => {
   if (Object.keys(entrants).length === 0) {
     return 0
@@ -17,6 +16,7 @@ entryCalculator = (entrants = 0) => {
 }
 
 const { hours } = require('./data')
+
 const open = "Open from"
 const until = "until"
 const { Tuesday, Wednesday, Thursday, friday, Saturday, Sunday, Monday } = hours
@@ -36,6 +36,7 @@ schedule = (dayName = 0) => {
 };
 
 const { animals } = require('./data')
+
 animalCount = (species = 0) => {
   let obj = {}
   if (Object.keys(species).length === 0) {
@@ -65,6 +66,7 @@ animalsByIds = (...ids) => {
 };
 
 const { employees } = require('./data')
+
 employeeByName = (employeeName = '') => {
   let obj = {}
   if (employeeName.length !== 0) {
@@ -77,12 +79,10 @@ employeeByName = (employeeName = '') => {
   return obj
 };
 
-
 employeeCoverage = (idOrName = "") => {
   if (idOrName.length === 0) {
   }
 };
-console.log(employeeCoverage())
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
