@@ -38,35 +38,33 @@ function animalCount(species = 0) {
   return num || obj
 }
 
-const isLocation = (animal, location) => animal.location === location
-const filterAnimalsByLocation = (animals, location) => animals.filter(animal => isLocation(animal, location))
-const getAllLocation =()=> data.animals.map(animal => animal.location)
-const locationReduce =()=> getAllLocation().filter((este, i) => getAllLocation().indexOf(este) === i);
+function animalsFilteredBySex(animals, sex) {
+  if (!sex) return animals
+  return animals.filter(({ sex: animalSex }) => sex === animalSex)
+}
 
-function animalMap(options) {
-  const animals = data.animals;
-  const obj = {};
-  if (options === undefined || options['includeNames'] === undefined) {
-    locationReduce().forEach(location => {
-      obj[location] = filterAnimalsByLocation(animals, location).map(species => species.name)
-    })
-  } else if (options) {
-    locationReduce().forEach(location => {
-      obj[location] = filterAnimalsByLocation(animals, location)
-        .map(species => ({ [species.name]: species.residents.map(nome => nome.name) }))
-    })
-    if (options['sorted']) {
-      Object.keys(obj).forEach(item =>
-        (obj[item].forEach(item2 => Object.keys(item2).forEach(item3 => item2[item3].sort()))))
+function sortedAnimalNames(animalNames, sorted) {
+  if (!sorted) return animalNames
+  return animalNames.sort()
+}
+
+function animalMap(options = {}) {
+  const { includeNames, sex, sorted } = options
+  return data.animals.reduce((obj, animal) => {
+    const animalsInLocation = obj[animal.location] || []
+
+    if (!includeNames) {
+      obj[animal.location] = [...animalsInLocation, animal.name]
+      return obj
     }
-    if (options['sex'] === 'female') {
-      locationReduce().forEach((location) => { obj[location] = filterAnimalsByLocation(animals, location)
-        .map((item) => ({[item.name]: item.residents
-            .filter((nameAnimal) => nameAnimal.sex === 'female').map((value) => value.name)}))
-      })
-    }
-  }
-  return obj
+
+    let animals = animal.residents
+    animals = animalsFilteredBySex(animals, sex)
+    let animalNames = animals.map(({ name }) => name)
+    animalNames = sortedAnimalNames(animalNames, sorted)
+    obj[animal.location] = [...animalsInLocation, { [animal.name]: animalNames }]
+    return obj
+  }, {})
 };
 
 
