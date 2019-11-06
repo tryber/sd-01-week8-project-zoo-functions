@@ -38,7 +38,11 @@ function animalCount(species) {
 }
 
 function animalMap(options = {}) {
-    const { includeNames, sex, sorted } = options
+    const {
+        includeNames,
+        sex,
+        sorted
+    } = options
     const obj = {}
     const locations = [...new Set(data.animals.map(species => species.location))]
     locations.forEach(location => {
@@ -93,7 +97,10 @@ function employeesByIds(ids) {
 };
 
 function employeeByName(employeeName) {
-    return data.employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName) || {}
+    return data.employees.find(({
+        firstName,
+        lastName
+    }) => firstName === employeeName || lastName === employeeName) || {}
 }
 
 function managersForEmployee(idOrName) {
@@ -110,7 +117,11 @@ function employeeCoverage(idOrName) {
                 .map(animaisPeloId => animal.find(animalIdComparar => animalIdComparar.id === animaisPeloId).name)
         })
     } else {
-        const listaEmpregado = empregado.find(({ firstName, lastName, id }) => firstName === idOrName || lastName === idOrName || id === idOrName)
+        const listaEmpregado = empregado.find(({
+            firstName,
+            lastName,
+            id
+        }) => firstName === idOrName || lastName === idOrName || id === idOrName)
         obj[`${listaEmpregado.firstName} ${listaEmpregado.lastName}`] = listaEmpregado.responsibleFor
             .map(animaisPeloId => animal.find(animalIdComparar => animalIdComparar.id === animaisPeloId).name)
     }
@@ -118,7 +129,13 @@ function employeeCoverage(idOrName) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-    const empregadoNovo = { id, firstName, lastName, managers, responsibleFor }
+    const empregadoNovo = {
+        id,
+        firstName,
+        lastName,
+        managers,
+        responsibleFor
+    }
     return data.employees.push(empregadoNovo)
 }
 
@@ -137,7 +154,11 @@ function oldestFromFirstSpecies(id) {
     const valores = funcionario.find(select => select.id === id).responsibleFor[0]
     const animaisEmOrdem = animais.find(select => select.id === valores).residents
     const novaLista = [...animaisEmOrdem].sort((idadeA, idadeB) => idadeB.age - idadeA.age)
-    const { name, sex, age } = novaLista[0]
+    const {
+        name,
+        sex,
+        age
+    } = novaLista[0]
     const lista = [name, sex, age]
     return lista
 }
@@ -160,7 +181,12 @@ class Animal {
     }
 
     info() {
-        const { name, age, sex, species } = this
+        const {
+            name,
+            age,
+            sex,
+            species
+        } = this
         return `${name} is a ${age} year old ${sex} ${species}`
     }
 
@@ -173,7 +199,11 @@ function createAnimals() {
     const bichos = []
     const bicharada = data.animals
     bicharada.forEach(animal => (
-        animal.residents.forEach(({ name, age, sex }) => (
+        animal.residents.forEach(({
+            name,
+            age,
+            sex
+        }) => (
             bichos.push(new Animal(name, age, sex, animal.name))
         ))
     ))
@@ -181,7 +211,10 @@ function createAnimals() {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-    return {...personalInfo, ...associatedWith }
+    return {
+        ...personalInfo,
+        ...associatedWith
+    }
 }
 
 module.exports = {
