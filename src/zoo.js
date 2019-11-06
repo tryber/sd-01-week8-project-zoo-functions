@@ -109,14 +109,13 @@ function employeeCoverage(idOrName) {
   if (!idOrName) {
     Object.keys(employessToFind).forEach((key) => {
       obj[`${employessToFind[key].firstName} ${employessToFind[key].lastName}`] = employessToFind[key].responsibleFor.map((empl) => {
-        return data.animals.find((animal) => animal.id === empl).name
-      })
-    })
+        return data.animals.find(animal => animal.id === empl).name
+      })})
   } else {
     const idEmployess = employessToFind.find(employeToFind => employeToFind.id === idOrName ||
       employeToFind.firstName === idOrName || employeToFind.lastName === idOrName)
     obj[`${idEmployess.firstName} ${idEmployess.lastName}`] = idEmployess.responsibleFor.map((id2) => {
-      return data.animals.find((animal) => animal.id === id2).name
+      return data.animals.find(animal => animal.id === id2).name
     })
     return obj
   }
