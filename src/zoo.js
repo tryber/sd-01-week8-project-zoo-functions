@@ -38,35 +38,23 @@ function animalCount(species) {
 }
 
 function animalMap(options = {}) {
-  const {
-    includeNames,
-    sex,
-    sorted
-  } = options
+  const { includeNames, sex, sorted } = options
   const obj = {}
   const locations = [...new Set(data.animals.map(species => species.location))]
   locations.forEach(location => {
     if (!includeNames) {
-      obj[location] = data.animals
-        .filter(animal => animal.location == location)
-        .map(species => species.name)
+      obj[location] = data.animals.filter(animal => animal.location == location).map(species => species.name)
       return obj
     }
-    obj[location] = data.animals
-      .filter(animal => animal.location == location)
-      .map(species => {
-        let residents = species.residents
-        if (sex) {
-          residents = residents.filter(resident => resident.sex === sex)
-        }
-        let animalNames = residents.map(resident => resident.name)
-        if (sorted) {
-          animalNames = animalNames.sort()
-        }
-        return {
-          [species.name]: animalNames
-        }
-      })
+    obj[location] = data.animals.filter(animal => animal.location == location).map(species => {
+      let residents = species.residents
+      if (sex) { residents = residents.filter(resident => resident.sex === sex) }
+      let animalNames = residents.map(resident => resident.name)
+      if (sorted) { animalNames = animalNames.sort() }
+      return {
+        [species.name]: animalNames
+      }
+    })
   })
   return obj
 }
