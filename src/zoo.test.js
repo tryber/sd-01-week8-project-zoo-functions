@@ -309,6 +309,8 @@ expected = {
   'Emery Elser': ['elephants', 'bears', 'lions']
 };
 
+//assert comentado pois está retornando os animais em ordem diferente da que pede no assert
+// monitor Leandro me disse que não há problema estar na ordem diferente
 // assert.deepEqual(actual, expected);
 
 // com o id de um funcionário, retorna os animais pelos quais o funcionário é
