@@ -4,9 +4,9 @@ function entryCalculator (entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0
   }
-  return Object.keys(entrants).reduce((acc, key) => {
-    return acc + (data.prices[key] * entrants[key]);
-  }, 0)
+  return Object.keys(entrants).reduce((acc, key) => (
+    acc + (data.prices[key] * entrants[key])
+  ), 0)
 }; 
 
 function schedule(dayName = 0) {
@@ -48,7 +48,6 @@ function animalsByIds (...ids) {
     return idsObject
   }
   ids.map(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
-  return idsObject  
 };
 
 function animalByName (animalName) {
@@ -63,7 +62,7 @@ function employeeByName (employeeName) {
   if(employeeName == undefined) {
     return empty = []
   } 
-  data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName) || {}
+  return data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName)
 }
 
 function managersForEmployee (idOrName) {
