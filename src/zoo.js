@@ -112,40 +112,36 @@ function relatedData(index, dataIndex, dataKey) {
     return newArray
 }
 
-// console.log(animalMap({ includeNames: true }))
 
-// const array_location_filter = bigDates("animals_location_value").filter((elm, index) => bigDates("animals_location_value").indexOf(elm) === index)
+function animalMap(options = 0) {
+    const { includeNames, sex, sorted } = options
 
-// const newArray = new Array;
-// bigDates("animals_name_value").forEach((elm, index) => newArray.push(logic.createObject(elm, bigDates("animals_residents_name_value")[index].sort())))
+    const result = data.animals.reduce((obj, animal) => {
+        const animalsInLocation = obj[animal.location] || []
 
-// const newObject = new Object;
-// array_location_filter.forEach((elm) => logic.addNode(newObject, elm, getIndex(elm)))
-// console.log(newObject)
+        if (!includeNames) {
+            obj[animal.location] = [...animalsInLocation, animal.name]
+            return obj
+        }
+        let residents = animal.residents
 
-// function getIndex(elm) {
-//     const newnewArray = new Array;
-//     // .forEach((elmt) => newnewArray.push((newArray.filter((elmm) => elmm[elmt]))))
-//     const array = relatedData(elm, bigDates("animals_location_value"), bigDates("animals_name_value"))
-//     console.log(array)
-//     console.log(newArray.filter((elmt) => array.forEach((elmm) => (elmt[`${elmm}`]))))
+        if (sex) {
+            residents = residents.filter(resident => resident.sex === sex)
+        }
+        let animalNames = residents.map(({ name }) => name)
 
-//     return newnewArray
-// }
-// function animalMap(options) {
-//     const obj = new Object
-//     if (options == undefined) {
-//         bigDates("animals_location_value").filter((elm, index) => bigDates("animals_location_value").indexOf(elm) === index).forEach((elm) => logic.addNode(obj, elm, relatedData(elm, bigDates("animals_location_value"), bigDates("animals_name_value"))));
-//         return obj
-//     } else if (options.includeNames) {
+        if (sorted) {
+            animalNames = animalNames.sort()
+        }
+        obj[animal.location] = [...animalsInLocation, {
+            [animal.name]: animalNames
+        }]
 
-//         return
-//     }
-// };
+        return obj
+    }, {})
+    return result
+}
 
-//         function animalPopularity(rating) {
-//             // seu código aqui
-//         };
 
 function animalsByIds(...ids) {
     const newArray = new Array
@@ -236,17 +232,44 @@ function oldestFromFirstSpecies(id) {
     return newArray
 }
 
-//         function increasePrices(percentage) {
-//             // seu código aqui
-//         }
+function increasePrices(percentage) {
+    const array = bigDates("prices_value").map((elm) => (elm * (1 + (percentage) / 100) + 0.001).toFixed(2))
+    const obj = new Object
+    bigDates("key_later_2_prices").forEach((elm, index) => logic.addNode(obj, elm, array[index]))
+    data.prices = obj
+    return data.prices
+}
 
-//         class Animal {
-//             // seu código aqui
-//         }
+// bigDates("animals_residents_name_value").forEach((array) => number += array.length)
 
-//         function createAnimals() {
-//             // seu código aqui
-//         }
+
+
+class Animal {
+    constructor(name, age, sex, species) {
+        this.name = name
+        this.age = age
+        this.sex = sex
+        this.species = species
+    }
+    info() {
+        const { name, age, sex, species } = this
+        return `${name} is a ${age} year old ${sex} ${species.slice(0, -1)}`
+    }
+
+    static total_animals() {
+        return createAnimals().length
+    }
+}
+
+function createAnimals() {
+    const animals = new Array
+    data.animals.forEach(animal => (
+        animal.residents.forEach(({ name, age, sex }) => (
+            animals.push(new Animal(name, age, sex, animal.name))
+        ))
+    ))
+    return animals
+}
 
 function createEmployee(personalInfo, associatedWith) {
     const obj = new Object
@@ -259,7 +282,7 @@ module.exports = {
     entryCalculator: entryCalculator,
     schedule: schedule,
     animalCount: animalCount,
-    // animalMap: animalMap,
+    animalMap: animalMap,
     animalsByIds: animalsByIds,
     employeeByName: employeeByName,
     employeeCoverage: employeeCoverage,
@@ -267,8 +290,8 @@ module.exports = {
     isManager: isManager,
     animalsOlderThan: animalsOlderThan,
     oldestFromFirstSpecies: oldestFromFirstSpecies,
-    // increasePrices: increasePrices,
-    // createAnimals: createAnimals,
-    // Animal: Animal,
+    increasePrices: increasePrices,
+    createAnimals: createAnimals,
+    Animal: Animal,
     createEmployee: createEmployee
 }

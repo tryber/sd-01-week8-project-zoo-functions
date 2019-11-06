@@ -169,3 +169,26 @@ console.log(logic.getKeyName(data.animals[0]).forEach((element) => console.log(l
 
 
 // making a object
+
+const obj = new Object
+if (options == undefined) {
+    bigDates("animals_location_value").filter((elm, index) => bigDates("animals_location_value").indexOf(elm) === index).forEach((elm) => logic.addNode(obj, elm, relatedData(elm, bigDates("animals_location_value"), bigDates("animals_name_value"))));
+    return obj
+} else if (options.includeNames) {
+    const array_location_filter = bigDates("animals_location_value").filter((elm, index) => bigDates("animals_location_value").indexOf(elm) === index)
+    const newArray = new Array;
+    if (options.sorted) {
+        bigDates("animals_name_value").forEach((elm, index) => newArray.push(logic.createObject(elm, bigDates("animals_residents_name_value")[index].sort())))
+    } else {
+        bigDates("animals_name_value").forEach((elm, index) => newArray.push(logic.createObject(elm, bigDates("animals_residents_name_value")[index])))
+    }
+    const array = new Array
+    array_location_filter.forEach((elm) => array.push(relatedData(elm, bigDates("animals_location_value"), bigDates("animals_name_value"))))
+    for (let elm of array_location_filter) {
+        let animalName = array[array_location_filter.indexOf(elm)]
+        let index = animalName.map((elmt) => bigDates("animals_name_value").indexOf(elmt))
+        obj[elm] = index.map((elmm) => newArray[elmm])
+    }
+
+    return obj
+}

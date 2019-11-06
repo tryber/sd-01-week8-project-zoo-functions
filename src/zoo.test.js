@@ -102,96 +102,96 @@ assert.deepEqual(actual, expected);
 // // // /*************/
 
 // // sem parâmetros, retorna animais categorizados por localização
-// actual = zoo.animalMap();
-// expected = {
-//     NE: ['lions', 'giraffes'],
-//     NW: ['tigers', 'bears', 'elephants'],
-//     SE: ['penguins', 'otters'],
-//     SW: ['frogs', 'snakes']
-// };
+actual = zoo.animalMap();
+expected = {
+    NE: ['lions', 'giraffes'],
+    NW: ['tigers', 'bears', 'elephants'],
+    SE: ['penguins', 'otters'],
+    SW: ['frogs', 'snakes']
+};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // com opções especificadas, retorna nomes de animais
-// options = { includeNames: true }
-// actual = zoo.animalMap(options);
-// expected = {
-//     NE: [
-//         { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
-//         { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
-//     ],
-//     NW: [
-//         { tigers: ['Shu', 'Esther'] },
-//         { bears: ['Hiram', 'Edwardo', 'Milan'] },
-//         { elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'] }
-//     ],
-//     SE: [
-//         { penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'] },
-//         { otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'] }
-//     ],
-//     SW: [
-//         { frogs: ['Cathey', 'Annice'] },
-//         { snakes: ['Paulette', 'Bill'] }
-//     ]
-// };
+// com opções especificadas, retorna nomes de animais
+options = { includeNames: true }
+actual = zoo.animalMap(options);
+expected = {
+    NE: [
+        { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
+        { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
+    ],
+    NW: [
+        { tigers: ['Shu', 'Esther'] },
+        { bears: ['Hiram', 'Edwardo', 'Milan'] },
+        { elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'] }
+    ],
+    SE: [
+        { penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'] },
+        { otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'] }
+    ],
+    SW: [
+        { frogs: ['Cathey', 'Annice'] },
+        { snakes: ['Paulette', 'Bill'] }
+    ]
+};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // // // com opções especificadas, retorna nomes de animais ordenados
-// // // options = { includeNames: true, sorted: true }
-// // // actual = zoo.animalMap(options);
-// // // expected = {
-// // //     NE: [
-// // //         { lions: ['Dee', 'Faustino', 'Maxwell', 'Zena'] },
-// // //         { giraffes: ['Antone', 'Arron', 'Bernard', 'Clay', 'Gracia', 'Vicky'] }
-// // //     ],
-// // //     NW: [
-// // //         { tigers: ['Esther', 'Shu'] },
-// // //         { bears: ['Edwardo', 'Hiram', 'Milan'] },
-// // //         { elephants: ['Bea', 'Ilana', 'Jefferson', 'Orval'] }
-// // //     ],
-// // //     SE: [
-// // //         { penguins: ['Joe', 'Keri', 'Nicholas', 'Tad'] },
-// // //         { otters: ['Lloyd', 'Margherita', 'Mercedes', 'Neville'] }
-// // //     ],
-// // //     SW: [
-// // //         { frogs: ['Annice', 'Cathey'] }, { snakes: ['Bill', 'Paulette'] }
-// // //     ]
-// // // };
+// // // com opções especificadas, retorna nomes de animais ordenados
+options = { includeNames: true, sorted: true }
+actual = zoo.animalMap(options);
+expected = {
+    NE: [
+        { lions: ['Dee', 'Faustino', 'Maxwell', 'Zena'] },
+        { giraffes: ['Antone', 'Arron', 'Bernard', 'Clay', 'Gracia', 'Vicky'] }
+    ],
+    NW: [
+        { tigers: ['Esther', 'Shu'] },
+        { bears: ['Edwardo', 'Hiram', 'Milan'] },
+        { elephants: ['Bea', 'Ilana', 'Jefferson', 'Orval'] }
+    ],
+    SE: [
+        { penguins: ['Joe', 'Keri', 'Nicholas', 'Tad'] },
+        { otters: ['Lloyd', 'Margherita', 'Mercedes', 'Neville'] }
+    ],
+    SW: [
+        { frogs: ['Annice', 'Cathey'] }, { snakes: ['Bill', 'Paulette'] }
+    ]
+};
 
-// // // assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // // // com oções especificadas, retorna somente nomes de animais macho/fêmea
-// // // options = { includeNames: true, sex: 'female' }
-// // // actual = zoo.animalMap(options);
-// // // expected = {
-// // //     NE: [
-// // //         { lions: ['Zena', 'Dee'] },
-// // //         { giraffes: ['Gracia', 'Vicky'] }
-// // //     ],
-// // //     NW: [
-// // //         { tigers: ['Shu', 'Esther'] },
-// // //         { bears: [] },
-// // //         { elephants: ['Ilana', 'Bea'] }
-// // //     ],
-// // //     SE: [
-// // //         { penguins: ['Keri'] },
-// // //         { otters: ['Mercedes', 'Margherita'] }
-// // //     ],
-// // //     SW: [
-// // //         { frogs: ['Cathey', 'Annice'] },
-// // //         { snakes: ['Paulette'] }
-// // //     ]
-// // // };
+// // // com oções especificadas, retorna somente nomes de animais macho/fêmea
+options = { includeNames: true, sex: 'female' }
+actual = zoo.animalMap(options);
+expected = {
+    NE: [
+        { lions: ['Zena', 'Dee'] },
+        { giraffes: ['Gracia', 'Vicky'] }
+    ],
+    NW: [
+        { tigers: ['Shu', 'Esther'] },
+        { bears: [] },
+        { elephants: ['Ilana', 'Bea'] }
+    ],
+    SE: [
+        { penguins: ['Keri'] },
+        { otters: ['Mercedes', 'Margherita'] }
+    ],
+    SW: [
+        { frogs: ['Cathey', 'Annice'] },
+        { snakes: ['Paulette'] }
+    ]
+};
 
-// // // assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // // // só retorna informações específicas de gênero se includeNames for setado
-// // // options = { sex: 'female' }
-// // // actual = zoo.animalMap(options)['NE'][0];
-// // // expected = 'lions';
+// // // só retorna informações específicas de gênero se includeNames for setado
+options = { sex: 'female' }
+actual = zoo.animalMap(options)['NE'][0];
+expected = 'lions';
 
-// // // assert.equal(actual, expected);
+assert.equal(actual, expected);
 
 // // // /******************************************************************************/
 
@@ -444,16 +444,16 @@ expected = {
     'Child': 31.49
 }
 
-assert.deepEqual(prices, expected)
+assert.deepEqual(data.prices, expected)
 
 zoo.increasePrices(30)
 expected = {
     'Adult': 97.49,
     'Senior': 48.74,
-    'Child': 40.93
+    'Child': 40.94
 }
 
-assert.deepEqual(prices, expected)
+assert.deepEqual(data.prices, expected)
 
 // // // /******************************************************************************/
 
@@ -463,33 +463,33 @@ assert.deepEqual(prices, expected)
 
 // // // // retorna um array de objetos da classe Animal. Esta classe contém os atributos
 // // // // name, sex, age and species.
-// // // const animals = zoo.createAnimals()
+const animals = zoo.createAnimals()
 
-// // // assert.equal(animals.length, 31)
+assert.equal(animals.length, 31)
 
-// // // animals.forEach(animal => {
-// // //     assert.equal(typeof animal, 'object')
-// // //     assert.equal(animal.constructor.name, 'Animal')
-// // //     assert.equal(typeof animal.name, 'string')
-// // //     assert.ok(animal.sex === 'male' || animal.sex === 'female')
-// // //     assert.equal(typeof animal.age, 'number')
-// // //     assert.equal(typeof animal.species, 'string')
-// // // })
+animals.forEach(animal => {
+    assert.equal(typeof animal, 'object')
+    assert.equal(animal.constructor.name, 'Animal')
+    assert.equal(typeof animal.name, 'string')
+    assert.ok(animal.sex === 'male' || animal.sex === 'female')
+    assert.equal(typeof animal.age, 'number')
+    assert.equal(typeof animal.species, 'string')
+})
 
 // // // /***************/
 // // // /* Animal.info */
 // // // /***************/
 
 // // // // retorna uma string formatada descrevendo o animal
-// // // assert.equal(animals[0].info(), 'Zena is a 12 year old female lion')
-// // // assert.equal(animals[30].info(), 'Bernard is a 6 year old male giraffe')
+assert.equal(animals[0].info(), 'Zena is a 12 year old female lion')
+assert.equal(animals[30].info(), 'Bernard is a 6 year old male giraffe')
 
 // // // /************************/
 // // // /* Animal.total_animals */
 // // // /************************/
 
-// // // // retorna o número total de animais existentes
-// // // assert.equal(zoo.Animal.total_animals, 31)
+// retorna o número total de animais existentes
+assert.equal(zoo.Animal.total_animals(), 31)
 
 // // // /******************************************************************************/
 
