@@ -51,19 +51,20 @@ function sortedAnimalNames(animalNames, sorted) {
 function animalMap(options = {}) {
   const { includeNames, sex, sorted } = options
   return data.animals.reduce((obj, animal) => {
+    let result=obj
     const animalsInLocation = obj[animal.location] || []
 
     if (!includeNames) {
-      obj[animal.location] = [...animalsInLocation, animal.name]
-      return obj
+      result[animal.location] = [...animalsInLocation, animal.name]
+      return result
     }
 
     let animals = animal.residents
     animals = animalsFilteredBySex(animals, sex)
     let animalNames = animals.map(({ name }) => name)
     animalNames = sortedAnimalNames(animalNames, sorted)
-    obj[animal.location] = [...animalsInLocation, { [animal.name]: animalNames }]
-    return obj
+    result[animal.location] = [...animalsInLocation, { [animal.name]: animalNames }]
+    return result
   }, {})
 };
 
