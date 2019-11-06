@@ -72,13 +72,9 @@ function employeeCoverage (idOrName) {
   const employee = data.employees.reduce((accumuateValues, actualArray) => {
     accumuateValues[`${actualArray.firstName} ${actualArray.lastName}`] = actualArray.responsibleFor.map(id => data.animals.find(animal => animal.id == id).name)
     return accumuateValues
-  }, {})
-  
+  }, {})  
   if (idOrName === undefined) {
     return employee
-  } else {
-    
-  }
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
