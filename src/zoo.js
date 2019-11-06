@@ -40,20 +40,18 @@ function animalCount(species = 0) {
 
 const isLocation = (animal, location) => animal.location === location
 const filterAnimalsByLocation = (animals, location) => animals.filter(animal => isLocation(animal, location))
+const getAllLocation =()=> data.animals.map(animal => animal.location)
+const locationReduce =()=> getAllLocation().filter((este, i) => getAllLocation().indexOf(este) === i);
 
 function animalMap(options) {
   const animals = data.animals;
   const obj = {};
-  const getAllLocation = data.animals.map(animal => animal.location)
-  const locationReduce = getAllLocation.filter((este, i) => getAllLocation.indexOf(este) === i);
-
   if (options === undefined || options['includeNames'] === undefined) {
-    locationReduce.forEach(location => {
-      obj[location] = filterAnimalsByLocation(animals, location)
-        .map(species => species.name)
+    locationReduce().forEach(location => {
+      obj[location] = filterAnimalsByLocation(animals, location).map(species => species.name)
     })
   } else if (options) {
-    locationReduce.forEach(location => {
+    locationReduce().forEach(location => {
       obj[location] = filterAnimalsByLocation(animals, location)
         .map(species => ({ [species.name]: species.residents.map(nome => nome.name) }))
     })
@@ -62,12 +60,9 @@ function animalMap(options) {
         (obj[item].forEach(item2 => Object.keys(item2).forEach(item3 => item2[item3].sort()))))
     }
     if (options['sex'] === 'female') {
-      locationReduce.forEach((location) => {
-        obj[location] = filterAnimalsByLocation(animals, location)
-          .map((item) => ({
-            [item.name]: item.residents
-              .filter((nameAnimal) => nameAnimal.sex === 'female')
-              .map((value) => value.name)
+      locationReduce().forEach((location) => { obj[location] = filterAnimalsByLocation(animals, location)
+        .map((item) => ({[item.name]: item.residents
+            .filter((nameAnimal) => nameAnimal.sex === 'female').map((value) => value.name)
           }))
       })
     }
