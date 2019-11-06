@@ -94,7 +94,7 @@ function managersForEmployee (idOrName) {
 };
 
 function employeeCoverage(idOrName) {
-  const obj = []
+  const obj = {}
   data.employees.forEach((employee) => {
     obj[`${employee.firstName} ${employee.lastName}`] =
       employee.responsibleFor.map(id => data.animals.find(animal => animal.id === id).name)
