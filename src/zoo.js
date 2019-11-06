@@ -78,7 +78,7 @@ employeeByName = (employeeName = '') => {
   return obj
 };
 
-employeeCoverage = (idOrName = ') => {
+employeeCoverage = (idOrName = '') => {
   if (idOrName.length === 0) {
   }
 };
