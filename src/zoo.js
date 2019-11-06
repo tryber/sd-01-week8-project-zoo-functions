@@ -122,14 +122,14 @@ class Animal {
 
 createAnimals = () => {
   const animals = []
-  data.animals.forEach(animal => (
-    animal.residents.forEach(({ name, age, sex }) => (
-      animals.push(new Animal(name, age, sex, animal.name))
+  animals.forEach(animal => (
+    animal.residents.forEach(([...animalDefintion]) => (
+      animals.push(new Animal(...animalDefintion, animal.name))
     ))
   ))
   return animals
 }
-
+console.log(createAnimals())
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
