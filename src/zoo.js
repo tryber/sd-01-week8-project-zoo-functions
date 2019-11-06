@@ -147,26 +147,30 @@ function isManager(id) {
 }
 
 function animalsOlderThan(animal, age) {
-    // seu código aqui
+    const bichos = data.animals
+    return bichos.find(select => select.name === animal).residents.every(select => select.age > age)
 }
 
 function oldestFromFirstSpecies(id) {
     const funcionario = data.employees
     const animais = data.animals
     const valores = funcionario.find(select => select.id === id).responsibleFor[0]
-    const teste = animais.find(select => select.id === valores).residents
-    console.log('//////////*********------------')
-    console.log(teste)
-    console.log('////////////////************-----------')
-    const teste2 = teste.reduce((a, b) => a.age - b.age, 0)
-    console.log('//////////*********------------')
-    console.log(teste2)
-    console.log('////////////////************-----------')
-    return teste
+    const animaisEmOrdem = animais.find(select => select.id === valores).residents.sort((idadeA, idadeB) => idadeB.age - idadeA.age)[0]
+    const { name, sex, age } = animaisEmOrdem
+    const lista = [name, sex, age]
+    return lista
 }
 
 function increasePrices(percentage) {
-    // seu código aqui
+    const porcentagem = parseFloat(`0.${percentage}`)
+    const aumentar = (valor) => (valor * porcentagem + valor).toFixed(2)
+    const preco = Object.assign({}, data.prices)
+    const final = {}
+    Object.keys(preco).forEach(key => final[`${key}`] = aumentar(preco[key]))
+    console.log('////////////////////////////////////')
+    console.log(final)
+    console.log('-------------------------------------')
+    return final
 }
 
 class Animal {
