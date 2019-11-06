@@ -488,7 +488,7 @@ assert.equal(animals[30].info(), 'Bernard is a 6 year old male giraffe')
 /************************/
 
 // retorna o número total de animais existentes
-assert.equal(zoo.Animal.totalAnimals(), 31)
+assert.equal(zoo.Animal.total_animals(), 31)
 
 /******************************************************************************/
 
