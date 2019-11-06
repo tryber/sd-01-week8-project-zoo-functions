@@ -60,8 +60,10 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  return data.employees.find(name => name.firstName === employeeName || 
-  name.lastName === employeeName) || {}
+  if(employeeName == undefined) {
+    return empty = []
+  } 
+  data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName) || {}
 }
 
 function managersForEmployee (idOrName) {
@@ -75,6 +77,7 @@ function employeeCoverage (idOrName) {
   }, {})  
   if (idOrName === undefined) {
     return employee
+  }
 };
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -102,7 +105,7 @@ class Animal {
 }
 
 function createAnimals() {
-  
+  // seu código aqui
 }
 
 function createEmployee(personalInfo, associatedWith) {
