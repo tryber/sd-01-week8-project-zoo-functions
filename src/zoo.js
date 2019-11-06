@@ -25,7 +25,7 @@ function animalCount(species = 0) {
   const animals = data.animals;
   const obj = {}
   let num;
-  const isSpecie = ({name}, specie) => name === specie
+  const isSpecie = ({ name }, specie) => name === specie
   const filterAnimals = (animals, specieAnimal) =>
     animals.filter((animal) => isSpecie(animal, specieAnimal))
   if (species === 0) {
