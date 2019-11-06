@@ -4,22 +4,23 @@ function entryCalculator(entrants = 0) {
   if (Object.keys(entrants).length === 0) {
     return 0
   }
-  return Object.keys(entrants).reduce((total, entrant) => {
+  const calculation = Object.keys(entrants).reduce((total, entrant) => {
     return total + (data.prices[entrant] * entrants[entrant])
   }, 0)
+  return calculation
 };
 
 function schedule(dayName) {
   const hours = data.hours
   const hourKeys = Object.keys(data.hours)
   if (dayName === undefined) {
-    for (let key of hourKeys) {
-      if (hours[key].open == 0 && hours[key].close == 0) {
+    hourKeys.forEach( key => {
+      if (hours[key].open === 0 && hours[key].close === 0) {
         hours[key] = 'CLOSED'
       } else {
         hours[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`
       }
-    }
+    })
     return data.hours
   } else {
     return {
@@ -29,7 +30,7 @@ function schedule(dayName) {
 };
 
 function animalCount(species) {
-  if (species == undefined) {
+  if (species === undefined) {
     const animals = data.animals
     let animalsObject = {}
     for (let animal of animals) {
@@ -37,7 +38,7 @@ function animalCount(species) {
     }
     return animalsObject
   }
-  return data.animals.find(animal => animal.name == species).residents.length
+  return data.animals.find(animal => animal.name === species).residents.length
 };
 
 function animalMap(options = {}) {
@@ -75,7 +76,7 @@ function animalMap(options = {}) {
 }
 
 function filterAnimals(region, object) {
-  const animalsRegion = data.animals.filter(animal => animal.location == region)
+  const animalsRegion = data.animals.filter(animal => animal.location === region)
   let regionalAnimals = animalsRegion.reduce((arr, animal) => {
     arr.push(animal.name)
     object[region] = arr
@@ -85,7 +86,7 @@ function filterAnimals(region, object) {
 }
 
 function filterAnimalsResidents(region, options) {
-  const animalsRegion = data.animals.filter(beast => beast.location == region),
+  const animalsRegion = data.animals.filter(beast => beast.location === region),
     animalsObjArray = []
   let residentAnimals = []
   for (let animal of animalsRegion) {
@@ -116,23 +117,23 @@ function optionSort(param) {
 }
 
 function animalsByIds(...ids) {
-  if (ids[0] == undefined) {
+  if (ids[0] === undefined) {
     return ids
   } else {
     let animalArr = []
     for (let id of ids) {
-      animalArr.push(data.animals.find(item => item.id == id))
+      animalArr.push(data.animals.find(item => item.id === id))
     }
     return animalArr
   }
 };
 
 function employeeByName(employeeName = 0) {
-  if (employeeName == 0) {
+  if (employeeName === 0) {
     return {}
   } else {
     const employees = data.employees
-    return employees.find(property => property.firstName == employeeName || property.lastName == employeeName)
+    return employees.find(property => property.firstName === employeeName || property.lastName === employeeName)
   }
 };
 
@@ -143,10 +144,10 @@ function employeeCoverage(idOrName = "") {
 
   function getAnimalsArray(ids) {
     for (let id of ids) {
-      animalArr.push(data.animals.find(item => item.id == id).name)
+      animalArr.push(data.animals.find(item => item.id === id).name)
     }
   }
-  if (idOrName == "") {
+  if (idOrName === "") {
     for (let employee of employees) {
       fullName = `${employee.firstName} ${employee.lastName}`
       animalIds = employee.responsibleFor
@@ -156,7 +157,7 @@ function employeeCoverage(idOrName = "") {
     }
     return coverageList
   } else {
-    const employeeObj = employees.find(employee => employee.id == idOrName || employee.firstName == idOrName || employee.lastName == idOrName)
+    const employeeObj = employees.find(employee => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName)
     const animalIds = employeeObj.responsibleFor
     getAnimalsArray(animalIds)
     return {
@@ -188,7 +189,7 @@ function isManager(id) {
 }
 
 function animalsOlderThan(animal, age) {
-  const selectedAnimal = data.animals.find(animals => animals.name == animal)
+  const selectedAnimal = data.animals.find(animals => animals.name === animal)
   if (selectedAnimal.residents.every(resident => resident.age >= age)) {
     return true
   } else {
@@ -197,9 +198,9 @@ function animalsOlderThan(animal, age) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const employeeObj = data.employees.find(employee => employee.id == id)
+  const employeeObj = data.employees.find(employee => employee.id === id)
   const firstSpecieId = employeeObj.responsibleFor[0]
-  const animalObj = data.animals.find(animal => animal.id == firstSpecieId)
+  const animalObj = data.animals.find(animal => animal.id === firstSpecieId)
   const ageArray = animalObj.residents.map(element => element.age)
   const oldestAnimal = animalObj.residents[ageArray.indexOf(Math.max(...ageArray))]
   const oldestAnimalArray = [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age]
