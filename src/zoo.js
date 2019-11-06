@@ -11,7 +11,7 @@ function entryCalculator(entrants) {
 
 function schedule(dayName) {
   const horarioFunc = Object.assign({}, data.hours)
-  Object.keys(horarioFunc).forEach((key) => horarioFunc[key] = `Open from ${parseInt(data.hours[key].open)}am until ${parseInt(data.hours[key].close) - 12}pm`)
+  Object.keys(horarioFunc).forEach(key => horarioFunc[key] = `Open from ${parseInt(data.hours[key].open)}am until ${parseInt(data.hours[key].close) - 12}pm`)
   horarioFunc.Monday = "CLOSED"
   if (dayName === undefined || Object.keys(dayName).length === 0) {
     return horarioFunc
