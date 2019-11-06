@@ -47,7 +47,7 @@ function animalsByIds (...ids) {
   if (ids === undefined) {
     return idsObject
   }
-  ids.map(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
+  return ids.map(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
 };
 
 function animalByName (animalName) {
@@ -62,7 +62,8 @@ function employeeByName (employeeName) {
   if(employeeName === undefined) {
     return []
   } 
-  return data.employees.find(name => name.firstName === employeeName || name.lastName === employeeName)
+  return data.employees.find(name => name.firstName === employeeName || 
+    name.lastName === employeeName)
 }
 
 function managersForEmployee (idOrName) {
