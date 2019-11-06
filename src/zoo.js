@@ -135,8 +135,9 @@ function oldestFromFirstSpecies(id) {
     const funcionario = data.employees
     const animais = data.animals
     const valores = funcionario.find(select => select.id === id).responsibleFor[0]
-    const animaisEmOrdem = animais.find(select => select.id === valores).residents.sort((idadeA, idadeB) => idadeB.age - idadeA.age)[0]
-    const { name, sex, age } = animaisEmOrdem
+    const animaisEmOrdem = animais.find(select => select.id === valores).residents
+    const novaLista = [...animaisEmOrdem].sort((idadeA, idadeB) => idadeB.age - idadeA.age)
+    const { name, sex, age } = novaLista[0]
     const lista = [name, sex, age]
     return lista
 }
@@ -171,16 +172,11 @@ class Animal {
 function createAnimals() {
     const bichos = []
     const bicharada = data.animals
-    console.log('********************************************')
-    console.log(bicharada[8].residents)
-    console.log('********************************************')
-
     bicharada.forEach(animal => (
         animal.residents.forEach(({ name, age, sex }) => (
             bichos.push(new Animal(name, age, sex, animal.name))
         ))
     ))
-
     return bichos
 }
 
