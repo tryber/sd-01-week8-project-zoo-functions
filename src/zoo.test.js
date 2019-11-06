@@ -2,7 +2,7 @@ const assert = require('assert'),
       zoo    = require('./zoo'),
       data   = require('./data');
 
-let actual, expected, options
+let actual, expected
 
 /******************************************************************************/
 

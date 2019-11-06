@@ -7,7 +7,7 @@ function entryCalculator (entrants) {
   return Object.keys(entrants).reduce((acc, key) => (
     acc + (data.prices[key] * entrants[key])
   ), 0)
-}; 
+};
 
 function schedule(dayName = 0) {
   const cronograma = data.hours;
@@ -21,7 +21,7 @@ function schedule(dayName = 0) {
   const obj = {}
   obj[dayName] = cronograma[dayName]
   return obj;
-}
+};
 
 function animalCount (species) {
   if (species === undefined) {
@@ -47,7 +47,7 @@ function animalsByIds (...ids) {
   if (ids === undefined) {
     return idsObject
   }
-  return ids.map(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))  
+  return ids.map(id => idsObject.push(data.animals.find(actualAnimal => actualAnimal.id === id)))
 };
 
 function animalByName (animalName) {
@@ -59,9 +59,9 @@ function employeesByIds (ids) {
 };
 
 function employeeByName (employeeName) {
-  if(employeeName === undefined) {
+  if (employeeName === undefined) {
     return []
-  } 
+  }
   return data.employees.find(name => name.firstName === employeeName || 
     name.lastName === employeeName)
 }
@@ -74,7 +74,7 @@ function employeeCoverage (idOrName) {
   const employee = data.employees.reduce((accumuateValues, actualArray) => {
     accumuateValues[`${actualArray.firstName} ${actualArray.lastName}`] = actualArray.responsibleFor.map(id => data.animals.find(animal => animal.id == id).name)
     return accumuateValues
-  }, {})  
+  }, {})
   if (idOrName === undefined) {
     return employee
   }
