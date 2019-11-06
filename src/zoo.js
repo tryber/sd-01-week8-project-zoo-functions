@@ -104,21 +104,21 @@ function managersForEmployee(idOrName) {
 }
 
 function employeeCoverage(idOrName) {
-  const employess = data.employees
+  const employessToFind = data.employees
   const obj = {}
   if (!idOrName) {
-    Object.keys(employess).forEach((key) => {
-      obj[`${employess[key].firstName} ${employess[key].lastName}`] = data.animals.filter((animal) => {
-        for (let i = 0; i < employess[key].responsibleFor.length; i += 1) {
-          if (employess[key].responsibleFor[i] === animal.id) {
+    Object.keys(employessToFind).forEach((key) => {
+      obj[`${employessToFind[key].firstName} ${employessToFind[key].lastName}`] = data.animals.filter((animal) => {
+        for (let i = 0; i < employessToFind[key].responsibleFor.length; i += 1) {
+          if (employessToFind[key].responsibleFor[i] === animal.id) {
             return animal
           }
         }
       }).map(animal => animal.name)
       return })
   } else {
-    const idEmployess = employess.find(employess => employess.id === idOrName ||
-      employess.firstName === idOrName || employess.lastName === idOrName)
+    const idEmployess = employessToFind.find(employessToFind => employessToFind.id === idOrName ||
+      employessToFind.firstName === idOrName || employessToFind.lastName === idOrName)
     obj[`${idEmployess.firstName} ${idEmployess.lastName}`] = data.animals.filter((animal) => {
       for (let i = 0; i < idEmployess.responsibleFor.length; i += 1) {
         if (idEmployess.responsibleFor[i] === animal.id) {
@@ -142,12 +142,14 @@ function isManager(id) {
 }
 
 function animalsOlderThan(animal, age) {
-  return data.animals.find(animals => animals.name === animal).residents.every(animals => animals.age >= age)
+  return data.animals.find(animals => animals.name === animal)
+  .residents.every(animals => animals.age >= age)
 }
 
 function oldestFromFirstSpecies(id) {
   const findFunc = data.employees.find(element => element.id === id)
-  const findAnimal = data.animals.find(animal => animal.id === findFunc.responsibleFor[0]).residents.map(resident => resident)
+  const findAnimal = data.animals.find(animal => animal.id === findFunc.responsibleFor[0])
+  .residents.map(resident => resident)
   const arrayAge = findAnimal.map(resident => resident.age)
   const oldestAnimal = Math.max(...arrayAge)
   const array = findAnimal.find(animal => animal.age === oldestAnimal)
@@ -156,9 +158,20 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   Object.keys(data.prices).forEach((key) => {
-    data.prices[key] = Math.round((data.prices[key] + (data.prices[key] * (percentage / 100))) * 100) / 100
+    data.prices[key] = Math.round((data.prices[key] +
+    (data.prices[key] * (percentage / 100))) * 100) / 100
   })
   return data.prices
+}
+
+function createAnimals() {
+  const animals = []
+  data.animals.forEach(animal => (
+    animal.residents.forEach(({ name, age, sex }) => (
+      animals.push(new Animal(name, age, sex, animal.name))
+    ))
+  ))
+  return animals
 }
 
 class Animal {
@@ -179,15 +192,6 @@ class Animal {
   }
 }
 
-function createAnimals() {
-  const animals = []
-  data.animals.forEach(animal => (
-    animal.residents.forEach(({ name, age, sex }) => (
-      animals.push(new Animal(name, age, sex, animal.name))
-    ))
-  ))
-  return animals
-}
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith }
