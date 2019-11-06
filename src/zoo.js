@@ -22,26 +22,6 @@ function schedule(dayName) {
     }
 }
 
-
-// function schedule(dayName = 0) {
-//     const cronograma = data.hours;
-//     if (dayName == 0) {
-//         Object.keys(cronograma).forEach((key) => {
-//             cronograma[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`;
-//         })
-//         cronograma.Monday = 'CLOSED';
-//         return cronograma;
-//     } else {
-//         let obj = {}
-//         obj[dayName] = cronograma[dayName]
-//         return obj;
-//     }
-// }
-
-
-
-
-
 function animalCount(species) {
     const bichos = data.animals
     const chaves = bichos.map(bicharada => bicharada.name)
@@ -163,26 +143,41 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
     const porcentagem = parseFloat(`0.${percentage}`)
-    const aumentar = (valor) => (valor * porcentagem + valor).toFixed(2)
-    const preco = Object.assign({}, data.prices)
-    const final = {}
-    Object.keys(preco).forEach(key => final[`${key}`] = aumentar(preco[key]))
-    console.log('////////////////////////////////////')
-    console.log(final)
-    console.log('-------------------------------------')
-    return final
+    const aumentar = (valor) => (valor * porcentagem + valor)
+    const valorCorrigido = (numero) => Math.round(numero * 100) / 100
+    const newPrices = data.prices
+    Object.keys(newPrices).forEach(key => newPrices[key] = valorCorrigido(aumentar(newPrices[key])))
+    return newPrices
 }
 
 class Animal {
-    // seu código aqui
+    constructor(name, sex, age, species) {
+        this.name = name
+        this.sex = sex
+        this.age = age
+        this.species = species
+    }
+    static info() {
+        return `${this.name} is a ${this.age} year old ${this.sex} ${this.species}`
+    }
+    static totalAnimal() {
+        return data.animais.length
+    }
+
 }
 
-function createAnimals() {
-    // seu código aqui
+function createAnimals(name = {}, sex, age, species) {
+    const criandoNovoAnimal = data.animals
+    console.log('************************************')
+    console.log(criandoNovoAnimal.length)
+    console.log('************************************')
+    const obj = { name, sex, age, species }
+    criandoNovoAnimal.push(obj)
+    return criandoNovoAnimal
 }
 
 function createEmployee(personalInfo, associatedWith) {
-    // seu código aqui
+    return {...personalInfo, ...associatedWith }
 }
 
 module.exports = {
