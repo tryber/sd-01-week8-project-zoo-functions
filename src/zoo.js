@@ -74,7 +74,7 @@ function animalPopularity(rating) {
 
 function animalsByIds(...values) {
   const obj = [];
-  values.forEach((item) => obj.push(data.animals.find(animal => animal.id === item)));
+  values.forEach(item => obj.push(data.animals.find(animal => animal.id === item)));
   return obj;
 };
 
@@ -100,11 +100,11 @@ function employeeCoverage(idOrName) {
   const allIddata = data.employees.map(item => item.id);
   const returnIdResponsibleForById = idEmployee => (
     data.employees.find(employee => employee.id === idEmployee))
-  const funcGetResult = id => {
+  const funcGetResult = id => (
     obj[`${returnIdResponsibleForById(id).firstName} ${returnIdResponsibleForById(id).lastName}`] =
       returnIdResponsibleForById(id).responsibleFor.map(idAnimal =>
-        data.animals.find(animal => animal.id === idAnimal).name);
-  }
+        data.animals.find(animal => animal.id === idAnimal).name)
+  )
   if (idOrName === undefined) {
     allIddata.forEach(id => funcGetResult(id));
   } else {
@@ -162,7 +162,6 @@ class Animal {
     this.sex = sex;
     this.age = age;
     this.species = species.slice(0, -1);
-
   }
 
   info() {
