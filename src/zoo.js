@@ -8,24 +8,24 @@ entryCalculator = (entrants = 0) => {
   }
   else {
     let result = 0
-    result += entrants.Adult * prices["Adult"]
-    result += entrants.Senior * prices["Senior"]
-    result += entrants.Child * prices["Child"]
+    result += entrants.Adult * prices['Adult']
+    result += entrants.Senior * prices['Senior']
+    result += entrants.Child * prices['Child']
     return result
   }
 }
 
 const { hours } = require('./data')
 
-const open = "Open from"
-const until = "until"
+const open = 'Open from'
+const until = 'until'
 const { Tuesday, Wednesday, Thursday, friday, Saturday, Sunday, Monday } = hours
 schedule = (dayName = 0) => {
   if (Object.keys(dayName).length === 0) {
     Object.keys(hours).forEach(days => {
       hours[days] = `${open} ${hours[days].open}am ${until} ${hours[days].close - 12}pm`
     });
-    hours.Monday = "CLOSED"
+    hours.Monday = 'CLOSED'
     return hours
   }
   else {
@@ -66,7 +66,6 @@ animalsByIds = (...ids) => {
 };
 
 const { employees } = require('./data')
-
 employeeByName = (employeeName = '') => {
   let obj = {}
   if (employeeName.length !== 0) {
@@ -79,7 +78,7 @@ employeeByName = (employeeName = '') => {
   return obj
 };
 
-employeeCoverage = (idOrName = "") => {
+employeeCoverage = (idOrName = ') => {
   if (idOrName.length === 0) {
   }
 };
