@@ -62,8 +62,7 @@ function animalMap(options) {
     if (options['sex'] === 'female') {
       locationReduce().forEach((location) => { obj[location] = filterAnimalsByLocation(animals, location)
         .map((item) => ({[item.name]: item.residents
-            .filter((nameAnimal) => nameAnimal.sex === 'female').map((value) => value.name)
-          }))
+            .filter((nameAnimal) => nameAnimal.sex === 'female').map((value) => value.name)}))
       })
     }
   }
