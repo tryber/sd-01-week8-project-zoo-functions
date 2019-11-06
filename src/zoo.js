@@ -115,10 +115,10 @@ function employeeCoverage(idOrName) {
           }
         }
       }).map(animal => animal.name)
-      return })
+      return 0 })
   } else {
-    const idEmployess = employessToFind.find(employessToFind => employessToFind.id === idOrName ||
-      employessToFind.firstName === idOrName || employessToFind.lastName === idOrName)
+    const idEmployess = employessToFind.find(employeToFind => employeToFind.id === idOrName ||
+      employeToFind.firstName === idOrName || employeToFind.lastName === idOrName)
     obj[`${idEmployess.firstName} ${idEmployess.lastName}`] = data.animals.filter((animal) => {
       for (let i = 0; i < idEmployess.responsibleFor.length; i += 1) {
         if (idEmployess.responsibleFor[i] === animal.id) {
@@ -164,16 +164,6 @@ function increasePrices(percentage) {
   return data.prices
 }
 
-function createAnimals() {
-  const animals = []
-  data.animals.forEach(animal => (
-    animal.residents.forEach(({ name, age, sex }) => (
-      animals.push(new Animal(name, age, sex, animal.name))
-    ))
-  ))
-  return animals
-}
-
 class Animal {
   constructor(name, age, sex, species) {
     this.name = name
@@ -192,6 +182,15 @@ class Animal {
   }
 }
 
+function createAnimals() {
+  const animals = []
+  data.animals.forEach(animal => (
+    animal.residents.forEach(({ name, age, sex }) => (
+      animals.push(new Animal(name, age, sex, animal.name))
+    ))
+  ))
+  return animals
+}
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith }
