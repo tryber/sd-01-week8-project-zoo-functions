@@ -129,7 +129,17 @@ function animalsOlderThan(animal, age) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecie = data.employees.find(employee => employee.id === id).responsibleFor[0]
+  const animals = data.animals.find(animal => animal.id === firstSpecie).residents
+  let oldestAge = 0, oldestName, oldestSex
+  animals.forEach((animal) => {
+    if (animal.age > oldestAge) {
+      oldestAge = animal.age
+      oldestName = animal.name
+      oldestSex = animal.sex
+    }
+  })
+  return [oldestName, oldestSex, oldestAge]
 }
 
 function increasePrices(percentage) {
