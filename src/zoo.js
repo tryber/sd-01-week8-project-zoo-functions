@@ -51,7 +51,7 @@ function sortedAnimalNames(animalNames, sorted) {
 function animalMap(options = {}) {
   const { includeNames, sex, sorted } = options
   return data.animals.reduce((obj, animal) => {
-    let result=obj
+    const result = obj
     const animalsInLocation = obj[animal.location] || []
 
     if (!includeNames) {
@@ -156,9 +156,10 @@ function increasePrices(percentage) {
     return result;
   }
   Object.keys(data.prices).forEach(type => {
-    data.prices[type] = Math.round(calculate(percentage, data.prices[type]) * 100) / 100
+    (data.prices[type] = Math.round(calculate(percentage, data.prices[type]) * 100) / 100)
     return 0;
-  })
+  }
+  )
 }
 
 class Animal {
