@@ -2,58 +2,87 @@ const data = require('./data')
 
 
 
-const {prices} = require('./data')
+const { prices } = require('./data')
 entryCalculator = (entrants = 0) => {
   if (Object.keys(entrants).length === 0) {
     return 0
   }
-  else{
+  else {
     let result = 0
     result += entrants.Adult * prices["Adult"]
     result += entrants.Senior * prices["Senior"]
-    result += entrants.Child  * prices["Child"]
+    result += entrants.Child * prices["Child"]
     return result
   }
 }
 
-const {hours} = require('./data')
+const { hours } = require('./data')
 const open = "Open from"
 const until = "until"
-const {Tuesday, Wednesday, Thursday, friday, Saturday, Sunday, Monday} = hours
+const { Tuesday, Wednesday, Thursday, friday, Saturday, Sunday, Monday } = hours
 schedule = (dayName = 0) => {
   if (Object.keys(dayName).length === 0) {
     Object.keys(hours).forEach(days => {
-      hours[days] =`${open} ${hours[days].open}am ${until} ${hours[days].close -12}pm`
+      hours[days] = `${open} ${hours[days].open}am ${until} ${hours[days].close - 12}pm`
     });
-    hours.Monday =  "CLOSED"
+    hours.Monday = "CLOSED"
     return hours
   }
-  else{
+  else {
     const obj = {}
     obj[dayName] = hours[dayName]
     return obj
   }
 };
 
-function animalCount (species) {
+const { animals } = require('./data')
+animalCount = (species = 0) => {
+  let obj = {}
+  if (Object.keys(species).length === 0) {
+    Object.keys(animals).forEach(key => {
+      obj[animals[key].name] = animals[key].residents.length
+    })
+  }
+  else {
+    obj = animals.find(animal => animal.name == species).residents.length
+  }
+  return obj
+}
+
+function animalMap(options) {
   // seu código aqui
 };
 
-function animalMap (options) {
-  // seu código aqui
+animalsByIds = (...ids) => {
+  let obj = {}
+  if (Object.keys(ids).length === 0) {
+    return []
+  }
+  else {
+    obj = ids.map(idPass => animals.find(animal => animal.id == idPass))
+  }
+  return obj
 };
 
-function animalsByIds (ids) {
-  // seu código aqui
+const { employees } = require('./data')
+employeeByName = (employeeName = '') => {
+  let obj = {}
+  if (employeeName.length !== 0) {
+    obj = employees.find(empregado => {
+      if (empregado.firstName === employeeName || empregado.lastName === employeeName) {
+        return empregado
+      }
+    })
+  }
+  return obj
 };
 
-function employeeByName (employeeName) {
-  // seu código aqui
-};
 
-function employeeCoverage (idOrName) {
-  // seu código aqui
+employeeCoverage = (idOrName = "") => {
+  if (idOrName.length === 0) {
+  }
 };
+console.log(employeeCoverage())
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -76,11 +105,29 @@ function increasePrices(percentage) {
 }
 
 class Animal {
-  // seu código aqui
+  constructor(name, age, sex, species) {
+    this.name = name
+    this.age = age
+    this.sex = sex
+    this.species = species.slice(0, -1)
+  }
+  info() {
+    const { name, age, sex, species } = this
+    return `${name} is a ${age} year old ${sex} ${species}`
+  }
+  static totalAnimals() {
+    return createAnimals().length
+  }
 }
 
-function createAnimals() {
-  // seu código aqui
+createAnimals = () => {
+  const animals = []
+  data.animals.forEach(animal => (
+    animal.residents.forEach(({ name, age, sex }) => (
+      animals.push(new Animal(name, age, sex, animal.name))
+    ))
+  ))
+  return animals
 }
 
 function createEmployee(personalInfo, associatedWith) {
