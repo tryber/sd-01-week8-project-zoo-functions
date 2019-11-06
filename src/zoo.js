@@ -43,32 +43,31 @@ function animalCount(species = 0) {
   return obj
 }
 
-function animalMap(options = 0) {
-  const { includeNames, sex, sorted } = options
-
-  const result = data.animals.reduce((obj, animal) => {
-    const animalsInLocation = obj[animal.location] || []
-
-    if (!includeNames) {
-      obj[animal.location] = [...animalsInLocation, animal.name]
-      return obj
-    }
-    let residents = animal.residents
-
-    if (sex) {
-      residents = residents.filter(resident => resident.sex === sex)
-    }
-    let animalNames = residents.map(({ name }) => name)
-
-    if (sorted) {
-      animalNames = animalNames.sort()
-    }
-    obj[animal.location] = [...animalsInLocation, { [animal.name]: animalNames }]
-
-    return obj
-  }, {})
-  return result
+function animalsFilteredBySex(animals, sex) {
+  if (!sex) return animals
+  return animals.filter(({ sex: animalSex }) => sex === animalSex)
 }
+function sortedAnimalNames(animalNames, sorted) {
+  if (!sorted) return animalNames
+  return animalNames.sort()
+}
+function animalMap(options = {}) {
+  const { includeNames, sex, sorted } = options
+  return data.animals.reduce((obj, animal) => {
+    const result = obj
+    const animalsInLocation = obj[animal.location] || []
+    if (!includeNames) {
+      result[animal.location] = [...animalsInLocation, animal.name]
+      return result
+    }
+    let animals = animal.residents
+    animals = animalsFilteredBySex(animals, sex)
+    let animalNames = animals.map(({ name }) => name)
+    animalNames = sortedAnimalNames(animalNames, sorted)
+    result[animal.location] = [...animalsInLocation, { [animal.name]: animalNames }]
+    return result
+  }, {})
+};
 
 function animalPopularity(rating) {
   // seu código aqui
@@ -168,7 +167,7 @@ class Animal {
   }
 
   static totalAnimals() {
-    return createAnimals().length
+    return data.animals.reduce((count, animal) => count + animal.residents.length, 0)
   }
 }
 
