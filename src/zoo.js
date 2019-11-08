@@ -26,17 +26,12 @@ function animalCount(species) {
     const result = obj
     if (!species) {
       result[animal.name] = animal.residents.length
-    } else {
-      if (animal.name === species) return animal.residents.length
     }
+    if (animal.name === species) return animal.residents.length
+    
     return result
   }, {})
 }
-
-
-
-
-
 
 function animalsFilteredBySex(animals, sex) {
   if (!sex) return animals
