@@ -21,22 +21,22 @@ function schedule(dayName = 0) {
   return obj
 }
 
-function animalCount(species = 0) {
-  const animals = data.animals;
-  const obj = {}
-  let num;
-  const isSpecie = ({ name }) => name === species
-  const filterAnimals = objAnimals =>
-    objAnimals.filter(animal => isSpecie(animal))
-  if (species === 0) {
-    Object.keys(animals).forEach(key => (
-      obj[data.animals[key].name] = data.animals[key].residents.length)
-    )
-  } else {
-    num = filterAnimals(data.animals)[0].residents.length
-  }
-  return num || obj
+function animalCount(species) {
+  return data.animals.reduce((obj, animal) => {
+    const result = obj
+    if (!species) {
+      result[animal.name] = animal.residents.length
+    } else {
+      if (animal.name === species) return animal.residents.length
+    }
+    return result
+  }, {})
 }
+
+
+
+
+
 
 function animalsFilteredBySex(animals, sex) {
   if (!sex) return animals
