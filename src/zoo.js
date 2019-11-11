@@ -12,12 +12,14 @@ function entryCalculator (entrants) {
 
 function schedule (dayName) {
   const schedule = data.hours
+  if (dayName == undefined) {
   Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
   schedule.Monday = "CLOSED"
-  if (dayName == undefined) {
     return schedule
   } else {
-    return ({dayName : schedule[dayName]})
+    let obj = {}
+    obj[dayName] = schedule[dayName]
+    return obj
   }
 };
 
@@ -50,15 +52,19 @@ function animalPopularity (rating) { //nao tem
 };
 
 function animalsByIds (ids) {
-  if(ids === undefined){
+  if(ids == undefined) {
     return ids = []
-  } 
-  else {
-    const dados = [ data.animals.find((animal) => animal.id == ids) ]
-    return dados
   }
-
+  else {
+    return [data.animals.find(numberId => numberId.id == ids)]
+  }
 };
+//let find = []
+  // if(ids){
+  //   return find
+  // }
+  
+  // find.push(data.animals.find((animal) => animal.id == ids))
 
 function animalByName (animalName) { //nao tem
   // seu código aqui
@@ -114,11 +120,32 @@ function increasePrices(percentage) {
 }
 
 class Animal {
-  // seu código aqui
+    constructor(name, age, sex, species) {
+      this.name = name
+      this.age = age
+      this.sex = sex
+      this.species = species.slice(0, -1)
+    }
+  
+    info() {
+      const { name, age, sex, species } = this
+      return `${name} is a ${age} year old ${sex} ${species}`
+    }
+  
+    static totalAnimals() {
+      return data.animals.reduce((count, animal) => count + animal.residents.length, 0)
+    }
 }
 
 function createAnimals() {
-  // seu código aqui
+  const animals = []
+  data.animals.forEach(animal => (
+    animal.residents.forEach(({ name, age, sex }) => (
+      animals.push(new Animal(name, age, sex, animal.name))
+    ))
+  ))
+  return animals
+  
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -129,7 +156,7 @@ function createEmployee(personalInfo, associatedWith) {
     firstName,
     lastName,
     managers,
-    responsibleFor,
+    responsibleFor
   }
 }
 // return {...personalInfo, ...associatedwidth} 

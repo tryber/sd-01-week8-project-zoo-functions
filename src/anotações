@@ -1,14 +1,14 @@
-let; 
+let;  x
 const; x 
 arrow functions; x 
 template literals; x
-spread operator; 
+spread operator; x
 parâmetro rest;
 object destructuring; x
-array destructuring;
-default destructuring;
+array destructuring;  x
+default destructuring; 
 abbreviation object literal; x
-default params;
+default params;  x
 higher order functions; x
 classes;
 atributos de classes;

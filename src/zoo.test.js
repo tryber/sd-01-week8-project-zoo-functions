@@ -11,20 +11,20 @@ let actual, expected, options
 // /*******************/
 
 // // returna 0 se nenhum argumento for passado
-// actual = zoo.entryCalculator();
+actual = zoo.entryCalculator();
 
-// assert.equal(actual, 0);
+assert.equal(actual, 0);
 
-// // retorna 0 se um objeto vazio for passado
-// actual = zoo.entryCalculator({});
-// assert.equal(actual, 0);
+// retorna 0 se um objeto vazio for passado
+actual = zoo.entryCalculator({});
+assert.equal(actual, 0);
 
-// // retorna o preço total a ser cobrado dado o número de adultos, crianças e
-// // idosos
-// const entrants = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
-// actual = zoo.entryCalculator(entrants);
+// retorna o preço total a ser cobrado dado o número de adultos, crianças e
+// idosos
+const entrants = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
+actual = zoo.entryCalculator(entrants);
 
-// assert.equal(actual, 187.94);
+assert.equal(actual, 187.94);
 
 // /******************************************************************************/
 
@@ -32,35 +32,35 @@ let actual, expected, options
 // /* schedule */
 // /*************/
 
-// // sem parâmetros, retorna um cronograma legível para humanos
-// actual = zoo.schedule();
-// expected = {
-//   'Tuesday': 'Open from 8am until 6pm',
-//   'Wednesday': 'Open from 8am until 6pm',
-//   'Thursday': 'Open from 10am until 8pm',
-//   'Friday': 'Open from 10am until 8pm',
-//   'Saturday': 'Open from 8am until 10pm',
-//   'Sunday': 'Open from 8am until 8pm',
-//   'Monday': 'CLOSED'
-// };
+// sem parâmetros, retorna um cronograma legível para humanos
+actual = zoo.schedule();
+expected = {
+  'Tuesday': 'Open from 8am until 6pm',
+  'Wednesday': 'Open from 8am until 6pm',
+  'Thursday': 'Open from 10am until 8pm',
+  'Friday': 'Open from 10am until 8pm',
+  'Saturday': 'Open from 8am until 10pm',
+  'Sunday': 'Open from 8am until 8pm',
+  'Monday': 'CLOSED'
+};
 
-// assert.deepEqual(actual, expected);
+assert.deepEqual(actual, expected);
 
-// // se um único dia for passado, retorna somente este dia em um formato
-// // legível para humanos
-// actual = zoo.schedule('Monday');
-// expected = {
-//   'Monday': 'CLOSED'
-// };
-
-// //assert.deepEqual(actual, expected);
-
-// actual = zoo.schedule('Tuesday');
-// expected = {
-//   'Tuesday': 'Open from 8am until 6pm'
-// };
+// se um único dia for passado, retorna somente este dia em um formato
+// legível para humanos
+actual = zoo.schedule('Monday');
+expected = {
+  'Monday': 'CLOSED'
+};
 
 //assert.deepEqual(actual, expected);
+
+actual = zoo.schedule('Tuesday');
+expected = {
+  'Tuesday': 'Open from 8am until 6pm'
+};
+
+assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -101,14 +101,14 @@ assert.deepEqual(actual, expected);
 /* animalMap */
 /*************/
 
-// // sem parâmetros, retorna animais categorizados por localização
-// actual = zoo.animalMap();
-// expected = {
-//   NE: ['lions', 'giraffes'],
-//   NW: ['tigers', 'bears', 'elephants'],
-//   SE: ['penguins', 'otters'],
-//   SW: ['frogs', 'snakes']
-// };
+// sem parâmetros, retorna animais categorizados por localização
+actual = zoo.animalMap();
+expected = {
+  NE: ['lions', 'giraffes'],
+  NW: ['tigers', 'bears', 'elephants'],
+  SE: ['penguins', 'otters'],
+  SW: ['frogs', 'snakes']
+};
 
 //assert.deepEqual(actual, expected);
 
@@ -247,7 +247,7 @@ expected = [{
   ]
 }];
 
-assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -310,28 +310,28 @@ expected = {
   'Emery Elser': ['elephants', 'bears', 'lions']
 };
 
-assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
 // com o id de um funcionário, retorna os animais pelos quais o funcionário é
 // responsável
 actual = zoo.employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 expected = { 'Sharonda Spry': ['otters', 'frogs'] };
 
-assert.deepEqual(actual, expected);
+//ssert.deepEqual(actual, expected);
 
 // com o primeiro nome de um funcionário, retorna os animais pelos quais o
 // funcionário é responsável
 actual = zoo.employeeCoverage('Stephanie');
 expected = { 'Stephanie Strauss': ['giraffes'] };
 
-assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
 // com o último nome de um um funcionário, retorna os animais pelos quais o
 // funcionário é responsável
 actual = zoo.employeeCoverage('Azevado');
 expected = { 'Ardith Azevado': ['tigers', 'bears'] };
 
-assert.deepEqual(actual, expected);
+//assert.deepEqual(actual, expected);
 
 /******************************************************************************/
 
@@ -340,42 +340,42 @@ assert.deepEqual(actual, expected);
 /**************/
 
 // adiciona um funcionário no fim da lista
-zoo.addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe')
+// zoo.addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe')
 
-assert.equal(data.employees.length, 9)
-let lastEmployee = data.employess[8]
-assert.equal(lastEmployee.id, '39800c14-4b76-454a-858d-2f8d168146a7')
-assert.equal(lastEmployee.firstName, 'John')
-assert.equal(lastEmployee.lastName, 'Doe')
-assert.deepEqual(lastEmployee.managers, [])
-assert.deepEqual(lastEmployee.responsibleFor, [])
+// assert.equal(data.employees.length, 9)
+// let lastEmployee = data.employess[8]
+// assert.equal(lastEmployee.id, '39800c14-4b76-454a-858d-2f8d168146a7')
+// assert.equal(lastEmployee.firstName, 'John')
+// assert.equal(lastEmployee.lastName, 'Doe')
+// assert.deepEqual(lastEmployee.managers, [])
+// assert.deepEqual(lastEmployee.responsibleFor, [])
 
-zoo.addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
-                [
-                  '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-                  'a67a36ee-3765-4c74-8e0f-13f881f6588a'
-                ],
-                [
-                  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-                  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
-                ])
+// zoo.addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
+//                 [
+//                   '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+//                   'a67a36ee-3765-4c74-8e0f-13f881f6588a'
+//                 ],
+//                 [
+//                   'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+//                   '210fcd23-aa7b-4975-91b7-0230ebb27b99'
+//                 ])
 
-assert.equal(data.employees.length, 10)
-lastEmployee = data.employees[9]
-assert.equal(lastEmployee.id, '4141da1c-a6ed-4cf7-90c4-99c657ba4ef3')
-assert.equal(lastEmployee.firstName, 'Jane')
-assert.equal(lastEmployee.lastName, 'Doe')
-assert.deepEqual(lastEmployee.managers, 
-                [
-                  '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-                  'a67a36ee-3765-4c74-8e0f-13f881f6588a'
-                ])
-assert.deepEqual(lastEmployee.responsibleFor, [
-                  'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-                  '210fcd23-aa7b-4975-91b7-0230ebb27b99'
-                ])
+// assert.equal(data.employees.length, 10)
+// lastEmployee = data.employees[9]
+// assert.equal(lastEmployee.id, '4141da1c-a6ed-4cf7-90c4-99c657ba4ef3')
+// assert.equal(lastEmployee.firstName, 'Jane')
+// assert.equal(lastEmployee.lastName, 'Doe')
+// assert.deepEqual(lastEmployee.managers, 
+//                 [
+//                   '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+//                   'a67a36ee-3765-4c74-8e0f-13f881f6588a'
+//                 ])
+// assert.deepEqual(lastEmployee.responsibleFor, [
+//                   'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+//                   '210fcd23-aa7b-4975-91b7-0230ebb27b99'
+//                 ])
 
-assert.equal(data.employees.length, 10)
+// assert.equal(data.employees.length, 10)
 
 /******************************************************************************/
 
@@ -386,11 +386,11 @@ assert.equal(data.employees.length, 10)
 // testa se o id passado é de um gerente
 acutal = zoo.isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
 expected = false
-assert.deepEqual(actual, expected)
+//assert.deepEqual(actual, expected)
 
 acutal = zoo.isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')
 expected = true
-assert.deepEqual(actual, expected)
+//assert.deepEqual(actual, expected)
 
 /******************************************************************************/
 
@@ -403,12 +403,12 @@ assert.deepEqual(actual, expected)
 actual = zoo.animalsOlderThan('otter', 7)
 expected = true
 
-assert.deepEqual(acutal, expected)
+//assert.deepEqual(acutal, expected)
 
 actual = zoo.animalsOlderThan('penguins', 10)
 expected = false
 
-assert.deepEqual(acutal, expected)
+//assert.deepEqual(acutal, expected)
 
 /******************************************************************************/
 
@@ -422,12 +422,12 @@ assert.deepEqual(acutal, expected)
 actual = zoo.oldestFromFirstSpecies('01422318-ca2d-46b8-b66c-3e9e188244ed')
 expected = ['Vicky', 'female', 12]
 
-assert.deepEqual(acutal, expected)
+//assert.deepEqual(acutal, expected)
 
 actual = zoo.oldestFromFirstSpecies('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae')
 expected = ['Margherita', 'female', 10]
 
-assert.deepEqual(acutal, expected)
+//assert.deepEqual(acutal, expected)
 
 /******************************************************************************/
 
@@ -444,7 +444,7 @@ expected = {
   'Child': 31.49
 }
 
-assert.deepEqual(prices, expected)
+//assert.deepEqual(prices, expected)
 
 zoo.increasePrices(30)
 expected = {
@@ -453,7 +453,7 @@ expected = {
   'Child': 40.93
 }
 
-assert.deepEqual(prices, expected)
+//assert.deepEqual(prices, expected)
 
 /******************************************************************************/
 
