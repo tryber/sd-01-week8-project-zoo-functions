@@ -69,9 +69,7 @@ function animalPopularity(rating) {
 };
 
 function animalsByIds(...values) {
-  const obj = [];
-  values.forEach(item => obj.push(data.animals.find(animal => animal.id === item)));
-  return obj;
+  return values.map(item => data.animals.find(animal => animal.id === item));
 };
 
 function animalByName(animalName) {
