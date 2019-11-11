@@ -25,7 +25,7 @@ function schedule(dayName = 0) {
 
 function animalCount (species) {
   if (species === undefined) {
-    const animalsObject = {}
+    let animalsObject = {}
     const animal = data.animals.forEach((actualAnimal) => {
       animalsObject[actualAnimal.name] = actualAnimal.residents.length
     })
@@ -80,8 +80,15 @@ function employeeCoverage (idOrName) {
   }
 };
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  let newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  }
+  data.employees.push(newEmployee)
 }
 
 function isManager(id) {
@@ -89,7 +96,12 @@ function isManager(id) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const selectedAnimal = data.animals.find(animals => animals.name === animal)
+  if (selectedAnimal.residents.every(resident => resident.age >= age)) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function oldestFromFirstSpecies(id) {
@@ -101,11 +113,32 @@ function increasePrices(percentage) {
 }
 
 class Animal {
-  // seu código aqui
+  constructor(name, age, sex, species) {
+    this.name = name
+    this.age = age
+    this.sex = sex
+    this.species = species.slice(0, -1)
+    Animal.numInstances = (Animal.numInstances || 0) + 1;
+  }
+
+  info() {
+    const { name, age, sex, species } = this
+    return (`${name} is a ${age} year old ${sex} ${species}`)
+  }
+  static total_animals() {
+    return Animal.numInstances
+  }
 }
 
 function createAnimals() {
-  // seu código aqui
+  const animals = data.animals.reduce((arr, animal) => {
+    animal.residents.map(({ name,age,sex }) => {
+      const newAnimal = new Animal(name, age, sex, animal.name)
+      arr.push(newAnimal)
+    })
+    return arr
+  }, [])
+  return animals
 }
 
 function createEmployee(personalInfo, associatedWith) {
