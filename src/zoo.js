@@ -21,6 +21,7 @@ function schedule(dayName = 0) {
   return obj
 }
 
+
 function animalCount(species) {
   return data.animals.reduce((obj, animal) => {
     const result = obj
@@ -28,7 +29,6 @@ function animalCount(species) {
       result[animal.name] = animal.residents.length
     }
     if (animal.name === species) return animal.residents.length
-    
     return result
   }, {})
 }
