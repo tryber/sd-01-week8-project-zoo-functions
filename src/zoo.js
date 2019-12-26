@@ -85,7 +85,7 @@ function animalsByIds(...ids) {
 };
 
 function animalByName(animalName) {
-  // seu código aqui
+  
 };
 
 function employeesByIds(ids) {
