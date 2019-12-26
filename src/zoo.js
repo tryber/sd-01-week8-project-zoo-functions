@@ -85,7 +85,7 @@ function animalsByIds(...ids) {
 };
 
 function animalByName(animalName) {
-  
+
 };
 
 function employeesByIds(ids) {
