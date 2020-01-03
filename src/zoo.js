@@ -85,7 +85,7 @@ function animalsByIds(...ids) {
 };
 
 function animalByName(animalName) {
-
+  // seu código aqui
 };
 
 function employeesByIds(ids) {
@@ -93,7 +93,9 @@ function employeesByIds(ids) {
 };
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName) {
+    console.log(employeeName)
+  }
 };
 
 function managersForEmployee(idOrName) {
