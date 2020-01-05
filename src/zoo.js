@@ -113,9 +113,12 @@ function managersForEmployee(idOrName) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 };
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+*/
+function addEmployee(...arg) {
+  const allEmployees = [...data.employees]
+  const newEmployee = ([id, firstName, lastName, managers = [], responsibleFor =[]]) =>
+  ({id, firstName, lastName, managers, responsibleFor})
+  data.employees = [...allEmployees, newEmployee(arg)]
 }
 
 function isManager(id) {
