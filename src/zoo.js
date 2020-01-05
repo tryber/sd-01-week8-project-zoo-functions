@@ -113,7 +113,7 @@ function managersForEmployee(idOrName) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 };
-*/
+
 function addEmployee(...arg) {
   const allEmployees = [...data.employees]
   const newEmployee = ([id, firstName, lastName, managers = [], responsibleFor =[]]) =>
