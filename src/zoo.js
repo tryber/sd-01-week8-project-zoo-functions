@@ -1,5 +1,5 @@
 const data = require('./data')
-
+/*
 function entryCalculator(entrants) {
   if (entrants === undefined || Object.keys(entrants).length == 0) {
     return 0
@@ -133,6 +133,7 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
 }
+*/
 
 class Animal {
   constructor(name, age, sex, species) {
@@ -141,13 +142,21 @@ class Animal {
     this.sex = sex
     this.species = species
   }
+  info() {
+    return `${this.name} is a ${this.age} year old ${this.sex} ${this.species}`
+  }
+  static countAnimals() {
+    const total = data.animals.reduce((acc, el) => acc + el.residents.length, 0)
+    return total
+  }
+
 }
 
 function createAnimals() {
   const animals = []
   data.animals.forEach(animal => (
     animal.residents.forEach(resident => (
-      animals.push(new Animal())
+      animals.push(new Animal(resident.name, resident.age, resident.sex, animal.name))
     ))
   ))
   return animals
@@ -158,22 +167,22 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 module.exports = {
-  entryCalculator: entryCalculator,
-  schedule: schedule,
-  animalCount: animalCount,
-  animalMap: animalMap,
-  animalPopularity: animalPopularity,
-  animalsByIds: animalsByIds,
-  animalByName: animalByName,
-  employeesByIds: employeesByIds,
-  employeeByName: employeeByName,
-  managersForEmployee: managersForEmployee,
-  employeeCoverage: employeeCoverage,
-  addEmployee: addEmployee,
-  isManager: isManager,
-  animalsOlderThan: animalsOlderThan,
-  oldestFromFirstSpecies: oldestFromFirstSpecies,
-  increasePrices: increasePrices,
+  // entryCalculator: entryCalculator,
+  // schedule: schedule,
+  // animalCount: animalCount,
+  // animalMap: animalMap,
+  // animalPopularity: animalPopularity,
+  // animalsByIds: animalsByIds,
+  // animalByName: animalByName,
+  // employeesByIds: employeesByIds,
+  // employeeByName: employeeByName,
+  // managersForEmployee: managersForEmployee,
+  // employeeCoverage: employeeCoverage,
+  // addEmployee: addEmployee,
+  // isManager: isManager,
+  // animalsOlderThan: animalsOlderThan,
+  // oldestFromFirstSpecies: oldestFromFirstSpecies,
+  // increasePrices: increasePrices,
   createAnimals: createAnimals,
   Animal: Animal,
   createEmployee: createEmployee
