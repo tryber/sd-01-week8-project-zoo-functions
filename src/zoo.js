@@ -93,9 +93,17 @@ function employeesByIds(ids) {
 };
 
 function employeeByName(employeeName) {
-  if (employeeName) {
-    console.log(employeeName)
+  if (employeeName === undefined) {
+    return {}
   }
+  let firstOrLastName = data.employees.find((employee) => {
+    if (employee.firstName === employeeName) {
+      return employee
+    } else if (employee.lastName === employeeName) {
+      return employee
+    }
+  });
+  return firstOrLastName
 };
 
 function managersForEmployee(idOrName) {
@@ -139,7 +147,7 @@ function createAnimals() {
   const animals = []
   data.animals.forEach(animal => (
     animal.residents.forEach(resident => (
-      animals.push(new animal())
+      animals.push(new Animal())
     ))
   ))
   return animals
