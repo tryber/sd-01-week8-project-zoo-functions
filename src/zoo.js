@@ -6,7 +6,7 @@ function entryCalculator(entrants) {
   }
   return Object.keys(entrants)
   .reduce((acc, key) => {
-    let sum = data.prices[key] * entrants[key]
+    const sum = data.prices[key] * entrants[key]
     return acc + sum;
   }, 0)
 };
@@ -14,7 +14,7 @@ function entryCalculator(entrants) {
 function schedule(dayName) {
   const schedules = data.hours
   if (dayName === undefined) {
-    Object.keys(schedules).forEach((key) => schedules[key] = `Open from ${schedules[key].open}am until ${schedules[key].close - 12}pm`)
+    Object.keys(schedules).forEach(key => schedules[key] = `Open from ${schedules[key].open}am until ${schedules[key].close - 12}pm`)
     schedules.Monday = 'CLOSED'
     return schedules
   }
@@ -62,6 +62,7 @@ function animalMap(options = {}) {
         }
         return { [species.name]: animalNames }
       })
+    return 0;
   })
   return obj;
 }
