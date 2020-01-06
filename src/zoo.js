@@ -1,7 +1,7 @@
 const data = require('./data')
 
 function entryCalculator(entrants) {
-  if (entrants === undefined || Object.keys(entrants).length == 0) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0
   }
   return Object.keys(entrants).reduce((acc, key) => {
@@ -10,14 +10,14 @@ function entryCalculator(entrants) {
 };
 
 function schedule(dayName) {
-  const schedule = data.hours
-  if (dayName == undefined) {
-    Object.keys(schedule).forEach((key) => schedule[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
-    schedule.Monday = "CLOSED"
-    return schedule
+  const schedules = data.hours
+  if (dayName === undefined) {
+    Object.keys(schedules).forEach((key) => schedules[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+    schedules.Monday = "CLOSED"
+    return schedules
   } else {
     let day = {}
-    day[dayName] = schedule[dayName]
+    day[dayName] = schedules[dayName]
     return day
   }
 };
@@ -27,7 +27,7 @@ function animalCount(species = 0) {
   const isSpecie = (animal, species) => animal.name === species
   const filterAnimals = (animals, species) => animals.filter(
     (animal) => isSpecie(animal, species))
-  if (species == 0) {
+  if (species === 0) {
     Object.keys(animals).forEach((key) => {
       obj[data.animals[key].name] = data.animals[key].residents.length
     })
@@ -41,7 +41,7 @@ function animalMap(options = {}) {
   const { includeNames, sex, sorted } = options
   const obj = {}
   const locations = [...new Set(data.animals.map(species => species.location))]
-  locations.forEach(location => {
+  locations.forEach((location) => {
     if (!includeNames) {
       obj[location] = data.animals
         .filter(animal => animal.location == location)
@@ -49,8 +49,7 @@ function animalMap(options = {}) {
       return obj
     }
     obj[location] = data.animals
-      .filter(animal => animal.location == location)
-      .map(species => {
+      .filter(animal => animal.location == location).map((species) => {
         let residents = species.residents
         if (sex) {
           residents = residents.filter(resident => resident.sex === sex)
@@ -61,8 +60,7 @@ function animalMap(options = {}) {
         }
         return { [species.name]: animalNames }
       })
-  }
-  )
+  })
   return obj;
 }
 
@@ -72,7 +70,7 @@ function animalPopularity(rating) {
 
 function animalsByIds(...ids) {
   const arrayIdsAnimals = [];
-  if (ids == 0) {
+  if (ids === 0) {
     return []
   } else {
     for (let id of ids) {
@@ -96,7 +94,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {}
   }
-  let firstOrLastName = data.employees.find((employee) => {
+  const firstOrLastName = data.employees.find((employee) => {
     if (employee.firstName === employeeName) {
       return employee
     } else if (employee.lastName === employeeName) {
