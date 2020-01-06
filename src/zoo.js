@@ -81,7 +81,7 @@ function animalsByIds(...ids) {
     arrayIdsAnimals.push(idAnimals);
   }
   return arrayIdsAnimals
-};
+}
 
 function animalByName(animalName) {
   // seu código aqui
@@ -101,6 +101,7 @@ function employeeByName(employeeName) {
     } else if (employee.lastName === employeeName) {
       return employee
     }
+    return 0;
   });
   return firstOrLastName
 };
