@@ -13,20 +13,20 @@ function schedule(dayName) {
   const schedules = data.hours
   if (dayName === undefined) {
     Object.keys(schedules).forEach((key) => schedules[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
-    schedules.Monday = "CLOSED"
+    schedules.Monday = 'CLOSED'
     return schedules
-  } else {
-    let day = {}
-    day[dayName] = schedules[dayName]
-    return day
   }
+  const day = {}
+  day[dayName] = schedules[dayName]
+  return day
 };
 
 function animalCount(species = 0) {
-  const animals = data.animals, obj = {}
+  const animals = data.animals
+  const obj = {}
   const isSpecie = (animal, species) => animal.name === species
   const filterAnimals = (animals, species) => animals.filter(
-    (animal) => isSpecie(animal, species))
+    animal => isSpecie(animal, species))
   if (species === 0) {
     Object.keys(animals).forEach((key) => {
       obj[data.animals[key].name] = data.animals[key].residents.length
@@ -44,12 +44,12 @@ function animalMap(options = {}) {
   locations.forEach((location) => {
     if (!includeNames) {
       obj[location] = data.animals
-        .filter(animal => animal.location == location)
+        .filter(animal => animal.location === location)
         .map(species => species.name)
       return obj
     }
     obj[location] = data.animals
-      .filter(animal => animal.location == location).map((species) => {
+      .filter(animal => animal.location === location).map((species) => {
         let residents = species.residents
         if (sex) {
           residents = residents.filter(resident => resident.sex === sex)
@@ -72,14 +72,14 @@ function animalsByIds(...ids) {
   const arrayIdsAnimals = [];
   if (ids === 0) {
     return []
-  } else {
-    for (let id of ids) {
-      const animalsArray = data.animals;
-      const idAnimals = animalsArray.find(animal => animal.id == id);
-      arrayIdsAnimals.push(idAnimals);
-    }
-    return arrayIdsAnimals
   }
+  for (const id of ids) {
+    const animalsArray = data.animals;
+    const idAnimals = animalsArray.find(animal => animal.id === id);
+    arrayIdsAnimals.push(idAnimals);
+  }
+  return arrayIdsAnimals
+
 };
 
 function animalByName(animalName) {
