@@ -116,8 +116,8 @@ function employeeCoverage(idOrName) {
 
 function addEmployee(...arg) {
   const allEmployees = [...data.employees]
-  const newEmployee = ([id, firstName, lastName, managers = [], responsibleFor =[]]) =>
-  ({id, firstName, lastName, managers, responsibleFor})
+  const newEmployee = ([id, firstName, lastName, managers = [], responsibleFor = []]) =>
+    ({ id, firstName, lastName, managers, responsibleFor })
   data.employees = [...allEmployees, newEmployee(arg)]
 }
 
