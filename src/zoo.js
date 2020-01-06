@@ -4,15 +4,17 @@ function entryCalculator(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0
   }
-  return Object.keys(entrants).reduce((acc, key) => {
-    return acc + data.prices[key] * entrants[key];
+  return Object.keys(entrants)
+  .reduce((acc, key) => {
+    let sum = data.prices[key] * entrants[key]
+    return acc + sum;
   }, 0)
 };
 
 function schedule(dayName) {
   const schedules = data.hours
   if (dayName === undefined) {
-    Object.keys(schedules).forEach((key) => schedules[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+    Object.keys(schedules).forEach((key) => schedules[key] = `Open from ${schedules[key].open}am until ${schedules[key].close - 12}pm`)
     schedules.Monday = 'CLOSED'
     return schedules
   }
@@ -79,7 +81,6 @@ function animalsByIds(...ids) {
     arrayIdsAnimals.push(idAnimals);
   }
   return arrayIdsAnimals
-
 };
 
 function animalByName(animalName) {
