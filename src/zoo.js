@@ -63,7 +63,7 @@ function animalMap(options = {}) {
       })
   }
   )
-  return obj
+  return obj;
 }
 
 function animalPopularity(rating) {
@@ -71,14 +71,14 @@ function animalPopularity(rating) {
 };
 
 function animalsByIds(...ids) {
-  const arrayIdsAnimals = []
+  const arrayIdsAnimals = [];
   if (ids == 0) {
     return []
   } else {
     for (let id of ids) {
-      const animalsArray = data.animals
-      const idAnimals = animalsArray.find(animal => animal.id == id)
-      arrayIdsAnimals.push(idAnimals)
+      const animalsArray = data.animals;
+      const idAnimals = animalsArray.find(animal => animal.id == id);
+      arrayIdsAnimals.push(idAnimals);
     }
     return arrayIdsAnimals
   }
